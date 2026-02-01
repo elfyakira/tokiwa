@@ -64,19 +64,19 @@ const SERVICES = [
 const WORKS = [
   {
     category: "カテゴリ",
-    title: "実績タイトル1",
+    name: "実績タイトル1",
     year: "2024年",
     image: "/images/generated/project_public_building.jpg",
   },
   {
     category: "カテゴリ",
-    title: "実績タイトル2",
+    name: "実績タイトル2",
     year: "2024年",
     image: "/images/generated/project_shopping_mall.jpg",
   },
   {
     category: "カテゴリ",
-    title: "実績タイトル3",
+    name: "実績タイトル3",
     year: "2024年",
     image: "/images/generated/project_house.jpg",
   },
@@ -96,9 +96,9 @@ const RECRUIT = {
 
 // お知らせ
 const NEWS = [
-  { date: "2026.01.01", category: "お知らせ", title: "お知らせタイトル1", href: "/news/1" },
-  { date: "2026.01.01", category: "お知らせ", title: "お知らせタイトル2", href: "/news/2" },
-  { date: "2026.01.01", category: "お知らせ", title: "お知らせタイトル3", href: "/news/3" },
+  { date: "2026.01.01", category: "お知らせ", title: "お知らせタイトル1", slug: "1" },
+  { date: "2026.01.01", category: "お知らせ", title: "お知らせタイトル2", slug: "2" },
+  { date: "2026.01.01", category: "お知らせ", title: "お知らせタイトル3", slug: "3" },
 ];
 
 // CTAセクション
@@ -282,11 +282,11 @@ function WorksSection() {
         <div className="hidden lg:grid grid-cols-[580px_1fr] gap-6">
           <Link href="/service#works" className="group">
             <div className="relative h-[450px] rounded overflow-hidden">
-              <Image src={works[0]?.image || ""} alt={works[0]?.name || works[0]?.title || ""} fill className="object-cover transition-opacity group-hover:opacity-90" />
+              <Image src={works[0]?.image || ""} alt={works[0]?.name || ""} fill className="object-cover transition-opacity group-hover:opacity-90" />
             </div>
             <div className="mt-4">
               <span className="text-xs font-semibold text-accent">{works[0]?.category}</span>
-              <h3 className="mt-1 text-lg font-semibold text-text-primary">{works[0]?.name || works[0]?.title}</h3>
+              <h3 className="mt-1 text-lg font-semibold text-text-primary">{works[0]?.name}</h3>
               <p className="mt-1 text-sm text-text-secondary">{works[0]?.year}</p>
             </div>
           </Link>
@@ -295,11 +295,11 @@ function WorksSection() {
             {works.slice(1, 3).map((work, index) => (
               <Link href="/service#works" key={index} className="group">
                 <div className="relative h-[213px] rounded overflow-hidden">
-                  <Image src={work.image} alt={work.name || work.title} fill className="object-cover transition-opacity group-hover:opacity-90" />
+                  <Image src={work.image} alt={work.name} fill className="object-cover transition-opacity group-hover:opacity-90" />
                 </div>
                 <div className="mt-4">
                   <span className="text-xs font-semibold text-accent">{work.category}</span>
-                  <h3 className="mt-1 text-lg font-semibold text-text-primary">{work.name || work.title}</h3>
+                  <h3 className="mt-1 text-lg font-semibold text-text-primary">{work.name}</h3>
                   <p className="mt-1 text-sm text-text-secondary">{work.year}</p>
                 </div>
               </Link>
@@ -311,11 +311,11 @@ function WorksSection() {
           {works.map((work, index) => (
             <Link href="/service#works" key={index} className="block group">
               <div className="relative h-[200px] rounded overflow-hidden">
-                <Image src={work.image} alt={work.name || work.title} fill className="object-cover transition-opacity group-hover:opacity-90" />
+                <Image src={work.image} alt={work.name} fill className="object-cover transition-opacity group-hover:opacity-90" />
               </div>
               <div className="mt-4">
                 <span className="text-xs font-semibold text-accent">{work.category}</span>
-                <h3 className="mt-1 text-lg font-semibold text-text-primary">{work.name || work.title}</h3>
+                <h3 className="mt-1 text-lg font-semibold text-text-primary">{work.name}</h3>
                 <p className="mt-1 text-sm text-text-secondary">{work.year}</p>
               </div>
             </Link>
@@ -375,7 +375,7 @@ function NewsSection() {
             <ul>
               {news.map((item, index) => (
                 <li key={index} className="border-b border-gray-200">
-                  <Link href={item.href || `/news/${item.slug}`} className="block py-4 lg:py-5 group hover:bg-gray-50 transition-colors -mx-2 px-2">
+                  <Link href={`/news/${item.slug}`} className="block py-4 lg:py-5 group hover:bg-gray-50 transition-colors -mx-2 px-2">
                     <div className="hidden lg:flex items-center gap-6">
                       <span className="text-sm text-text-secondary w-24">{item.date}</span>
                       <span className="text-xs font-semibold text-accent">{item.category}</span>

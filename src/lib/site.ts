@@ -1,6 +1,13 @@
 import siteData from '@data/site.json';
 
 // 型定義
+export interface SEO {
+  siteUrl: string;
+  titleSuffix: string;
+  defaultTitle: string;
+  defaultDescription: string;
+}
+
 export interface SiteData {
   company: {
     name: string;
@@ -50,6 +57,7 @@ export interface SiteData {
     logoOnly: string;
   };
   seo: {
+    siteUrl: string;
     titleSuffix: string;
     defaultTitle: string;
     defaultDescription: string;
@@ -73,7 +81,7 @@ export interface SiteData {
   works: Array<{
     category: string;
     name: string;
-    location: string;
+    location?: string;
     year: string;
     image: string;
   }>;

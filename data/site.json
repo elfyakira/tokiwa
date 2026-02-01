@@ -42,6 +42,7 @@
     "logoOnly": "/images/logo-only.png"
   },
   "seo": {
+    "siteUrl": "https://example.com",
     "titleSuffix": "",
     "defaultTitle": "",
     "defaultDescription": ""
