@@ -1,15 +1,9 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
-import type { Metadata } from "next";
 import { site, company, contact } from "@/lib/site";
-
-// ============================================================
-// 📝 ページ設定（構成案に基づいて編集してください）
-// ============================================================
-export const metadata: Metadata = {
-  title: `事業内容｜${site.seo.titleSuffix || "企業サイト"}`,
-  description: site.seo.defaultDescription || "事業内容ページです。",
-};
+import { FadeInUp, StaggerContainer, HeroBackground } from "@/components/animations";
 
 // ============================================================
 // 📝 コンテンツデータ（構成案に基づいて編集してください）
@@ -208,7 +202,7 @@ const WORKS_FALLBACK = [
 function PageHeader() {
   return (
     <section className="relative h-[200px] lg:h-[300px] flex items-center justify-center">
-      <div className="absolute inset-0 z-0">
+      <HeroBackground className="absolute inset-0 z-0">
         <Image
           src="/images/service-hero.jpg"
           alt="事業内容"
@@ -217,12 +211,14 @@ function PageHeader() {
           priority
         />
         <div className="absolute inset-0 bg-[rgba(26,58,92,0.8)]" />
-      </div>
+      </HeroBackground>
       <div className="relative z-10 text-center">
-        <p className="text-sm text-white/80 tracking-[0.1em] mb-3">Service</p>
-        <h1 className="text-[28px] lg:text-[40px] font-bold text-white">
-          事業内容
-        </h1>
+        <FadeInUp>
+          <p className="text-sm text-white/80 tracking-[0.1em] mb-3">Service</p>
+          <h1 className="text-[28px] lg:text-[40px] font-bold text-white">
+            事業内容
+          </h1>
+        </FadeInUp>
       </div>
     </section>
   );
@@ -236,11 +232,13 @@ function ServiceOverview() {
   return (
     <section className="py-12 lg:py-20 bg-white">
       <div className="max-w-container mx-auto px-4 lg:px-12">
-        <p className="text-center text-[15px] lg:text-lg text-text-primary mb-8 lg:mb-12">
-          私たちは、お客様のあらゆるニーズにお応えします。
-        </p>
+        <FadeInUp>
+          <p className="text-center text-[15px] lg:text-lg text-text-primary mb-8 lg:mb-12">
+            私たちは、お客様のあらゆるニーズにお応えします。
+          </p>
+        </FadeInUp>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-8">
+        <StaggerContainer className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-8">
           {services.map((service) => (
             <a
               key={service.id}
@@ -263,7 +261,7 @@ function ServiceOverview() {
               </p>
             </a>
           ))}
-        </div>
+        </StaggerContainer>
       </div>
     </section>
   );
@@ -309,7 +307,7 @@ function ServiceDetail({
             reverse ? "lg:flex-row-reverse" : ""
           }`}
         >
-          <div className="w-full lg:w-1/2">
+          <FadeInUp className="w-full lg:w-1/2">
             <div className="relative aspect-[4/3] rounded overflow-hidden bg-gray-100">
               <Image
                 src={image}
@@ -318,9 +316,9 @@ function ServiceDetail({
                 className="object-cover"
               />
             </div>
-          </div>
+          </FadeInUp>
 
-          <div className="w-full lg:w-1/2">
+          <FadeInUp className="w-full lg:w-1/2" delay={100}>
             <span className="block text-5xl lg:text-6xl font-bold text-accent/20">
               {number}
             </span>
@@ -350,7 +348,7 @@ function ServiceDetail({
                 {ctaText}
               </Link>
             </div>
-          </div>
+          </FadeInUp>
         </div>
       </div>
     </section>
@@ -361,14 +359,14 @@ function FlowSection() {
   return (
     <section className="py-[60px] lg:py-[100px] bg-bg-light">
       <div className="max-w-[1100px] mx-auto px-4">
-        <div className="text-center mb-8 lg:mb-12">
+        <FadeInUp className="text-center mb-8 lg:mb-12">
           <span className="section-label block">Flow</span>
           <h2 className="text-2xl lg:text-[32px] font-bold text-text-primary">
             ご依頼の流れ
           </h2>
-        </div>
+        </FadeInUp>
 
-        <div className="grid lg:grid-cols-6 gap-4 lg:gap-6">
+        <StaggerContainer className="grid lg:grid-cols-6 gap-4 lg:gap-6">
           {FLOW_STEPS.map((item, index) => (
             <div
               key={index}
@@ -385,7 +383,7 @@ function FlowSection() {
               </p>
             </div>
           ))}
-        </div>
+        </StaggerContainer>
       </div>
     </section>
   );
@@ -397,16 +395,18 @@ function WorksSection() {
   return (
     <section id="works" className="py-[60px] lg:py-[100px] bg-white scroll-mt-20">
       <div className="max-w-container mx-auto px-4 lg:px-12">
-        <span className="section-label block">Works</span>
-        <h2 className="text-2xl lg:text-[32px] font-bold text-text-primary mb-4">
-          実績紹介
-        </h2>
-        <p className="text-[15px] text-text-secondary mb-8 lg:mb-12">
-          これまでの実績をご紹介します。
-        </p>
+        <FadeInUp>
+          <span className="section-label block">Works</span>
+          <h2 className="text-2xl lg:text-[32px] font-bold text-text-primary mb-4">
+            実績紹介
+          </h2>
+          <p className="text-[15px] text-text-secondary mb-8 lg:mb-12">
+            これまでの実績をご紹介します。
+          </p>
+        </FadeInUp>
 
         {/* PC Grid */}
-        <div className="hidden lg:grid grid-cols-3 gap-6">
+        <StaggerContainer className="hidden lg:grid grid-cols-3 gap-6">
           {works.length > 0 && (
             <div className="col-span-1 row-span-2">
               <div className="relative aspect-[3/4] rounded overflow-hidden bg-gray-100">
@@ -454,10 +454,10 @@ function WorksSection() {
               </div>
             </div>
           ))}
-        </div>
+        </StaggerContainer>
 
         {/* SP List */}
-        <div className="lg:hidden space-y-6">
+        <StaggerContainer className="lg:hidden space-y-6">
           {works.map((work, index) => (
             <div key={index}>
               <div className="relative aspect-[16/9] rounded overflow-hidden bg-gray-100">
@@ -481,7 +481,7 @@ function WorksSection() {
               </div>
             </div>
           ))}
-        </div>
+        </StaggerContainer>
       </div>
     </section>
   );
@@ -491,29 +491,31 @@ function CTASection() {
   return (
     <section className="py-[60px] lg:py-20 bg-navy">
       <div className="max-w-narrow mx-auto px-4 text-center">
-        <h2 className="text-2xl lg:text-[32px] font-bold text-white mb-4">
-          お気軽にご相談ください
-        </h2>
-        <p className="text-sm lg:text-base text-white/90 mb-8 lg:mb-10">
-          まずはお気軽にお問い合わせください。
-        </p>
+        <FadeInUp>
+          <h2 className="text-2xl lg:text-[32px] font-bold text-white mb-4">
+            お気軽にご相談ください
+          </h2>
+          <p className="text-sm lg:text-base text-white/90 mb-8 lg:mb-10">
+            まずはお気軽にお問い合わせください。
+          </p>
 
-        <a
-          href={`tel:${contact.phoneTel || contact.phone?.replace(/-/g, "")}`}
-          className="block lg:inline-block text-[28px] lg:text-[36px] font-bold text-white mb-2"
-        >
-          {contact.phoneFormatted || contact.phone || "000-000-0000"}
-        </a>
-        <p className="text-sm text-white/70 mb-8">
-          受付時間: {contact.hours || "9:00〜18:00"}
-        </p>
+          <a
+            href={`tel:${contact.phoneTel || contact.phone?.replace(/-/g, "")}`}
+            className="block lg:inline-block text-[28px] lg:text-[36px] font-bold text-white mb-2"
+          >
+            {contact.phoneFormatted || contact.phone || "000-000-0000"}
+          </a>
+          <p className="text-sm text-white/70 mb-8">
+            受付時間: {contact.hours || "9:00〜18:00"}
+          </p>
 
-        <Link
-          href="/contact"
-          className="btn-primary px-14 py-[18px] text-base font-semibold"
-        >
-          お問い合わせフォームへ
-        </Link>
+          <Link
+            href="/contact"
+            className="btn-primary px-14 py-[18px] text-base font-semibold"
+          >
+            お問い合わせフォームへ
+          </Link>
+        </FadeInUp>
       </div>
     </section>
   );

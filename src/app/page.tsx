@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { company, contact, site } from "@/lib/site";
+import { FadeInUp, StaggerContainer } from "@/components/animations";
 
 // ============================================================
 // コンテンツデータ（構成案に基づいて編集してください）
@@ -209,13 +210,13 @@ function AboutSection() {
     <section className="section-padding bg-white">
       <div className="max-w-container mx-auto px-4 lg:px-12">
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-[60px] items-center">
-          <div className="w-full lg:w-1/2 order-1 lg:order-2">
+          <FadeInUp className="w-full lg:w-1/2 order-1 lg:order-2">
             <div className="relative aspect-[4/3] rounded-lg overflow-hidden">
               <Image src={ABOUT.image} alt="会社紹介" fill className="object-cover" />
             </div>
-          </div>
+          </FadeInUp>
 
-          <div className="w-full lg:w-1/2 order-2 lg:order-1">
+          <FadeInUp className="w-full lg:w-1/2 order-2 lg:order-1" delay={0.1}>
             <span className="section-label">About Us</span>
             <h2 className="text-[28px] lg:text-[36px] font-bold text-text-primary leading-[1.4] mb-6 lg:mb-8 whitespace-pre-line">
               {company.mission || ABOUT.heading}
@@ -230,7 +231,7 @@ function AboutSection() {
                 会社概要を見る
               </Link>
             </div>
-          </div>
+          </FadeInUp>
         </div>
       </div>
     </section>
@@ -243,12 +244,12 @@ function ServicesSection() {
   return (
     <section className="section-padding bg-bg-light">
       <div className="max-w-container mx-auto px-4 lg:px-12">
-        <div className="text-center mb-10 lg:mb-[60px]">
+        <FadeInUp className="text-center mb-10 lg:mb-[60px]">
           <span className="section-label">Service</span>
           <h2 className="text-[28px] lg:text-[36px] font-bold text-text-primary">私たちの事業</h2>
-        </div>
+        </FadeInUp>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-10">
+        <StaggerContainer className="grid grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-10">
           {services.map((service, index) => (
             <div key={index}>
               <div className="relative aspect-[3/2] rounded overflow-hidden">
@@ -258,11 +259,11 @@ function ServicesSection() {
               <p className="mt-2 text-[13px] lg:text-sm text-text-secondary leading-[1.6]">{service.description}</p>
             </div>
           ))}
-        </div>
+        </StaggerContainer>
 
-        <div className="mt-10 lg:mt-12 text-center">
+        <FadeInUp className="mt-10 lg:mt-12 text-center" delay={0.4}>
           <Link href="/service" className="text-link">サービス詳細を見る</Link>
-        </div>
+        </FadeInUp>
       </div>
     </section>
   );

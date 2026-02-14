@@ -1,15 +1,9 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
-import type { Metadata } from "next";
 import { site, company, contact, locations } from "@/lib/site";
-
-// ============================================================
-// 📝 ページ設定（構成案に基づいて編集してください）
-// ============================================================
-export const metadata: Metadata = {
-  title: `会社概要｜${site.seo.titleSuffix || "企業サイト"}`,
-  description: site.seo.defaultDescription || "会社概要ページです。",
-};
+import { FadeInUp, FadeInImage, HeroBackground } from "@/components/animations";
 
 // ============================================================
 // 📝 コンテンツデータ（構成案に基づいて編集してください）
@@ -83,7 +77,7 @@ const HISTORY_FALLBACK = [
 function PageHeader() {
   return (
     <section className="relative h-[200px] lg:h-[300px] flex items-center justify-center">
-      <div className="absolute inset-0 z-0">
+      <HeroBackground className="absolute inset-0 z-0">
         <Image
           src="/images/about-hero.jpg"
           alt="会社概要"
@@ -92,12 +86,14 @@ function PageHeader() {
           priority
         />
         <div className="absolute inset-0 bg-[rgba(26,58,92,0.8)]" />
-      </div>
+      </HeroBackground>
       <div className="relative z-10 text-center">
-        <p className="text-sm text-white/80 tracking-[0.1em] mb-3">About Us</p>
-        <h1 className="text-[28px] lg:text-[40px] font-bold text-white">
-          会社概要
-        </h1>
+        <FadeInUp>
+          <p className="text-sm text-white/80 tracking-[0.1em] mb-3">About Us</p>
+          <h1 className="text-[28px] lg:text-[40px] font-bold text-white">
+            会社概要
+          </h1>
+        </FadeInUp>
       </div>
     </section>
   );
@@ -107,15 +103,19 @@ function MissionSection() {
   return (
     <section className="py-[60px] lg:py-[100px] bg-white">
       <div className="max-w-[800px] mx-auto px-4 text-center">
-        <span className="section-label block">Mission & Vision</span>
-        <h2 className="text-2xl lg:text-[32px] font-bold text-text-primary leading-[1.5] mb-8 lg:mb-10">
-          {MISSION.title}
-        </h2>
-        <div className="max-w-[700px] mx-auto text-[15px] lg:text-base text-text-primary leading-[2] space-y-6">
-          {MISSION.paragraphs.map((para, i) => (
-            <p key={i}>{para}</p>
-          ))}
-        </div>
+        <FadeInUp>
+          <span className="section-label block">Mission & Vision</span>
+          <h2 className="text-2xl lg:text-[32px] font-bold text-text-primary leading-[1.5] mb-8 lg:mb-10">
+            {MISSION.title}
+          </h2>
+        </FadeInUp>
+        <FadeInUp delay={100}>
+          <div className="max-w-[700px] mx-auto text-[15px] lg:text-base text-text-primary leading-[2] space-y-6">
+            {MISSION.paragraphs.map((para, i) => (
+              <p key={i}>{para}</p>
+            ))}
+          </div>
+        </FadeInUp>
       </div>
     </section>
   );
@@ -132,7 +132,7 @@ function MessageSection() {
     <section className="py-[60px] lg:py-[100px] bg-bg-light">
       <div className="max-w-[1000px] mx-auto px-4">
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-[60px]">
-          <div className="lg:w-[280px] flex-shrink-0">
+          <FadeInUp className="lg:w-[280px] flex-shrink-0">
             <span className="section-label block lg:hidden">Message</span>
             <h2 className="text-2xl lg:text-[28px] font-bold text-text-primary mb-6 lg:hidden">
               代表メッセージ
@@ -145,9 +145,9 @@ function MessageSection() {
                 className="object-cover"
               />
             </div>
-          </div>
+          </FadeInUp>
 
-          <div className="flex-1">
+          <FadeInUp className="flex-1" delay={100}>
             <span className="section-label hidden lg:block">Message</span>
             <h2 className="text-2xl lg:text-[28px] font-bold text-text-primary mb-8 hidden lg:block">
               代表メッセージ
@@ -160,7 +160,7 @@ function MessageSection() {
             <p className="mt-8 text-sm text-text-secondary">
               {ceoTitle && `${ceoTitle}　`}{ceoName}
             </p>
-          </div>
+          </FadeInUp>
         </div>
       </div>
     </section>
@@ -171,16 +171,16 @@ function StrengthsSection() {
   return (
     <section className="py-[60px] lg:py-[100px] bg-white">
       <div className="max-w-[1100px] mx-auto px-4">
-        <div className="text-center mb-10 lg:mb-[60px]">
+        <FadeInUp className="text-center mb-10 lg:mb-[60px]">
           <span className="section-label block">Our Strength</span>
           <h2 className="text-2xl lg:text-[32px] font-bold text-text-primary">
             {company.nameShort || "当社"}が選ばれる理由
           </h2>
-        </div>
+        </FadeInUp>
 
         <div className="grid lg:grid-cols-3 gap-10 lg:gap-[60px]">
-          {STRENGTHS.map((item) => (
-            <div key={item.number}>
+          {STRENGTHS.map((item, index) => (
+            <FadeInUp key={item.number} delay={index * 100}>
               <span className="block text-4xl lg:text-5xl font-bold text-accent/30">
                 {item.number}
               </span>
@@ -190,7 +190,7 @@ function StrengthsSection() {
               <p className="mt-3 lg:mt-4 text-sm lg:text-[15px] text-text-secondary leading-[1.7]">
                 {item.description}
               </p>
-            </div>
+            </FadeInUp>
           ))}
         </div>
       </div>
@@ -203,13 +203,13 @@ function CompanyInfoSection() {
     <section className="py-[60px] lg:py-[100px] bg-bg-light">
       <div className="max-w-[1000px] mx-auto px-4">
         <div className="lg:flex lg:gap-16">
-          <div className="lg:w-48 mb-8 lg:mb-0 text-center lg:text-left">
+          <FadeInUp className="lg:w-48 mb-8 lg:mb-0 text-center lg:text-left">
             <span className="section-label block">Company</span>
             <h2 className="text-2xl lg:text-[28px] font-bold text-text-primary">
               会社概要
             </h2>
-          </div>
-          <div className="flex-1 bg-white">
+          </FadeInUp>
+          <FadeInUp className="flex-1 bg-white" delay={100}>
             {COMPANY_INFO.map((item, index) => (
               <div
                 key={index}
@@ -223,7 +223,7 @@ function CompanyInfoSection() {
                 </div>
               </div>
             ))}
-          </div>
+          </FadeInUp>
         </div>
       </div>
     </section>
@@ -237,27 +237,29 @@ function HistorySection() {
     <section className="py-[60px] lg:py-[100px] bg-white">
       <div className="max-w-[1000px] mx-auto px-4">
         <div className="lg:flex lg:gap-16">
-          <div className="lg:w-48 mb-8 lg:mb-0 text-center lg:text-left">
+          <FadeInUp className="lg:w-48 mb-8 lg:mb-0 text-center lg:text-left">
             <span className="section-label block">History</span>
             <h2 className="text-2xl lg:text-[28px] font-bold text-text-primary">
               沿革
             </h2>
-          </div>
+          </FadeInUp>
           <div className="flex-1">
             {history.map((item, index) => (
-              <div key={index} className="flex gap-4 lg:gap-10 mb-6 lg:mb-8 last:mb-0">
-                <div className="w-20 lg:w-24 flex-shrink-0">
-                  <span className="text-base lg:text-lg font-bold text-navy">
-                    {item.year}
-                  </span>
+              <FadeInUp key={index} delay={index * 50}>
+                <div className="flex gap-4 lg:gap-10 mb-6 lg:mb-8 last:mb-0">
+                  <div className="w-20 lg:w-24 flex-shrink-0">
+                    <span className="text-base lg:text-lg font-bold text-navy">
+                      {item.year}
+                    </span>
+                  </div>
+                  <div className="relative flex-1 pb-6 lg:pb-8 border-l-2 border-gray-200 pl-4 lg:pl-10 last:border-l-0">
+                    <div className="hidden lg:block absolute left-[-5px] top-2 w-2 h-2 rounded-full bg-accent" />
+                    <p className="text-sm lg:text-[15px] text-text-primary">
+                      {item.event}
+                    </p>
+                  </div>
                 </div>
-                <div className="relative flex-1 pb-6 lg:pb-8 border-l-2 border-gray-200 pl-4 lg:pl-10 last:border-l-0">
-                  <div className="hidden lg:block absolute left-[-5px] top-2 w-2 h-2 rounded-full bg-accent" />
-                  <p className="text-sm lg:text-[15px] text-text-primary">
-                    {item.event}
-                  </p>
-                </div>
-              </div>
+              </FadeInUp>
             ))}
           </div>
         </div>
@@ -274,7 +276,7 @@ function AccessSection() {
     <section className="py-[60px] lg:py-[100px] bg-bg-light">
       <div className="max-w-[1100px] mx-auto px-4">
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
-          <div className="lg:w-[40%]">
+          <FadeInUp className="lg:w-[40%]">
             <span className="section-label block">Access</span>
             <h2 className="text-2xl lg:text-[28px] font-bold text-text-primary mb-6 lg:mb-8">
               アクセス
@@ -306,9 +308,9 @@ function AccessSection() {
                 )}
               </div>
             ))}
-          </div>
+          </FadeInUp>
 
-          <div className="lg:w-[60%]">
+          <FadeInUp className="lg:w-[60%]" delay={100}>
             <div className="h-[300px] lg:h-[400px] rounded lg:rounded bg-gray-200">
               {hq.mapUrl ? (
                 <iframe
@@ -327,7 +329,7 @@ function AccessSection() {
                 </div>
               )}
             </div>
-          </div>
+          </FadeInUp>
         </div>
       </div>
     </section>
@@ -338,29 +340,31 @@ function CTASection() {
   return (
     <section className="py-[60px] lg:py-20 bg-navy">
       <div className="max-w-narrow mx-auto px-4 text-center">
-        <h2 className="text-2xl lg:text-[32px] font-bold text-white mb-4">
-          お気軽にご相談ください
-        </h2>
-        <p className="text-sm lg:text-base text-white/90 mb-8 lg:mb-10">
-          まずはお気軽にお問い合わせください。
-        </p>
+        <FadeInUp>
+          <h2 className="text-2xl lg:text-[32px] font-bold text-white mb-4">
+            お気軽にご相談ください
+          </h2>
+          <p className="text-sm lg:text-base text-white/90 mb-8 lg:mb-10">
+            まずはお気軽にお問い合わせください。
+          </p>
 
-        <a
-          href={`tel:${contact.phoneTel || contact.phone?.replace(/-/g, "")}`}
-          className="block lg:inline-block text-[28px] lg:text-[36px] font-bold text-white mb-2"
-        >
-          {contact.phoneFormatted || contact.phone || "000-000-0000"}
-        </a>
-        <p className="text-sm text-white/70 mb-8">
-          受付時間: {contact.hours || "9:00〜18:00"}
-        </p>
+          <a
+            href={`tel:${contact.phoneTel || contact.phone?.replace(/-/g, "")}`}
+            className="block lg:inline-block text-[28px] lg:text-[36px] font-bold text-white mb-2"
+          >
+            {contact.phoneFormatted || contact.phone || "000-000-0000"}
+          </a>
+          <p className="text-sm text-white/70 mb-8">
+            受付時間: {contact.hours || "9:00〜18:00"}
+          </p>
 
-        <Link
-          href="/contact"
-          className="btn-primary px-14 py-[18px] text-base font-semibold"
-        >
-          お問い合わせフォームへ
-        </Link>
+          <Link
+            href="/contact"
+            className="btn-primary px-14 py-[18px] text-base font-semibold"
+          >
+            お問い合わせフォームへ
+          </Link>
+        </FadeInUp>
       </div>
     </section>
   );

@@ -1,14 +1,8 @@
-import Link from "next/link";
-import type { Metadata } from "next";
-import { site, company, contact, locations } from "@/lib/site";
+"use client";
 
-// ============================================================
-// 📝 ページ設定（構成案に基づいて編集してください）
-// ============================================================
-export const metadata: Metadata = {
-  title: `プライバシーポリシー｜${site.seo.titleSuffix || "企業サイト"}`,
-  description: "プライバシーポリシー（個人情報保護方針）について。",
-};
+import Link from "next/link";
+import { site, company, contact, locations } from "@/lib/site";
+import { FadeInUp } from "@/components/animations";
 
 // ============================================================
 // 📝 コンテンツデータ（必要に応じて編集してください）
@@ -32,17 +26,19 @@ export default function PrivacyPage() {
       {/* Page Header */}
       <section className="h-[150px] lg:h-[200px] flex items-center justify-center bg-navy">
         <div className="text-center">
-          <p className="text-sm text-white/80 tracking-[0.1em] mb-3">Privacy Policy</p>
-          <h1 className="text-[28px] lg:text-[40px] font-bold text-white">
-            プライバシーポリシー
-          </h1>
+          <FadeInUp>
+            <p className="text-sm text-white/80 tracking-[0.1em] mb-3">Privacy Policy</p>
+            <h1 className="text-[28px] lg:text-[40px] font-bold text-white">
+              プライバシーポリシー
+            </h1>
+          </FadeInUp>
         </div>
       </section>
 
       {/* Content */}
       <section className="py-10 lg:py-[60px] bg-white">
         <div className="max-w-[800px] mx-auto px-4">
-          <div className="prose prose-slate max-w-none">
+          <FadeInUp className="prose prose-slate max-w-none">
             <p className="text-[15px] lg:text-base text-text-primary leading-[1.9] mb-8">
               {companyName}（以下、「当社」）は、お客様の個人情報を適切に保護することを重要な社会的責務と認識し、以下のとおり個人情報保護方針を定め、これを遵守いたします。
             </p>
@@ -112,7 +108,7 @@ export default function PrivacyPage() {
             <p className="text-sm text-text-secondary mt-10">
               制定日: {EFFECTIVE_DATE}
             </p>
-          </div>
+          </FadeInUp>
         </div>
       </section>
     </>

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { site, company, contact } from "@/lib/site";
+import { FadeInUp } from "@/components/animations";
 
 // ============================================================
 // 📝 コンテンツデータ（構成案に基づいて編集してください）
@@ -26,10 +27,12 @@ function PageHeader() {
   return (
     <section className="h-[150px] lg:h-[200px] flex items-center justify-center bg-navy">
       <div className="text-center">
-        <p className="text-sm text-white/80 tracking-[0.1em] mb-3">Contact</p>
-        <h1 className="text-[28px] lg:text-[40px] font-bold text-white">
-          お問い合わせ
-        </h1>
+        <FadeInUp>
+          <p className="text-sm text-white/80 tracking-[0.1em] mb-3">Contact</p>
+          <h1 className="text-[28px] lg:text-[40px] font-bold text-white">
+            お問い合わせ
+          </h1>
+        </FadeInUp>
       </div>
     </section>
   );
@@ -350,18 +353,20 @@ function PhoneSection() {
   return (
     <section className="py-10 lg:py-[60px] bg-white">
       <div className="max-w-[600px] mx-auto px-4 text-center">
-        <h2 className="text-lg lg:text-xl text-text-primary mb-4">
-          お電話でのお問い合わせ
-        </h2>
-        <a
-          href={`tel:${contact.phoneTel || contact.phone?.replace(/-/g, "")}`}
-          className="block text-[28px] lg:text-4xl font-bold text-navy mb-2"
-        >
-          {contact.phoneFormatted || contact.phone || "000-000-0000"}
-        </a>
-        <p className="text-sm text-text-secondary">
-          受付時間: {contact.hours || "9:00〜18:00"}
-        </p>
+        <FadeInUp>
+          <h2 className="text-lg lg:text-xl text-text-primary mb-4">
+            お電話でのお問い合わせ
+          </h2>
+          <a
+            href={`tel:${contact.phoneTel || contact.phone?.replace(/-/g, "")}`}
+            className="block text-[28px] lg:text-4xl font-bold text-navy mb-2"
+          >
+            {contact.phoneFormatted || contact.phone || "000-000-0000"}
+          </a>
+          <p className="text-sm text-text-secondary">
+            受付時間: {contact.hours || "9:00〜18:00"}
+          </p>
+        </FadeInUp>
       </div>
     </section>
   );
