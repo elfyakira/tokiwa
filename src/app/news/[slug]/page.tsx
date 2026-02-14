@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { site, company } from "@/lib/site";
+import { FadeInUp } from "@/components/animations";
 
 // ============================================================
 // 📝 コンテンツデータ（構成案に基づいて編集してください）
@@ -154,33 +155,35 @@ export default async function NewsDetailPage({
       {/* Page Header */}
       <section className="py-10 lg:py-[60px] bg-white">
         <div className="max-w-[800px] mx-auto px-4">
-          <div className="flex items-center gap-3 mb-4">
-            <span className="text-[13px] lg:text-sm text-text-secondary">
-              {news.date}
-            </span>
-            <span className="text-xs font-semibold text-navy px-2 py-0.5 bg-gray-100 rounded">
-              {news.categoryLabel}
-            </span>
-          </div>
-          <h1 className="text-2xl lg:text-[32px] font-bold text-text-primary leading-[1.4]">
-            {news.title}
-          </h1>
+          <FadeInUp>
+            <div className="flex items-center gap-3 mb-4">
+              <span className="text-[13px] lg:text-sm text-text-secondary">
+                {news.date}
+              </span>
+              <span className="text-xs font-semibold text-navy px-2 py-0.5 bg-gray-100 rounded">
+                {news.categoryLabel}
+              </span>
+            </div>
+            <h1 className="text-2xl lg:text-[32px] font-bold text-text-primary leading-[1.4]">
+              {news.title}
+            </h1>
+          </FadeInUp>
         </div>
       </section>
 
       {/* Content */}
       <section className="pb-10 lg:pb-[60px] bg-white">
         <div className="max-w-[800px] mx-auto px-4">
-          <div className="text-[15px] lg:text-base text-text-primary leading-[1.9] whitespace-pre-wrap">
+          <FadeInUp delay={100} className="text-[15px] lg:text-base text-text-primary leading-[1.9] whitespace-pre-wrap">
             {news.content}
-          </div>
+          </FadeInUp>
         </div>
       </section>
 
       {/* Related Links */}
       <section className="pb-8 lg:pb-10 bg-white">
         <div className="max-w-[800px] mx-auto px-4">
-          <div className="bg-bg-light p-6 lg:p-8 rounded-lg">
+          <FadeInUp delay={200} className="bg-bg-light p-6 lg:p-8 rounded-lg">
             <p className="text-sm font-semibold text-text-secondary mb-4">
               関連ページ:
             </p>
@@ -196,7 +199,7 @@ export default async function NewsDetailPage({
                 </li>
               ))}
             </ul>
-          </div>
+          </FadeInUp>
         </div>
       </section>
 
