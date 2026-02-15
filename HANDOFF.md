@@ -10,6 +10,7 @@
 | 作成日 | 2026-02-15 |
 | 制作方式 | カンプ版（デザインカンプから実装） |
 | カンプフォルダ | C:\Users\tench\Downloads\トキワ工業HP |
+| GitHubリポジトリ | https://github.com/elfyakira/tokiwa.git |
 
 ## カンプ版 厳守事項
 
