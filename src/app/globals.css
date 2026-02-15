@@ -2,23 +2,25 @@
 @import "tailwindcss";
 
 @theme {
-  /* Brand Colors */
-  --color-navy: #1a3a5c;
-  --color-navy-dark: #152e4a;
-  --color-accent: #e67635;
-  --color-accent-dark: #d56025;
+  /* Brand Colors - トキワ工業 */
+  --color-navy: #1E3A8A;
+  --color-navy-dark: #1e3a8a;
+  --color-accent: #DC2626;
+  --color-accent-dark: #b91c1c;
+  --color-blue: #3B82F6;
+  --color-blue-light: #60A5FA;
 
   /* Text Colors */
-  --color-text-primary: #333333;
-  --color-text-secondary: #666666;
-  --color-text-muted: #999999;
+  --color-text-primary: #1F2937;
+  --color-text-secondary: #6B7280;
+  --color-text-muted: #9CA3AF;
 
   /* Background Colors */
-  --color-bg-light: #e0e0e0;
+  --color-bg-light: #F3F4F6;
   --color-bg-white: #ffffff;
 
   /* Border Colors */
-  --color-border: #e0e0e0;
+  --color-border: #E5E7EB;
 
   /* Font Family */
   --font-sans: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
@@ -58,7 +60,7 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--color-accent);
+  background-color: var(--color-navy);
   color: white;
   padding: 1rem 2rem;
   border-radius: var(--radius-btn);
@@ -68,7 +70,8 @@ body {
 }
 
 .btn-primary:hover {
-  background-color: var(--color-accent-dark);
+  background-color: var(--color-navy-dark);
+  opacity: 0.9;
 }
 
 .btn-secondary {
@@ -85,7 +88,7 @@ body {
 }
 
 .btn-secondary:hover {
-  background-color: rgba(26, 58, 92, 0.05);
+  background-color: rgba(30, 58, 138, 0.05);
 }
 
 .btn-outline-white {
@@ -105,6 +108,23 @@ body {
   background-color: rgba(255, 255, 255, 0.1);
 }
 
+.btn-accent {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-accent);
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: var(--radius-btn);
+  font-weight: 600;
+  font-size: 1rem;
+  transition: background-color 0.2s;
+}
+
+.btn-accent:hover {
+  background-color: var(--color-accent-dark);
+}
+
 .text-link {
   display: inline-flex;
   align-items: center;
@@ -115,7 +135,7 @@ body {
 }
 
 .text-link:hover {
-  color: var(--color-accent);
+  color: var(--color-blue);
 }
 
 .text-link::after {
@@ -128,6 +148,7 @@ body {
   color: var(--color-accent);
   letter-spacing: 0.1em;
   margin-bottom: 1rem;
+  display: block;
 }
 
 .section-padding {
@@ -159,6 +180,10 @@ body {
   background-color: var(--color-accent);
 }
 
+@utility bg-blue {
+  background-color: var(--color-blue);
+}
+
 @utility bg-bg-light {
   background-color: var(--color-bg-light);
 }
@@ -169,6 +194,10 @@ body {
 
 @utility text-accent {
   color: var(--color-accent);
+}
+
+@utility text-blue {
+  color: var(--color-blue);
 }
 
 @utility text-text-primary {

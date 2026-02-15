@@ -1,0 +1,25 @@
+{
+  "companyName": "有限会社トキワ工業",
+  "companyNameEn": "tokiwa",
+  "representative": "鳴澤 潤一",
+  "address": "〒496-0016 愛知県津島市白浜町八丁目59-1",
+  "phone": "0567-33-1330",
+  "fax": "0567-33-1320",
+  "businessHours": "8:30〜17:30",
+  "access": "JR蟹江駅 車で10分以内",
+  "brandColors": {
+    "primary": "青",
+    "secondary": "赤"
+  },
+  "target": {
+    "area": "東海3県",
+    "industry": "製造業、建築関係、食品関係"
+  },
+  "strengths": [
+    "精密さと確かさ（10分の1単位の精密加工）",
+    "個性を生かすチーム力",
+    "お客様の製品価値を高める存在"
+  ],
+  "products": ["制御盤関係", "機械カバー", "ブラケット"],
+  "customerNeeds": "納期、品質（コストより納期・品質重視）"
+}

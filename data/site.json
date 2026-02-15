@@ -1,34 +1,34 @@
 {
   "company": {
-    "name": "",
-    "nameShort": "",
-    "nameEn": "",
-    "id": "",
-    "ceo": "",
+    "name": "有限会社トキワ工業",
+    "nameShort": "トキワ工業",
+    "nameEn": "TOKIWA",
+    "id": "tokiwa",
+    "ceo": "鳴澤 潤一",
     "established": "",
     "capital": "",
     "revenue": "",
     "employees": "",
-    "business": "",
+    "business": "製造業（制御盤・配電盤・分電盤・機械カバー・ブラケット・ステンレス加工・鋼材加工・塗装・組付け・軽微品加工）",
     "license": "",
     "catchphrase": "",
     "mission": ""
   },
   "contact": {
-    "phone": "",
-    "phoneFormatted": "",
-    "phoneTel": "",
-    "fax": "",
+    "phone": "0567-33-1330",
+    "phoneFormatted": "0567-33-1330",
+    "phoneTel": "0567331330",
+    "fax": "0567-33-1320",
     "email": "",
-    "hours": "",
+    "hours": "8:30〜17:30",
     "recruitContact": ""
   },
   "locations": {
     "headquarters": {
       "name": "本社",
-      "zipCode": "",
-      "address": "",
-      "access": "",
+      "zipCode": "496-0016",
+      "address": "愛知県津島市白浜町八丁目59-1",
+      "access": "JR蟹江駅 車で10分以内",
       "mapUrl": ""
     },
     "branches": []
@@ -42,10 +42,10 @@
     "logoOnly": "/images/logo-only.png"
   },
   "seo": {
-    "siteUrl": "https://example.com",
-    "titleSuffix": "",
-    "defaultTitle": "",
-    "defaultDescription": ""
+    "siteUrl": "https://tokiwa-kogyo.co.jp",
+    "titleSuffix": " | 有限会社トキワ工業",
+    "defaultTitle": "有限会社トキワ工業 | 制御盤・配電盤・機械カバー製造",
+    "defaultDescription": "愛知県津島市のトキワ工業。制御盤・配電盤・分電盤・機械カバー・ブラケットの製造。10分の1単位の精密加工技術で、お客様の製品価値を高めます。"
   },
   "stats": {
     "yearsInBusiness": "",
@@ -74,8 +74,8 @@
     "interviews": []
   },
   "ceo": {
-    "name": "",
-    "title": "",
+    "name": "鳴澤 潤一",
+    "title": "代表取締役",
     "image": "",
     "message": []
   }

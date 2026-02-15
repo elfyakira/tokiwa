@@ -1,17 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
-import { company, contact, locations, images, site } from "@/lib/site";
+import { company, contact, locations, images } from "@/lib/site";
 
-const navLinks1 = [
-  { label: "会社概要", href: "/about" },
-  { label: "事業内容", href: "/service" },
-  { label: "採用情報", href: "/recruit" },
-];
-
-const navLinks2 = [
-  { label: "お知らせ", href: "/news" },
-  { label: "お問い合わせ", href: "/contact" },
-  { label: "プライバシーポリシー", href: "/privacy" },
+const navLinks = [
+  { label: "BUSINESS", href: "/business" },
+  { label: "TECHNOLOGY", href: "/technology" },
+  { label: "COMPANY", href: "/company" },
+  { label: "RECRUIT", href: "/recruit" },
+  { label: "CONTACT", href: "/contact" },
 ];
 
 export default function Footer() {
@@ -20,170 +16,85 @@ export default function Footer() {
 
   return (
     <footer className="bg-navy text-white">
-      <div className="max-w-container mx-auto px-6 lg:px-12 pt-12 lg:pt-20 pb-6 lg:pb-10">
-        {/* PC: 4 columns */}
-        <div className="hidden lg:flex lg:justify-between lg:items-start mb-16">
-          {/* 1. Logo */}
+      <div className="max-w-container mx-auto px-6 lg:px-12 pt-12 lg:pt-16 pb-6 lg:pb-8">
+        {/* PC: Layout */}
+        <div className="hidden lg:flex lg:justify-between lg:items-start mb-12">
+          {/* Logo */}
           <div>
             <Link href="/">
               <Image
-                src={images.logoSquare || "/images/logo-square.png"}
-                alt={company.name || "会社ロゴ"}
-                width={100}
-                height={100}
+                src={images.logo || "/images/logo.png"}
+                alt={company.name || "トキワ工業"}
+                width={160}
+                height={40}
                 className="brightness-0 invert"
               />
             </Link>
           </div>
 
-          {/* 2. Company Info */}
-          <div className="text-sm text-white/80 leading-relaxed pt-4">
-            {hq.zipCode && hq.address && (
-              <p>〒{hq.zipCode} {hq.address}</p>
-            )}
-            {contact.phone && <p>TEL: {contact.phoneFormatted || contact.phone}</p>}
-            {contact.hours && <p>営業時間: {contact.hours}</p>}
-          </div>
-
-          {/* 3. Navigation - 2 columns */}
-          <div className="flex gap-10">
-            <ul className="space-y-2">
-              {navLinks1.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-white/80 hover:text-white transition-colors"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-            <ul className="space-y-2">
-              {navLinks2.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-white/80 hover:text-white transition-colors"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* 4. SNS */}
-          {site.social.instagram && (
-            <div>
-              <a
-                href={site.social.instagram}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white/80 hover:text-white transition-colors"
-                aria-label="Instagram"
+          {/* Navigation */}
+          <nav className="flex gap-8">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="text-sm text-white/80 hover:text-white transition-colors tracking-wider"
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
-                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-                  <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
-                </svg>
-              </a>
-            </div>
+                {link.label}
+              </Link>
+            ))}
+          </nav>
+        </div>
+
+        {/* Company Info */}
+        <div className="hidden lg:block text-sm text-white/70 leading-relaxed mb-8">
+          <p className="mb-1">{company.name}</p>
+          {hq.zipCode && hq.address && (
+            <p>〒{hq.zipCode} {hq.address}</p>
           )}
+          <p className="mt-2">
+            {contact.phone && <span className="mr-4">TEL: {contact.phoneFormatted || contact.phone}</span>}
+            {contact.fax && <span>FAX: {contact.fax}</span>}
+          </p>
         </div>
 
         {/* SP: Stacked layout */}
         <div className="lg:hidden text-center mb-8">
           <Link href="/" className="inline-block mb-6">
             <Image
-              src={images.logoSquare || "/images/logo-square.png"}
-              alt={company.name || "会社ロゴ"}
-              width={120}
-              height={120}
+              src={images.logo || "/images/logo.png"}
+              alt={company.name || "トキワ工業"}
+              width={140}
+              height={35}
               className="brightness-0 invert"
             />
           </Link>
-          <div className="text-sm text-white/80 leading-relaxed mb-6">
+          <div className="text-sm text-white/70 leading-relaxed mb-6">
+            <p className="mb-1">{company.name}</p>
             {hq.zipCode && hq.address && (
               <p>〒{hq.zipCode} {hq.address}</p>
             )}
-            {contact.phone && <p>TEL: {contact.phoneFormatted || contact.phone}</p>}
-            {contact.hours && <p>営業時間: {contact.hours}</p>}
+            {contact.phone && <p className="mt-2">TEL: {contact.phoneFormatted || contact.phone}</p>}
+            {contact.fax && <p>FAX: {contact.fax}</p>}
           </div>
-          <div className="flex justify-center gap-10 mb-6">
-            <ul className="space-y-2 text-left">
-              {navLinks1.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-white/80 hover:text-white transition-colors"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-            <ul className="space-y-2 text-left">
-              {navLinks2.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-white/80 hover:text-white transition-colors"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-          {site.social.instagram && (
-            <a
-              href={site.social.instagram}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block text-white/80 hover:text-white transition-colors"
-              aria-label="Instagram"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
+          <nav className="flex flex-wrap justify-center gap-4 mb-6">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="text-sm text-white/80 hover:text-white transition-colors tracking-wider"
               >
-                <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
-                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-                <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
-              </svg>
-            </a>
-          )}
+                {link.label}
+              </Link>
+            ))}
+          </nav>
         </div>
 
         {/* Copyright */}
-        <div className="border-t border-white/10 pt-6 text-center">
+        <div className="border-t border-white/20 pt-6 text-center">
           <p className="text-xs text-white/50">
-            © {currentYear} {company.nameEn || company.name || "Company Name"}. All Rights Reserved.
+            © {currentYear} {company.nameEn || company.name || "TOKIWA"}. All Rights Reserved.
           </p>
-          {company.license && (
-            <p className="text-[11px] text-white/40 mt-2">
-              {company.license}
-            </p>
-          )}
         </div>
       </div>
     </footer>
