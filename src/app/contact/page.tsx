@@ -23,7 +23,7 @@ type ContactType = (typeof CONTACT_TYPES)[number]["id"];
 // ページヒーロー
 function PageHero() {
   return (
-    <section className="relative h-[300px] lg:h-[400px] flex items-center -mt-20 pt-20">
+    <section className="relative h-[300px] lg:h-[400px] flex items-center pt-24">
       <div className="absolute inset-0 z-0 bg-navy" />
       <div className="relative z-10 max-w-container mx-auto px-6 lg:px-12 w-full">
         <FadeInUp>

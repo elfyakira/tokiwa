@@ -8,84 +8,152 @@
 | 企業名（英語） | tokiwa |
 | 使用テンプレート | template-standard |
 | 作成日 | 2026-02-15 |
+| 更新日 | 2026-02-16 |
 | 制作方式 | カンプ版（デザインカンプから実装） |
 | カンプフォルダ | C:\Users\tench\Downloads\トキワ工業HP |
 | GitHubリポジトリ | https://github.com/elfyakira/tokiwa.git |
 
-## カンプ版 厳守事項
+---
 
-1. **文言の捏造禁止**: カンプに見えない文言を勝手に作らない
-2. **プレースホルダー維持**: 「aaaa」「ああああ」等はそのまま実装
-3. **デザイン忠実再現**: カンプの見た目を100%再現
-4. **虚偽情報禁止**: 推測で情報を追加しない
+## 今回セッションで完了した作業（2026-02-16 続き）
 
-## 企業基本情報
+### 1. TOPページ アニメーション実装 ✅
 
-| 項目 | 内容 |
-|------|------|
-| 代表者 | 鳴澤 潤一 |
-| 所在地 | 〒496-0016 愛知県津島市白浜町八丁目59-1 |
-| 電話番号 | 0567-33-1330 |
-| FAX番号 | 0567-33-1320 |
-| 営業時間 | 8:30〜17:30 |
-| 事業内容 | 製造業（制御盤・配電盤・分電盤等） |
+| セクション | アニメーション |
+|-----------|---------------|
+| BUSINESS | 右からスライドイン（FadeInImage direction="right"） |
+| OUR STRENGTHS | フェードイン（FadeInImage direction="up"） x3 |
+| TECHNOLOGY | 左からスライドイン（FadeInImage direction="left"） |
+| RECRUIT | フェードイン（FadeInImage direction="up"） |
+| CONTACT | フェードイン（FadeInImage direction="up"） |
 
-## ブランドカラー
+### 2. BUSINESS/TECHNOLOGY/RECRUITページ ヒーロー修正 ✅
 
-| 項目 | コード | 用途 |
-|------|--------|------|
-| メインカラー | #1E3A8A | ヘッダー、見出し等 |
-| アクセントカラー | #DC2626 | 赤アクセント |
-| サブカラー | #3B82F6 | リンク、グラフ等 |
-| テキスト（濃） | #1F2937 | 本文 |
-| テキスト（淡） | #6B7280 | 補足テキスト |
+カンプ（`/mnt/c/Users/tench/Downloads/hero-design.jpg`）に基づき修正:
+- 背景: navy → 白
+- タイトル色: 白 → navy
+- サブタイトル: タイトルの右横（同じ行）に配置
+- 説明文色: 白 → text-primary
+- 画像: 縦長（aspect-[3/4]）、右からスライドイン
+- コンテナ: max-w-7xl mx-auto
 
-## ヘッダー仕様
+### 3. COMPANYページ 採用情報バナー修正 ✅
 
-| 項目 | PC | SP |
-|------|----|----|
-| ロゴ位置 | 左 | 左 |
-| ナビ構成 | BUSINESS, TECHNOLOGY, COMPANY, RECRUIT, CONTACT | ハンバーガー |
-| 背景 | 白 | 白 |
+- コンテナを `max-w-7xl` に変更
+- 画像をオリジナルの高さに（fillではなくwidth/height指定）
+- テキスト中央揃え
 
-## フッター仕様
+### 4. RECRUITページ アイコン画像修正 ✅
 
-| 項目 | 内容 |
-|------|------|
-| 背景色 | #1E3A8A（濃紺） |
-| レイアウト | ロゴ、ナビ、会社情報、コピーライト |
+- SVGで描画していたアイコンを画像に置き換え
+- `/images/recruit-icon1.png` - 78%円グラフ（従業員定着率）
+- `/images/recruit-icon2.png` - 67%プログレスバー（生産性の向上）
+- `/images/recruit-icon3.png` - 人アイコン（多様なジェンダー）
+- テキストに`break-all`と`overflow-hidden`を追加
 
-## 参照ファイル
+### 5. TOPページ CONTACTセクション修正 ✅
 
-| ファイル | 用途 |
+- 帯とボタンをflexで横並びに変更（absoluteを廃止）
+- 帯: `w-[60%] lg:w-[50%]`、テキストは`items-end`で右寄せ
+- ボタン: `self-end -mb-16 lg:-mb-24`で下に配置
+- 背景画像: 7xlの左端に合わせる `left-[calc((100vw-80rem)/2+2.5rem)]`
+
+### 6. TOPページ TECHNOLOGYセクション修正 途中
+
+- 背景画像: 7xlの右端に合わせる `right-[calc((100vw-80rem)/2+3rem)]`
+- 帯の位置: `pr-[5%] lg:pr-[8%]`に変更
+
+### 7. TOPページ RECRUITセクション修正 途中
+
+- 高さ増加: `min-h-[550px] lg:min-h-[650px]`
+- 背景画像: `right-2`で右側に余白
+
+---
+
+## 次回セッションでやること
+
+### 未完了: TOPページ TECHNOLOGYセクションの微調整
+
+現在の問題:
+- サブテキストの位置が合っていない
+- 現在: `pr-[8%] lg:pr-[12%]`
+
+調整ポイント:
+- サブテキスト（説明文）の位置調整
+- ボタンの位置: 現在 `pl-[15%] lg:pl-[20%]`
+
+### 確認事項
+
+- TECHNOLOGYセクションとRECRUITセクションの背景画像の右端が揃っているか
+- CONTACTセクションとRECRUITセクションの背景画像の左端が揃っているか
+
+---
+
+## 背景画像の配置計算（重要）
+
+### 7xlコンテナに合わせる計算式
+
+7xl = 80rem = 1280px
+
+- 左端に合わせる: `left-[calc((100vw-80rem)/2+余白)]`
+- 右端に合わせる: `right-[calc((100vw-80rem)/2+余白)]`
+
+### 現在の設定
+
+| セクション | 背景画像の配置 |
+|-----------|---------------|
+| BUSINESS | `left-[20%] lg:left-[30%]` |
+| TECHNOLOGY | `right-[calc((100vw-80rem)/2+3rem)]` |
+| RECRUIT | `right-2`（7xlコンテナ内） |
+| CONTACT | `left-[calc((100vw-80rem)/2+2.5rem)]` |
+
+---
+
+## 不足している画像（要対応）
+
+| ファイル名 | 用途 | 現状 |
+|-----------|------|------|
+| interview.jpg | recruit/page.tsx インタビューセクション | なし |
+| greeting-illustration.png | company/page.tsx ごあいさつ | なし |
+| building.jpg | page.tsx CONTACTセクション背景 | works-1.jpg で仮対応中 |
+
+---
+
+## 主要ファイル
+
+| ファイル | 説明 |
 |---------|------|
-| data/composition.md | カンプ分析結果（実装の詳細仕様） |
-| data/hearing.json | ヒアリング抽出JSON |
-| SEO_LLMO_GUIDE.md | SEO・LLMO実装ガイド（最終フェーズで使用） |
+| `src/app/page.tsx` | TOPページ |
+| `src/app/layout.tsx` | 共通レイアウト |
+| `src/components/Header.tsx` | ヘッダー（透明/白切り替え対応） |
+| `src/components/Footer.tsx` | フッター（白背景） |
+| `src/app/business/page.tsx` | 事業紹介ページ |
+| `src/app/technology/page.tsx` | 技術・設備ページ |
+| `src/app/company/page.tsx` | 会社概要ページ |
+| `src/app/recruit/page.tsx` | 採用情報ページ |
+| `src/app/contact/page.tsx` | お問い合わせページ |
+| `tailwind.config.ts` | Tailwind設定（font-anton追加済み） |
+| `ANIMATION_GUIDE.md` | アニメーション実装ガイド |
+| `docs/IMAGE_LIST.md` | 画像一覧 |
 
-## 実装状況
+---
 
-| ページ | 状態 | 備考 |
-|--------|------|------|
-| TOP | 完了 | ヒーロー、About Us、Business、Our Strengths、Technology、Recruit、Contact セクション |
-| Business | 完了 | 盤制作、機械カバー制作、ブラケット金具製作、製缶制作、制作事例 |
-| Technology | 完了 | 技術（板金・溶接・組立）、設備ギャラリー |
-| Company | 完了 | ごあいさつ、沿革（※置き換え）、会社概要、採用情報バナー |
-| Recruit | 完了 | キャッチ、数字でわかる働く雰囲気（aaaa維持）、インタビュー |
-| Contact | 完了 | フォーム、電話番号 |
+## 検証コマンド
 
-## 次にやること
+```bash
+# TypeScriptチェック
+npx tsc --noEmit
 
-1. 画像の配置（/public/images/ フォルダに画像を配置）
-2. **プレースホルダー（aaaa等）はそのまま実装済み**（クライアント確認後に置き換え）
-3. SEO_LLMO_GUIDE.md に従ってSEO・LLMO対策を実施
+# 開発サーバー起動
+npm run dev
 
-### 最終フェーズ: SEO・LLMO対策（必須）
+# ビルド確認
+npm run build
+```
 
-- [ ] robots.txt 作成
-- [ ] sitemap.ts 作成
-- [ ] 全ページに metadata（title, description）設定
-- [ ] JSON-LD 構造化データ設置
-- [ ] 見出し構造の最適化（h1 > h2 > h3）
-- [ ] 画像の alt 属性設定
-- [ ] 型チェック（npx tsc --noEmit）
+---
+
+## 注意事項
+
+- page.tsxに未使用のImage importがある（警告が出ている）
+- FadeInImageを使っているのでImageは不要かもしれない、確認が必要

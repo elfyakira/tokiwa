@@ -42,6 +42,7 @@ const config: Config = {
           "Meiryo",
           "sans-serif",
         ],
+        anton: ["var(--font-anton)", "sans-serif"],
       },
       fontSize: {
         // Headings - PC

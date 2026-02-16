@@ -1,8 +1,16 @@
 import type { Metadata, Viewport } from "next";
+import { Anton } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { seo, company, contact, locations } from "@/lib/site";
+
+// Antonフォント（タイトル用）
+const anton = Anton({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-anton",
+});
 
 // JSON-LD構造化データ
 const jsonLd = {
@@ -30,6 +38,16 @@ export const metadata: Metadata = {
     template: `%s${seo.titleSuffix}`,
   },
   description: seo.defaultDescription,
+
+  // favicon
+  icons: {
+    icon: [
+      { url: "/favicon.png", type: "image/png" },
+    ],
+    apple: [
+      { url: "/images/logo-square.png" },
+    ],
+  },
 
   // canonical URL
   alternates: {
@@ -89,7 +107,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ja">
+    <html lang="ja" className={anton.variable}>
       <head>
         <script
           type="application/ld+json"

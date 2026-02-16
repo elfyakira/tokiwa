@@ -215,3 +215,7 @@ body {
 @utility rounded-btn {
   border-radius: var(--radius-btn);
 }
+
+@utility font-anton {
+  font-family: var(--font-anton), sans-serif;
+}

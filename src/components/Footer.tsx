@@ -1,5 +1,8 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { company, contact, locations, images } from "@/lib/site";
 
 const navLinks = [
@@ -13,32 +16,42 @@ const navLinks = [
 export default function Footer() {
   const hq = locations.headquarters;
   const currentYear = new Date().getFullYear();
+  const pathname = usePathname();
 
   return (
-    <footer className="bg-navy text-white">
-      <div className="max-w-container mx-auto px-6 lg:px-12 pt-12 lg:pt-16 pb-6 lg:pb-8">
-        {/* PC: Layout */}
-        <div className="hidden lg:flex lg:justify-between lg:items-start mb-12">
+    <footer className="bg-white text-navy">
+      <div className="max-w-container mx-auto px-6 lg:px-12 py-6 lg:py-8">
+        {/* PC: 横並び */}
+        <div className="hidden lg:flex lg:items-center lg:justify-between lg:gap-8 mb-4">
           {/* Logo */}
-          <div>
-            <Link href="/">
-              <Image
-                src={images.logo || "/images/logo.png"}
-                alt={company.name || "トキワ工業"}
-                width={160}
-                height={40}
-                className="brightness-0 invert"
-              />
-            </Link>
+          <Link href="/" className="shrink-0">
+            <Image
+              src={images.logo || "/images/logo.png"}
+              alt={company.name || "トキワ工業"}
+              width={120}
+              height={30}
+              className=""
+            />
+          </Link>
+
+          {/* Company Info */}
+          <div className="text-xs text-navy/70 leading-relaxed">
+            <p>{company.name} 〒{hq.zipCode} {hq.address}</p>
+            <p>
+              {contact.phone && <span className="mr-3">TEL: {contact.phoneFormatted || contact.phone}</span>}
+              {contact.fax && <span>FAX: {contact.fax}</span>}
+            </p>
           </div>
 
           {/* Navigation */}
-          <nav className="flex gap-8">
+          <nav className="flex gap-6">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-sm text-white/80 hover:text-white transition-colors tracking-wider"
+                className={`text-xs hover:text-navy transition-colors tracking-wider ${
+                  pathname === link.href ? "text-accent" : "text-navy/80"
+                }`}
               >
                 {link.label}
               </Link>
@@ -46,43 +59,32 @@ export default function Footer() {
           </nav>
         </div>
 
-        {/* Company Info */}
-        <div className="hidden lg:block text-sm text-white/70 leading-relaxed mb-8">
-          <p className="mb-1">{company.name}</p>
-          {hq.zipCode && hq.address && (
-            <p>〒{hq.zipCode} {hq.address}</p>
-          )}
-          <p className="mt-2">
-            {contact.phone && <span className="mr-4">TEL: {contact.phoneFormatted || contact.phone}</span>}
-            {contact.fax && <span>FAX: {contact.fax}</span>}
-          </p>
-        </div>
-
-        {/* SP: Stacked layout */}
-        <div className="lg:hidden text-center mb-8">
-          <Link href="/" className="inline-block mb-6">
+        {/* SP: 縦積み */}
+        <div className="lg:hidden text-center mb-4">
+          <Link href="/" className="inline-block mb-4">
             <Image
               src={images.logo || "/images/logo.png"}
               alt={company.name || "トキワ工業"}
-              width={140}
-              height={35}
-              className="brightness-0 invert"
+              width={100}
+              height={25}
+              className=""
             />
           </Link>
-          <div className="text-sm text-white/70 leading-relaxed mb-6">
-            <p className="mb-1">{company.name}</p>
+          <div className="text-xs text-navy/70 leading-relaxed mb-4">
+            <p>{company.name}</p>
             {hq.zipCode && hq.address && (
               <p>〒{hq.zipCode} {hq.address}</p>
             )}
-            {contact.phone && <p className="mt-2">TEL: {contact.phoneFormatted || contact.phone}</p>}
-            {contact.fax && <p>FAX: {contact.fax}</p>}
+            {contact.phone && <p>TEL: {contact.phoneFormatted || contact.phone}</p>}
           </div>
-          <nav className="flex flex-wrap justify-center gap-4 mb-6">
+          <nav className="flex flex-wrap justify-center gap-3 mb-4">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-sm text-white/80 hover:text-white transition-colors tracking-wider"
+                className={`text-xs hover:text-navy transition-colors tracking-wider ${
+                  pathname === link.href ? "text-accent" : "text-navy/80"
+                }`}
               >
                 {link.label}
               </Link>
@@ -91,8 +93,8 @@ export default function Footer() {
         </div>
 
         {/* Copyright */}
-        <div className="border-t border-white/20 pt-6 text-center">
-          <p className="text-xs text-white/50">
+        <div className="border-t border-navy/20 pt-4 text-center">
+          <p className="text-xs text-navy/50">
             © {currentYear} {company.nameEn || company.name || "TOKIWA"}. All Rights Reserved.
           </p>
         </div>
