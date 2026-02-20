@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
+
 @theme {
   /* Brand Colors - トキワ工業 */
   --color-navy: #1E3A8A;
@@ -218,4 +219,8 @@ body {
 
 @utility font-anton {
   font-family: var(--font-anton), sans-serif;
+}
+
+@utility font-mincho {
+  font-family: "游明朝", "Yu Mincho", "YuMincho", "Hiragino Mincho ProN", "HG明朝E", serif;
 }

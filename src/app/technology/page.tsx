@@ -7,35 +7,57 @@ import { FadeInUp, FadeInImage } from "@/components/animations";
 // Technologyページ - トキワ工業
 // ============================================================
 
-// ページヒーロー - 2カラム構成
+// ページヒーロー - フルワイド画像 + グラデーションセクション + テキストボックス
 function PageHero() {
   return (
     <section className="relative pt-24">
-      <div className="max-w-7xl mx-auto px-6 lg:px-12">
-        <div className="grid lg:grid-cols-2">
-          {/* 左: テキストコンテンツ */}
-          <div className="bg-white flex items-center py-16 lg:py-24">
-            <FadeInUp>
-              <div className="flex items-baseline gap-4 flex-wrap">
-                <h1 className="text-4xl lg:text-5xl font-bold text-navy tracking-wider">
-                  TECHNOLOGY
-                </h1>
-                <p className="text-sm text-navy tracking-wider">技術・設備</p>
-              </div>
-              <p className="text-text-primary leading-[2] mt-8 max-w-lg">
-                トキワ工業の技術は、人の感覚と設備の正確さ、その両方を活かすことから生まれます。細かな調整や最終工程の仕上がりまで妥協せず、ミスの許されない仕事にも応えられる体制を整えてきました。
-              </p>
-            </FadeInUp>
+      {/* タイトルセクション */}
+      <div className="bg-white pt-24 pb-8 lg:pt-40 lg:pb-10">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+          <FadeInUp>
+            <div className="flex items-baseline gap-4">
+              <h1 className="text-4xl lg:text-6xl font-anton font-bold text-navy tracking-wider lg:tracking-[0.12em]">
+                TECHNOLOGY
+              </h1>
+              <p className="text-sm lg:text-base text-navy tracking-wider">技術・設備</p>
+            </div>
+          </FadeInUp>
+        </div>
+      </div>
+
+      {/* ヒーロー画像（フルワイド） */}
+      <div className="relative">
+        <FadeInImage
+          src="/images/technology-hero.jpg"
+          alt="Technology"
+          fill
+          direction="up"
+          containerClassName="relative aspect-[16/9] lg:aspect-[2.5/1]"
+          className="object-cover"
+        />
+      </div>
+
+      {/* グラデーションセクション + テキストボックス */}
+      <div className="relative">
+        <div className="bg-gradient-to-b from-[#013f93] to-[#f5f8f6] py-32 lg:py-44" />
+
+        {/* 白いテキストボックス（画像とグラデーションにまたがる） */}
+        <div className="absolute left-0 right-0 z-20 -top-20 lg:-top-28">
+          <div className="max-w-7xl mx-auto px-6 lg:px-12">
+            <div>
+              <FadeInUp delay={0.1}>
+                <div className="bg-white p-8 lg:p-12 w-full shadow-lg">
+                  <h2 className="text-[40px] font-bold text-[#013f93] font-mincho leading-tight whitespace-nowrap">
+                    細かな仕事を、確かな技術で。
+                  </h2>
+                  <div className="w-48 lg:w-72 h-px bg-[#013f93] mt-8 mb-8" />
+                  <p className="text-sm lg:text-base text-[#013f93] leading-[2]">
+                    トキワ工業の技術は、人の感覚と設備の正確さ、その両方を活かすことから生まれます。細かな調整や最終工程の仕上がりまで妥協せず、ミスの許されない仕事にも応えられる体制を整えてきました。
+                  </p>
+                </div>
+              </FadeInUp>
+            </div>
           </div>
-          {/* 右: 画像（縦長）- 右からスライドイン */}
-          <FadeInImage
-            src="/images/technology-hero.jpg"
-            alt="Technology"
-            fill
-            direction="right"
-            containerClassName="relative aspect-[3/4]"
-            className="object-cover"
-          />
         </div>
       </div>
     </section>

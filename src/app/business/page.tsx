@@ -7,35 +7,57 @@ import { FadeInUp, FadeInImage } from "@/components/animations";
 // Businessページ - トキワ工業
 // ============================================================
 
-// ページヒーロー - 2カラム構成
+// ページヒーロー - フルワイド画像 + グラデーションセクション + テキストボックス
 function PageHero() {
   return (
     <section className="relative pt-24">
-      <div className="max-w-7xl mx-auto px-6 lg:px-12">
-        <div className="grid lg:grid-cols-2">
-          {/* 左: テキストコンテンツ */}
-          <div className="bg-white flex items-center py-16 lg:py-24">
-            <FadeInUp>
-              <div className="flex items-baseline gap-4 flex-wrap">
-                <h1 className="text-4xl lg:text-5xl font-bold text-navy tracking-wider">
-                  BUSINESS
-                </h1>
-                <p className="text-sm text-navy tracking-wider">事業紹介</p>
-              </div>
-              <p className="text-text-primary leading-[2] mt-8 max-w-lg">
-                制御盤・配電盤カバーからブラケット、機械カバー、制御BOXまで、多品種・小ロットにも対応した"細かなモノづくり"を行っています。図面製作〜板金加工〜組立まで一貫対応が可能です。
-              </p>
-            </FadeInUp>
+      {/* タイトルセクション */}
+      <div className="bg-white pt-24 pb-8 lg:pt-40 lg:pb-10">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+          <FadeInUp>
+            <div className="flex items-baseline gap-4">
+              <h1 className="text-4xl lg:text-6xl font-anton font-bold text-navy tracking-wider lg:tracking-[0.12em]">
+                BUSINESS
+              </h1>
+              <p className="text-sm lg:text-base text-navy tracking-wider">事業紹介</p>
+            </div>
+          </FadeInUp>
+        </div>
+      </div>
+
+      {/* ヒーロー画像（フルワイド） */}
+      <div className="relative">
+        <FadeInImage
+          src="/images/business-hero.jpg"
+          alt="Business"
+          fill
+          direction="up"
+          containerClassName="relative aspect-[16/9] lg:aspect-[2.5/1]"
+          className="object-cover"
+        />
+      </div>
+
+      {/* グラデーションセクション + テキストボックス */}
+      <div className="relative">
+        <div className="bg-gradient-to-b from-[#013f93] to-[#f5f8f6] py-32 lg:py-44" />
+
+        {/* 白いテキストボックス（画像とグラデーションにまたがる） */}
+        <div className="absolute left-0 right-0 z-20 -top-20 lg:-top-28">
+          <div className="max-w-7xl mx-auto px-6 lg:px-12">
+            <div>
+              <FadeInUp delay={0.1}>
+                <div className="bg-white p-8 lg:p-12 w-full shadow-lg">
+                  <h2 className="text-[40px] font-bold text-[#013f93] font-mincho leading-tight whitespace-nowrap">
+                    多品種・小ロットに応える、細かなモノづくり。
+                  </h2>
+                  <div className="w-48 lg:w-72 h-px bg-[#013f93] mt-8 mb-8" />
+                  <p className="text-sm lg:text-base text-[#013f93] leading-[2]">
+                    制御盤・配電盤カバーからブラケット、機械カバー、制御BOXまで、多品種・小ロットにも対応した"細かなモノづくり"を行っています。図面製作〜板金加工〜組立まで一貫対応が可能です。
+                  </p>
+                </div>
+              </FadeInUp>
+            </div>
           </div>
-          {/* 右: 画像（縦長）- 右からスライドイン */}
-          <FadeInImage
-            src="/images/business-hero.jpg"
-            alt="Business"
-            fill
-            direction="right"
-            containerClassName="relative aspect-[3/4]"
-            className="object-cover"
-          />
         </div>
       </div>
     </section>
@@ -52,27 +74,21 @@ function BusinessOverview() {
   ];
 
   return (
-    <section className="py-12 lg:py-16 bg-white">
+    <section className="py-12 lg:py-16 bg-[#f5f8f6]">
       <div className="max-w-container mx-auto px-6 lg:px-12">
         <FadeInUp>
-          <div className="flex flex-wrap justify-center gap-8 lg:gap-16">
+          <div className="grid grid-cols-2 gap-4">
             {navItems.map((item) => (
               <a
                 key={item.id}
                 href={`#${item.id}`}
-                className="flex flex-col items-center gap-3 text-text-primary hover:text-accent transition-colors group"
+                className="group block bg-[#013f93]/80 hover:bg-[#013f93] transition-colors py-8 lg:py-10 text-center"
               >
-                <span className="text-sm lg:text-base font-medium">{item.label}</span>
-                {/* 赤い丸下矢印アイコン */}
-                <div className="w-8 h-8 rounded-full bg-accent flex items-center justify-center group-hover:bg-accent-dark transition-colors">
-                  <svg
-                    className="w-4 h-4 text-white"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                    viewBox="0 0 24 24"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                <h3 className="text-xl lg:text-2xl font-bold text-white tracking-[0.15em]">{item.label}</h3>
+                <div className="mt-3 flex justify-center">
+                  <svg className="w-8 h-4 text-white/70 group-hover:text-white transition-colors" fill="none" stroke="currentColor" strokeWidth={1} viewBox="0 0 32 16">
+                    <line x1="0" y1="8" x2="28" y2="8" />
+                    <polyline points="24,4 28,8 24,12" />
                   </svg>
                 </div>
               </a>

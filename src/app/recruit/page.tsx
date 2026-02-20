@@ -8,46 +8,57 @@ import { FadeInUp, FadeInImage } from "@/components/animations";
 // Recruitページ - トキワ工業
 // ============================================================
 
-// ページヒーロー - 2カラム構成（キャッチセクション統合）
+// ページヒーロー - フルワイド画像 + グラデーションセクション + テキストボックス
 function PageHero() {
   return (
     <section className="relative pt-24">
-      <div className="max-w-7xl mx-auto px-6 lg:px-12">
-        <div className="grid lg:grid-cols-2">
-          {/* 左: テキストコンテンツ */}
-          <div className="bg-white flex items-center py-16 lg:py-24">
-            <FadeInUp>
-              <div className="flex items-baseline gap-4 flex-wrap">
-                <h1 className="text-4xl lg:text-5xl font-bold text-navy tracking-wider">
-                  RECRUIT
-                </h1>
-                <p className="text-sm text-navy tracking-wider">採用情報</p>
-              </div>
-              <div className="mt-8 space-y-4 text-text-primary leading-[2] max-w-lg">
-                <p>
-                  私たちが大切にしているのは、同じ方向を見ながらも、それぞれの個性で支え合うこと。
-                </p>
-                <p>
-                  几帳面な人、ひらめきに強い人、手が早い人ーちがう強みが重なり合って、トキワの"確かさ"が生まれています。
-                </p>
-                <p>
-                  トキワ工業は、自分の個性を生かして働ける"ものづくりの舞台"
-                </p>
-                <p className="font-medium">
-                  最後のピースを、あなたの手で完成させませんか？
-                </p>
-              </div>
-            </FadeInUp>
+      {/* タイトルセクション */}
+      <div className="bg-white pt-24 pb-8 lg:pt-40 lg:pb-10">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+          <FadeInUp>
+            <div className="flex items-baseline gap-4">
+              <h1 className="text-4xl lg:text-6xl font-anton font-bold text-navy tracking-wider lg:tracking-[0.12em]">
+                RECRUIT
+              </h1>
+              <p className="text-sm lg:text-base text-navy tracking-wider">採用情報</p>
+            </div>
+          </FadeInUp>
+        </div>
+      </div>
+
+      {/* ヒーロー画像（フルワイド） */}
+      <div className="relative">
+        <FadeInImage
+          src="/images/recruit-hero.jpg"
+          alt="Recruit"
+          fill
+          direction="up"
+          containerClassName="relative aspect-[16/9] lg:aspect-[2.5/1]"
+          className="object-cover"
+        />
+      </div>
+
+      {/* グラデーションセクション + テキストボックス */}
+      <div className="relative">
+        <div className="bg-gradient-to-b from-[#013f93] to-[#f5f8f6] py-32 lg:py-44" />
+
+        {/* 白いテキストボックス（画像とグラデーションにまたがる） */}
+        <div className="absolute left-0 right-0 z-20 -top-20 lg:-top-28">
+          <div className="max-w-7xl mx-auto px-6 lg:px-12">
+            <div>
+              <FadeInUp delay={0.1}>
+                <div className="bg-white p-8 lg:p-12 w-full shadow-lg">
+                  <h2 className="text-[40px] font-bold text-[#013f93] font-mincho leading-tight whitespace-nowrap">
+                    あなたの個性が、ものづくりを支える。
+                  </h2>
+                  <div className="w-48 lg:w-72 h-px bg-[#013f93] mt-8 mb-8" />
+                  <p className="text-sm lg:text-base text-[#013f93] leading-[2]">
+                    私たちが大切にしているのは、同じ方向を見ながらも、それぞれの個性で支え合うこと。几帳面な人、ひらめきに強い人、手が早い人ーちがう強みが重なり合って、トキワの"確かさ"が生まれています。トキワ工業は、自分の個性を生かして働ける"ものづくりの舞台"。最後のピースを、あなたの手で完成させませんか？
+                  </p>
+                </div>
+              </FadeInUp>
+            </div>
           </div>
-          {/* 右: 画像（縦長）- 右からスライドイン */}
-          <FadeInImage
-            src="/images/recruit-hero.jpg"
-            alt="Recruit"
-            fill
-            direction="right"
-            containerClassName="relative aspect-[3/4]"
-            className="object-cover"
-          />
         </div>
       </div>
     </section>

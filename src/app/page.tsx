@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { FadeInUp, FadeInImage } from "@/components/animations";
+import { FadeInUp, FadeInImage, TypingText } from "@/components/animations";
 
 // ============================================================
 // TOPページ - トキワ工業
@@ -11,7 +11,7 @@ import { FadeInUp, FadeInImage } from "@/components/animations";
 // ヒーローセクション（動画背景）
 function HeroSection() {
   return (
-    <section className="relative h-screen min-h-[600px] flex items-center justify-center">
+    <section className="sticky top-0 z-0 h-screen min-h-[600px] flex items-center justify-center">
       {/* 背景動画 */}
       <div className="absolute inset-0 z-0">
         <video
@@ -39,26 +39,29 @@ function AboutSection() {
   return (
     <section className="py-20 lg:py-32 bg-navy">
       <div className="max-w-container mx-auto px-6 lg:px-12">
-        <FadeInUp className="text-center mb-12">
+        <FadeInUp className="text-center mb-[100px]">
           <h2 className="text-4xl lg:text-6xl font-anton font-bold text-white tracking-[0.1em]">
             ABOUT US
           </h2>
         </FadeInUp>
 
         <FadeInUp delay={0.1}>
-          <div className="max-w-3xl mx-auto text-center">
-            <p className="text-base lg:text-lg text-white/90 leading-[2] mb-8">
+          <div className="max-w-[600px] mx-auto text-center">
+            <p className="text-base lg:text-lg text-white/90 leading-[2] tracking-[0.1em] mb-8 font-mincho">
               トキワ工業は、制御盤・配電盤カバー、機械カバー、ブラケットなどを製作するものづくりの会社です。
             </p>
-            <p className="text-base lg:text-lg text-white/90 leading-[2] mb-8">
+            <p className="text-base lg:text-lg text-white/90 leading-[2] tracking-[0.1em] mb-8 font-mincho">
               わずかなズレや仕上がりの違いが、製品全体の品質や信頼性を左右する─その現場の現実を知っているからこそ、「細かな仕事」と「確かな品質」に徹底的に向き合っています。現場で培った人の感覚や判断力に、設備の正確さを掛け合わせることで、ミスの許されない加工や組み立てにも応えられる体制を築いてきました。
             </p>
-            <p className="text-base lg:text-lg text-white/90 leading-[2] mb-8">
+            <p className="text-base lg:text-lg text-white/90 leading-[2] tracking-[0.1em] mb-8 font-mincho">
               私たちは、単なる部品の供給先ではなく、お客様の製品価値を高めるための「欠かせない存在」でありたいと考えています。品質と納期に責任を持ち、最後の一手まで妥協しない。その積み重ねこそが、信頼につながると信じています。
             </p>
-            <div className="mt-10">
-              <Link href="/company" className="inline-flex items-center gap-1 text-white font-semibold hover:text-white/80 transition-colors">
-                会社概要を見る<span>→</span>
+            <div className="mt-[100px] flex justify-center">
+              <Link
+                href="/company"
+                className="w-32 h-32 lg:w-40 lg:h-40 bg-accent rounded-full flex items-center justify-center text-white text-[24px] font-sans font-bold tracking-wider hover:bg-accent-dark transition-colors shadow-lg"
+              >
+                VIEW MORE
               </Link>
             </div>
           </div>
@@ -71,28 +74,29 @@ function AboutSection() {
 // Businessセクション
 function BusinessSection() {
   return (
-    <section className="bg-white">
+    <section className="bg-[#DFE5EA]">
       {/* 上の白い余白 */}
       <div className="py-8 lg:py-12" />
 
-      <div className="relative min-h-[500px] lg:min-h-[600px]">
-        {/* 背景画像（左に余白）- 右からスライドイン */}
-        <FadeInImage
-          src="/images/business-bg.jpg"
-          alt="Business"
-          fill
-          direction="right"
-          containerClassName="absolute inset-y-0 left-6 lg:left-[calc((100vw-80rem)/2+2.5rem)] right-0 z-0"
-          className="object-cover"
-        />
+      <div className="max-w-7xl mx-auto px-6 lg:px-12">
+        <div className="relative min-h-[500px] lg:min-h-[600px]">
+          {/* 背景画像 - 右からスライドイン */}
+          <FadeInImage
+            src="/images/business-bg.jpg"
+            alt="Business"
+            fill
+            direction="right"
+            containerClassName="absolute inset-0 z-0"
+            className="object-cover"
+          />
 
         {/* コンテンツ */}
         <div className="absolute inset-0 z-10 flex flex-col">
-          {/* タイトルバー */}
-          <div className="pt-12 lg:pt-16 pl-[10%] lg:pl-[14%]">
-            <div className="bg-white inline-block">
-              <div className="px-8 py-4 lg:px-12 lg:py-6">
-                <div className="flex items-baseline gap-4">
+          {/* タイトルバー（左いっぱい） */}
+          <div className="pt-12 lg:pt-16 -ml-6 lg:-ml-12">
+            <div className="bg-[#f5f8f6] inline-block">
+              <div className="pl-6 lg:pl-12 pr-8 lg:pr-12 py-4 lg:py-6">
+                <div className="flex items-center gap-4">
                   <h2 className="text-3xl lg:text-6xl font-anton font-bold text-navy tracking-wider lg:tracking-[0.12em]">BUSINESS</h2>
                   <span className="text-sm lg:text-base text-navy">事業紹介</span>
                 </div>
@@ -101,14 +105,17 @@ function BusinessSection() {
           </div>
 
           {/* 説明文（画像の上に配置） */}
-          <div className="pl-[18%] lg:pl-[24%] py-8 lg:py-12">
+          <div className="pl-8 lg:pl-12 py-8 lg:py-12">
             <div className="flex flex-col items-start gap-2">
-              <p className="text-base lg:text-lg text-navy leading-relaxed bg-white/90 px-4 py-1">
-                必要とされる部品を、
-              </p>
-              <p className="text-base lg:text-lg text-navy leading-relaxed bg-white/90 px-4 py-1">
-                必要な形で。
-              </p>
+              <TypingText
+                text="必要とされる部品を、"
+                className="text-base lg:text-lg text-navy leading-relaxed bg-white/90 px-1 py-0.5 font-mincho font-bold"
+              />
+              <TypingText
+                text="必要な形で。"
+                className="text-base lg:text-lg text-navy leading-relaxed bg-white/90 px-1 py-0.5 font-mincho font-bold"
+                delay={10 * 65}
+              />
             </div>
           </div>
 
@@ -117,12 +124,13 @@ function BusinessSection() {
           <div className="flex justify-end pr-[15%] lg:pr-[20%] pb-12 lg:pb-16">
             <Link
               href="/business"
-              className="w-24 h-24 lg:w-32 lg:h-32 bg-white rounded-full flex items-center justify-center text-navy text-sm lg:text-base font-semibold hover:bg-gray-100 transition-colors shadow-lg"
+              className="w-32 h-32 lg:w-40 lg:h-40 bg-[#FFFFFF] rounded-full flex items-center justify-center text-[#0042c1] text-[24px] font-sans font-bold tracking-wider hover:bg-gray-100 transition-colors shadow-lg"
             >
-              詳しく見る
+              VIEW MORE
             </Link>
           </div>
         </div>
+      </div>
       </div>
     </section>
   );
@@ -152,14 +160,18 @@ function StrengthsSection() {
   ];
 
   return (
-    <section>
+    <section className="bg-[#DFE5EA]">
       {/* ヘッダー */}
-      <div className="bg-white pt-12 lg:pt-16 pb-6 lg:pb-8">
+      <div className="bg-[#DFE5EA] pt-12 lg:pt-16 pb-6 lg:pb-8">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <FadeInUp>
-            <div className="flex items-baseline gap-4">
-              <h2 className="text-3xl lg:text-5xl font-anton font-bold text-accent tracking-wider">OUR STRENGTHS</h2>
-              <span className="text-sm lg:text-base text-accent font-semibold">3つの強み</span>
+            <div className="bg-[#f5f8f6] inline-block -ml-6 lg:-ml-12">
+              <div className="pl-6 lg:pl-12 pr-8 lg:pr-12 py-4 lg:py-6">
+                <div className="flex items-center gap-4">
+                  <h2 className="text-3xl lg:text-6xl font-anton font-bold text-accent tracking-wider lg:tracking-[0.12em]">OUR STRENGTHS</h2>
+                  <span className="text-sm lg:text-base text-accent font-semibold">3つの強み</span>
+                </div>
+              </div>
             </div>
           </FadeInUp>
         </div>
@@ -167,7 +179,7 @@ function StrengthsSection() {
 
       {/* 各強み */}
       {strengths.map((item, index) => (
-        <div key={item.number} className="bg-white">
+        <div key={item.number} className="bg-[#DFE5EA]">
           {/* 白い余白（最初以外） */}
           {index > 0 && <div className="py-6 lg:py-8" />}
 
@@ -186,11 +198,10 @@ function StrengthsSection() {
               <div className="absolute inset-0 bg-black/40 z-0" />
 
               {/* コンテンツ */}
-              <div className="absolute inset-0 z-10 flex items-center">
-                <div className="w-full px-6 lg:px-12">
-                  <div className="flex justify-end">
-                    <FadeInUp>
-                      <div className="max-w-xl">
+              <div className="absolute inset-0 z-10 flex items-end justify-end">
+                <div className="px-6 lg:px-12 pb-10 lg:pb-14">
+                  <FadeInUp>
+                    <div className="max-w-xl">
                         <p className="text-xl lg:text-3xl text-white font-anton font-bold tracking-widest mb-3">
                           OUR STRENGTHS　{item.number}
                         </p>
@@ -203,8 +214,7 @@ function StrengthsSection() {
                           {item.description}
                         </p>
                       </div>
-                    </FadeInUp>
-                  </div>
+                  </FadeInUp>
                 </div>
               </div>
             </div>
@@ -218,56 +228,61 @@ function StrengthsSection() {
 // Technologyセクション
 function TechnologySection() {
   return (
-    <section className="bg-white">
+    <section className="bg-[#DFE5EA]">
       {/* 上の白い余白 */}
       <div className="py-8 lg:py-12" />
 
-      <div className="relative min-h-[500px] lg:min-h-[600px]">
-        {/* 背景画像（右に余白）- 左からスライドイン */}
-        <FadeInImage
-          src="/images/technology-bg.jpg"
-          alt="Technology"
-          fill
-          direction="left"
-          containerClassName="absolute inset-y-0 left-0 right-6 lg:right-[calc((100vw-80rem)/2+3rem)] z-0"
-          className="object-cover"
-        />
+      <div className="max-w-7xl mx-auto px-6 lg:px-12">
+        <div className="relative min-h-[500px] lg:min-h-[600px]">
+          {/* 背景画像 - 左からスライドイン */}
+          <FadeInImage
+            src="/images/technology-bg.jpg"
+            alt="Technology"
+            fill
+            direction="left"
+            containerClassName="absolute inset-0 z-0"
+            className="object-cover"
+          />
 
-        {/* コンテンツ */}
-        <div className="absolute inset-0 z-10 flex flex-col">
-          {/* タイトルバー（右寄せ、帯内テキスト左揃え） */}
-          <div className="pt-12 lg:pt-16 flex justify-end pr-[5%] lg:pr-[8%]">
-            <div className="bg-white inline-block">
-              <div className="px-8 py-4 lg:px-12 lg:py-6">
-                <div className="flex items-baseline gap-4">
-                  <h2 className="text-3xl lg:text-6xl font-anton font-bold text-navy tracking-wider lg:tracking-[0.12em]">TECHNOLOGY</h2>
-                  <span className="text-sm lg:text-base text-navy">技術・設備</span>
+          {/* コンテンツ */}
+          <div className="absolute inset-0 z-10 flex flex-col">
+            {/* タイトルバー（右いっぱい） */}
+            <div className="pt-12 lg:pt-16 flex justify-end -mr-6 lg:-mr-12">
+              <div className="bg-[#f5f8f6] inline-block">
+                <div className="pl-8 lg:pl-12 pr-6 lg:pr-12 py-4 lg:py-6">
+                  <div className="flex items-center gap-4">
+                    <h2 className="text-3xl lg:text-6xl font-anton font-bold text-navy tracking-wider lg:tracking-[0.12em]">TECHNOLOGY</h2>
+                    <span className="text-sm lg:text-base text-navy">技術・設備</span>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          {/* 説明文（右寄せ、帯内テキスト左揃え、画像内に配置） */}
-          <div className="flex justify-end pr-[18%] lg:pr-[24%] py-8 lg:py-12">
-            <div className="flex flex-col items-start gap-2">
-              <p className="text-base lg:text-lg text-navy leading-relaxed bg-white/90 px-4 py-1">
-                細かな仕事を、
-              </p>
-              <p className="text-base lg:text-lg text-navy leading-relaxed bg-white/90 px-4 py-1">
-                確かな技術で。
-              </p>
+            {/* 説明文（右寄せ） */}
+            <div className="flex justify-end pr-8 lg:pr-12 py-8 lg:py-12">
+              <div className="flex flex-col items-start gap-2">
+                <TypingText
+                  text="細かな仕事を、"
+                  className="text-base lg:text-lg text-navy leading-relaxed bg-white/90 px-1 py-0.5 font-mincho font-bold"
+                />
+                <TypingText
+                  text="確かな技術で。"
+                  className="text-base lg:text-lg text-navy leading-relaxed bg-white/90 px-1 py-0.5 font-mincho font-bold"
+                  delay={7 * 65}
+                />
+              </div>
             </div>
-          </div>
 
-          {/* 下部余白とボタン（左寄せ） */}
-          <div className="flex-1" />
-          <div className="flex justify-start pl-[15%] lg:pl-[20%] pb-12 lg:pb-16">
-            <Link
-              href="/technology"
-              className="w-24 h-24 lg:w-32 lg:h-32 bg-white rounded-full flex items-center justify-center text-navy text-sm lg:text-base font-semibold hover:bg-gray-100 transition-colors shadow-lg"
-            >
-              詳しく見る
-            </Link>
+            {/* 下部余白とボタン（左寄せ） */}
+            <div className="flex-1" />
+            <div className="flex justify-start pl-8 lg:pl-12 pb-12 lg:pb-16">
+              <Link
+                href="/technology"
+                className="w-32 h-32 lg:w-40 lg:h-40 bg-[#FFFFFF] rounded-full flex items-center justify-center text-[#0042c1] text-[24px] font-sans font-bold tracking-wider hover:bg-gray-100 transition-colors shadow-lg"
+              >
+                VIEW MORE
+              </Link>
+            </div>
           </div>
         </div>
       </div>
@@ -278,44 +293,46 @@ function TechnologySection() {
 // Recruitセクション
 function RecruitSection() {
   return (
-    <section className="bg-white pt-16 lg:pt-24">
+    <section className="bg-[#DFE5EA] pt-16 lg:pt-24">
       {/* 7xl相当の左右余白 */}
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
-        {/* タイトルバー（画像の上に被せる） */}
-        <div className="relative z-10">
-          <div className="bg-gray-100 inline-block">
-            <div className="px-8 py-4 lg:px-12 lg:py-6">
-              <div className="flex items-baseline gap-4">
-                <h2 className="text-3xl lg:text-6xl font-anton font-bold text-navy tracking-wider lg:tracking-[0.12em]">RECRUIT</h2>
-                <span className="text-sm lg:text-base text-navy">採用情報</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* 画像エリア（タイトルバーと被せる） */}
-        <div className="relative -mt-10 lg:-mt-14 min-h-[550px] lg:min-h-[650px]">
+        <div className="relative min-h-[550px] lg:min-h-[650px]">
           {/* 背景画像 - フェードイン */}
           <FadeInImage
             src="/images/recruit-bg.jpg"
             alt="Recruit"
             fill
             direction="up"
-            containerClassName="absolute inset-y-0 left-0 right-2 z-0"
+            containerClassName="absolute inset-0 z-0"
             className="object-cover"
           />
 
           {/* コンテンツ */}
           <div className="absolute inset-0 z-10 flex flex-col">
+            {/* タイトルバー（左いっぱい） */}
+            <div className="pt-12 lg:pt-16 -ml-6 lg:-ml-12">
+              <div className="bg-[#f5f8f6] inline-block">
+                <div className="pl-6 lg:pl-12 pr-8 lg:pr-12 py-4 lg:py-6">
+                  <div className="flex items-center gap-4">
+                    <h2 className="text-3xl lg:text-6xl font-anton font-bold text-navy tracking-wider lg:tracking-[0.12em]">RECRUIT</h2>
+                    <span className="text-sm lg:text-base text-navy">採用情報</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             {/* 説明文 */}
-            <div className="px-6 lg:px-12 pt-20 lg:pt-24 pb-8 lg:pb-12">
+            <div className="pl-8 lg:pl-12 py-8 lg:py-12">
               <div className="flex flex-col items-start gap-2">
-                <p className="text-base lg:text-lg text-navy leading-relaxed bg-white/90 px-4 py-1">
-                  あなたの個性が、
-                </p>
-                <p className="text-base lg:text-lg text-navy leading-relaxed bg-white/90 px-4 py-1">
-                  ものづくりを支える。
-                </p>
+                <TypingText
+                  text="あなたの個性が、"
+                  className="text-base lg:text-lg text-navy leading-relaxed bg-white/90 px-1 py-0.5 font-mincho font-bold"
+                />
+                <TypingText
+                  text="ものづくりを支える。"
+                  className="text-base lg:text-lg text-navy leading-relaxed bg-white/90 px-1 py-0.5 font-mincho font-bold"
+                  delay={8 * 65}
+                />
               </div>
             </div>
 
@@ -324,9 +341,9 @@ function RecruitSection() {
             <div className="flex justify-end px-6 lg:px-12 pb-12 lg:pb-16">
               <Link
                 href="/recruit"
-                className="w-24 h-24 lg:w-32 lg:h-32 bg-white rounded-full flex items-center justify-center text-navy text-sm lg:text-base font-semibold hover:bg-gray-100 transition-colors shadow-lg"
+                className="w-32 h-32 lg:w-40 lg:h-40 bg-[#FFFFFF] rounded-full flex items-center justify-center text-[#0042c1] text-[24px] font-sans font-bold tracking-wider hover:bg-gray-100 transition-colors shadow-lg"
               >
-                詳しく見る
+                VIEW MORE
               </Link>
             </div>
           </div>
@@ -342,7 +359,7 @@ function RecruitSection() {
 // Contactセクション（共通CTA）
 function ContactSection() {
   return (
-    <section className="relative min-h-[600px] lg:min-h-[700px]">
+    <section className="relative min-h-[600px] lg:min-h-[700px] bg-white">
       {/* 背景画像 - フェードイン */}
       <FadeInImage
         src="/images/building.jpg"
@@ -373,9 +390,9 @@ function ContactSection() {
         <div className="mt-6 self-center lg:self-auto lg:mt-0 lg:ml-12 lg:self-end lg:-mb-24">
           <Link
             href="/contact"
-            className="w-24 h-24 lg:w-32 lg:h-32 bg-accent rounded-full flex items-center justify-center text-white text-sm lg:text-base font-semibold hover:bg-accent-dark transition-colors shadow-lg"
+            className="w-32 h-32 lg:w-40 lg:h-40 bg-accent rounded-full flex items-center justify-center text-white text-[24px] font-sans font-bold tracking-wider hover:bg-accent-dark transition-colors shadow-lg"
           >
-            お問い合わせ
+            VIEW MORE
           </Link>
         </div>
       </div>
@@ -387,12 +404,16 @@ export default function Home() {
   return (
     <>
       <HeroSection />
-      <AboutSection />
-      <BusinessSection />
-      <StrengthsSection />
-      <TechnologySection />
-      <RecruitSection />
-      <ContactSection />
+      <div className="relative z-10">
+        <AboutSection />
+      </div>
+      <div className="relative z-10">
+        <BusinessSection />
+        <StrengthsSection />
+        <TechnologySection />
+        <RecruitSection />
+        <ContactSection />
+      </div>
     </>
   );
 }
