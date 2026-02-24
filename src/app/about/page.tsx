@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { site, company, contact, locations } from "@/lib/site";
-import { FadeInUp, FadeInImage, HeroBackground } from "@/components/animations";
+import { FadeInUp, FadeInImage, HeroBackground, SectionTitleEntrance } from "@/components/animations";
 
 // ============================================================
 // 📝 コンテンツデータ（構成案に基づいて編集してください）
@@ -88,12 +88,12 @@ function PageHeader() {
         <div className="absolute inset-0 bg-[rgba(26,58,92,0.8)]" />
       </HeroBackground>
       <div className="relative z-10 text-center">
-        <FadeInUp>
+        <SectionTitleEntrance direction="scale">
           <p className="text-sm text-white/80 tracking-[0.1em] mb-3">About Us</p>
           <h1 className="text-[28px] lg:text-[40px] font-bold text-white">
             会社概要
           </h1>
-        </FadeInUp>
+        </SectionTitleEntrance>
       </div>
     </section>
   );

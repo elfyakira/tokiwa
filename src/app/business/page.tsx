@@ -1,7 +1,31 @@
 "use client";
 
+import { useEffect, useRef, useState, createContext, useContext } from "react";
 import Image from "next/image";
-import { FadeInUp, FadeInImage } from "@/components/animations";
+import { FadeInUp, FadeInImage, SectionTitleEntrance, Parallax } from "@/components/animations";
+import Lightbox from "@/components/Lightbox";
+
+// Lightbox用コンテキスト
+const LightboxContext = createContext<(src: string, alt: string) => void>(() => {});
+
+// 制作物セクションタイトル
+function BusinessSectionTitle({ number, title }: { number: string; title: React.ReactNode }) {
+  return (
+    <SectionTitleEntrance direction="left" className="mb-12">
+      <div className="flex items-center gap-5">
+        <span className="text-5xl lg:text-6xl font-anton font-bold text-accent tracking-wider">
+          {number}
+        </span>
+        <div>
+          <h2 className="text-2xl lg:text-3xl font-bold text-navy">
+            {title}
+          </h2>
+        </div>
+      </div>
+      <div className="mt-4 h-[2px] bg-gradient-to-r from-navy via-navy/40 to-transparent" />
+    </SectionTitleEntrance>
+  );
+}
 
 // ============================================================
 // Businessページ - トキワ工業
@@ -12,16 +36,16 @@ function PageHero() {
   return (
     <section className="relative pt-24">
       {/* タイトルセクション */}
-      <div className="bg-white pt-24 pb-8 lg:pt-40 lg:pb-10">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <FadeInUp>
+      <div className="bg-white pt-8 pb-8 lg:pt-10 lg:pb-10">
+        <div className="max-w-container mx-auto px-6 lg:px-12">
+          <SectionTitleEntrance direction="left">
             <div className="flex items-baseline gap-4">
               <h1 className="text-4xl lg:text-6xl font-anton font-bold text-navy tracking-wider lg:tracking-[0.12em]">
                 BUSINESS
               </h1>
               <p className="text-sm lg:text-base text-navy tracking-wider">事業紹介</p>
             </div>
-          </FadeInUp>
+          </SectionTitleEntrance>
         </div>
       </div>
 
@@ -43,17 +67,19 @@ function PageHero() {
 
         {/* 白いテキストボックス（画像とグラデーションにまたがる） */}
         <div className="absolute left-0 right-0 z-20 -top-20 lg:-top-28">
-          <div className="max-w-7xl mx-auto px-6 lg:px-12">
+          <div className="max-w-container mx-auto px-6 lg:px-12">
             <div>
               <FadeInUp delay={0.1}>
-                <div className="bg-white p-8 lg:p-12 w-full shadow-lg">
-                  <h2 className="text-[40px] font-bold text-[#013f93] font-mincho leading-tight whitespace-nowrap">
-                    多品種・小ロットに応える、細かなモノづくり。
-                  </h2>
-                  <div className="w-48 lg:w-72 h-px bg-[#013f93] mt-8 mb-8" />
-                  <p className="text-sm lg:text-base text-[#013f93] leading-[2]">
-                    制御盤・配電盤カバーからブラケット、機械カバー、制御BOXまで、多品種・小ロットにも対応した"細かなモノづくり"を行っています。図面製作〜板金加工〜組立まで一貫対応が可能です。
-                  </p>
+                <div className="bg-white p-8 lg:p-12 w-full shadow-lg overflow-hidden">
+                  <Parallax speed={0.08} clamp={15}>
+                    <h2 className="text-[40px] font-bold text-[#013f93] font-mincho leading-tight whitespace-nowrap">
+                      多品種・小ロットに応える、細かなモノづくり。
+                    </h2>
+                    <div className="w-48 lg:w-72 h-px bg-[#013f93] mt-8 mb-8" />
+                    <p className="text-base text-[#013f93] leading-[2]">
+                      制御盤・配電盤カバーからブラケット、機械カバー、制御BOXまで、多品種・小ロットにも対応した"細かなモノづくり"を行っています。図面製作〜板金加工〜組立まで一貫対応が可能です。
+                    </p>
+                  </Parallax>
                 </div>
               </FadeInUp>
             </div>
@@ -61,6 +87,45 @@ function PageHero() {
         </div>
       </div>
     </section>
+  );
+}
+
+// アンカーナビボタン（エントランス＋ホバーアニメーション付き）
+function BizNavButton({ id, label, index }: { id: string; label: string; index: number }) {
+  const ref = useRef<HTMLAnchorElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(el);
+        }
+      },
+      { threshold: 0.2 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <a
+      ref={ref}
+      href={`#${id}`}
+      className={`biz-nav-entrance biz-nav-btn group block bg-[#013f93]/80 py-8 lg:py-10 text-center relative overflow-hidden ${isVisible ? "is-visible" : ""}`}
+      style={{ animationDelay: isVisible ? `${index * 120}ms` : undefined }}
+    >
+      <h3 className="text-xl lg:text-2xl font-bold text-white tracking-[0.15em] relative z-10">{label}</h3>
+      <div className="mt-5 flex justify-center relative z-10">
+        <svg className="w-14 h-7 text-white/50 group-hover:text-white group-hover:translate-x-3 transition-all duration-300" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 56 28">
+          <line x1="0" y1="14" x2="48" y2="14" />
+          <polyline points="40,6 48,14 40,22" />
+        </svg>
+      </div>
+    </a>
   );
 }
 
@@ -76,27 +141,23 @@ function BusinessOverview() {
   return (
     <section className="py-12 lg:py-16 bg-[#f5f8f6]">
       <div className="max-w-container mx-auto px-6 lg:px-12">
-        <FadeInUp>
-          <div className="grid grid-cols-2 gap-4">
-            {navItems.map((item) => (
-              <a
-                key={item.id}
-                href={`#${item.id}`}
-                className="group block bg-[#013f93]/80 hover:bg-[#013f93] transition-colors py-8 lg:py-10 text-center"
-              >
-                <h3 className="text-xl lg:text-2xl font-bold text-white tracking-[0.15em]">{item.label}</h3>
-                <div className="mt-3 flex justify-center">
-                  <svg className="w-8 h-4 text-white/70 group-hover:text-white transition-colors" fill="none" stroke="currentColor" strokeWidth={1} viewBox="0 0 32 16">
-                    <line x1="0" y1="8" x2="28" y2="8" />
-                    <polyline points="24,4 28,8 24,12" />
-                  </svg>
-                </div>
-              </a>
-            ))}
-          </div>
-        </FadeInUp>
+        <div className="grid grid-cols-2 gap-4">
+          {navItems.map((item, i) => (
+            <BizNavButton key={item.id} id={item.id} label={item.label} index={i} />
+          ))}
+        </div>
       </div>
     </section>
+  );
+}
+
+// クリック可能な画像
+function ClickableImage({ src, alt }: { src: string; alt: string }) {
+  const onImageClick = useContext(LightboxContext);
+  return (
+    <div className="relative aspect-[4/3] rounded overflow-hidden cursor-pointer group" onClick={() => onImageClick(src, alt)}>
+      <Image src={src} alt={alt} fill className="object-cover transition-transform duration-500 ease-out group-hover:scale-105" />
+    </div>
   );
 }
 
@@ -105,11 +166,7 @@ function BanSection() {
   return (
     <section id="ban" className="py-16 lg:py-24 bg-bg-light scroll-mt-24">
       <div className="max-w-container mx-auto px-6 lg:px-12">
-        <FadeInUp>
-          <h2 className="text-2xl lg:text-3xl font-bold text-text-primary mb-8">
-            盤制作
-          </h2>
-        </FadeInUp>
+        <BusinessSectionTitle number="#01" title="盤制作" />
 
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
           <FadeInUp delay={0.1}>
@@ -120,22 +177,8 @@ function BanSection() {
           </FadeInUp>
           <FadeInUp delay={0.2}>
             <div className="space-y-4">
-              <div className="relative aspect-[4/3] rounded overflow-hidden">
-                <Image
-                  src="/images/business-ban-1.jpg"
-                  alt="盤制作1"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <div className="relative aspect-[4/3] rounded overflow-hidden">
-                <Image
-                  src="/images/business-ban-2.jpg"
-                  alt="盤制作2"
-                  fill
-                  className="object-cover"
-                />
-              </div>
+              <ClickableImage src="/images/business-ban-1.jpg" alt="盤制作1" />
+              <ClickableImage src="/images/business-ban-2.jpg" alt="盤制作2" />
             </div>
           </FadeInUp>
         </div>
@@ -149,11 +192,7 @@ function CoverSection() {
   return (
     <section id="cover" className="py-16 lg:py-24 bg-white scroll-mt-24">
       <div className="max-w-container mx-auto px-6 lg:px-12">
-        <FadeInUp>
-          <h2 className="text-2xl lg:text-3xl font-bold text-text-primary mb-8">
-            機械カバー制作
-          </h2>
-        </FadeInUp>
+        <BusinessSectionTitle number="#02" title="機械カバー制作" />
 
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
           <FadeInUp delay={0.1}>
@@ -162,14 +201,7 @@ function CoverSection() {
             </div>
           </FadeInUp>
           <FadeInUp delay={0.2}>
-            <div className="relative aspect-[4/3] rounded overflow-hidden">
-              <Image
-                src="/images/business-cover.jpg"
-                alt="機械カバー制作"
-                fill
-                className="object-cover"
-              />
-            </div>
+            <ClickableImage src="/images/business-cover.jpg" alt="機械カバー制作" />
           </FadeInUp>
         </div>
       </div>
@@ -182,11 +214,7 @@ function BracketSection() {
   return (
     <section id="bracket" className="py-16 lg:py-24 bg-bg-light scroll-mt-24">
       <div className="max-w-container mx-auto px-6 lg:px-12">
-        <FadeInUp>
-          <h2 className="text-2xl lg:text-3xl font-bold text-text-primary mb-8">
-            ブラケット<br className="lg:hidden" />金具製作
-          </h2>
-        </FadeInUp>
+        <BusinessSectionTitle number="#03" title={<>ブラケット<br className="lg:hidden" />金具製作</>} />
 
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
           <FadeInUp delay={0.1}>
@@ -196,14 +224,7 @@ function BracketSection() {
             </div>
           </FadeInUp>
           <FadeInUp delay={0.2}>
-            <div className="relative aspect-[4/3] rounded overflow-hidden">
-              <Image
-                src="/images/business-bracket.jpg"
-                alt="ブラケット金具製作"
-                fill
-                className="object-cover"
-              />
-            </div>
+            <ClickableImage src="/images/business-bracket.jpg" alt="ブラケット金具製作" />
           </FadeInUp>
         </div>
       </div>
@@ -216,11 +237,7 @@ function SeikanSection() {
   return (
     <section id="seikan" className="py-16 lg:py-24 bg-white scroll-mt-24">
       <div className="max-w-container mx-auto px-6 lg:px-12">
-        <FadeInUp>
-          <h2 className="text-2xl lg:text-3xl font-bold text-text-primary mb-8">
-            製缶制作
-          </h2>
-        </FadeInUp>
+        <BusinessSectionTitle number="#04" title="製缶制作" />
 
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
           <FadeInUp delay={0.1}>
@@ -231,22 +248,8 @@ function SeikanSection() {
           </FadeInUp>
           <FadeInUp delay={0.2}>
             <div className="space-y-4">
-              <div className="relative aspect-[4/3] rounded overflow-hidden">
-                <Image
-                  src="/images/business-seikan-1.jpg"
-                  alt="製缶制作1"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <div className="relative aspect-[4/3] rounded overflow-hidden">
-                <Image
-                  src="/images/business-seikan-2.jpg"
-                  alt="製缶制作2"
-                  fill
-                  className="object-cover"
-                />
-              </div>
+              <ClickableImage src="/images/business-seikan-1.jpg" alt="製缶制作1" />
+              <ClickableImage src="/images/business-seikan-2.jpg" alt="製缶制作2" />
             </div>
           </FadeInUp>
         </div>
@@ -255,39 +258,81 @@ function SeikanSection() {
   );
 }
 
+// 制作事例 写真カード（エントランス＋ホバー）
+function WorksCard({ index }: { index: number }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+  const onImageClick = useContext(LightboxContext);
+  const src = `/images/works-${index + 1}.jpg`;
+  const alt = `制作事例${index + 1}`;
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(el);
+        }
+      },
+      { threshold: 0.15 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div
+      ref={ref}
+      className={`works-card-entrance group relative aspect-square rounded-sm overflow-hidden cursor-pointer ${isVisible ? "is-visible" : ""}`}
+      style={{ animationDelay: isVisible ? `${(index % 6) * 80}ms` : undefined }}
+      onClick={() => onImageClick(src, alt)}
+    >
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        className="object-cover transition-transform duration-500 ease-out group-hover:scale-110"
+      />
+      <div className="absolute inset-0 bg-navy/0 group-hover:bg-navy/30 transition-colors duration-300" />
+    </div>
+  );
+}
+
 // 制作事例セクション - 3列グリッド
 function WorksSection() {
   return (
     <section className="py-16 lg:py-24 bg-bg-light">
       <div className="max-w-container mx-auto px-6 lg:px-12">
-        <FadeInUp>
-          <h2 className="text-2xl lg:text-3xl font-bold text-text-primary mb-8">
+        {/* タイトル：中央配置＋スケールアップ */}
+        <SectionTitleEntrance direction="scale" className="text-center mb-14">
+          <p className="text-sm lg:text-base text-accent font-bold tracking-[0.2em] mb-2">WORKS</p>
+          <h2 className="text-3xl lg:text-4xl font-anton font-bold text-navy tracking-wider">
             制作事例
           </h2>
-        </FadeInUp>
+          <div className="mt-4 mx-auto w-16 h-[2px] bg-accent" />
+        </SectionTitleEntrance>
 
-        <FadeInUp delay={0.1}>
-          <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
-            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16].map((i) => (
-              <div key={i} className="relative aspect-square rounded overflow-hidden">
-                <Image
-                  src={`/images/works-${i}.jpg`}
-                  alt={`制作事例${i}`}
-                  fill
-                  className="object-cover hover:scale-105 transition-transform duration-300"
-                />
-              </div>
-            ))}
-          </div>
-        </FadeInUp>
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-4">
+          {Array.from({ length: 16 }, (_, i) => (
+            <WorksCard key={i} index={i} />
+          ))}
+        </div>
       </div>
     </section>
   );
 }
 
 export default function BusinessPage() {
+  const [lightbox, setLightbox] = useState<{ src: string; alt: string } | null>(null);
+
+  const handleImageClick = (src: string, alt: string) => {
+    setLightbox({ src, alt });
+  };
+
   return (
-    <>
+    <LightboxContext.Provider value={handleImageClick}>
       <PageHero />
       <BusinessOverview />
       <BanSection />
@@ -295,6 +340,7 @@ export default function BusinessPage() {
       <BracketSection />
       <SeikanSection />
       <WorksSection />
-    </>
+      <Lightbox src={lightbox?.src ?? null} alt={lightbox?.alt} onClose={() => setLightbox(null)} />
+    </LightboxContext.Provider>
   );
 }

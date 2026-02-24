@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { contact } from "@/lib/site";
-import { FadeInUp } from "@/components/animations";
+import { FadeInUp, SectionTitleEntrance } from "@/components/animations";
 
 // ============================================================
 // Contactページ - トキワ工業
@@ -23,15 +23,15 @@ type ContactType = (typeof CONTACT_TYPES)[number]["id"];
 // ページヒーロー
 function PageHero() {
   return (
-    <section className="relative h-[300px] lg:h-[400px] flex items-center pt-24">
+    <section className="relative h-[220px] lg:h-[300px] flex items-center justify-center pt-24 pb-0">
       <div className="absolute inset-0 z-0 bg-navy" />
       <div className="relative z-10 max-w-container mx-auto px-6 lg:px-12 w-full">
-        <FadeInUp>
+        <SectionTitleEntrance direction="left">
           <h1 className="text-4xl lg:text-5xl font-bold text-white tracking-wider">
             CONTACT
           </h1>
           <p className="text-sm text-white/80 mt-2 tracking-wider">お問い合わせ</p>
-        </FadeInUp>
+        </SectionTitleEntrance>
       </div>
     </section>
   );

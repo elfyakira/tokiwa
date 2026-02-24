@@ -221,6 +221,324 @@ body {
   font-family: var(--font-anton), sans-serif;
 }
 
+@utility font-oswald {
+  font-family: var(--font-oswald), sans-serif;
+}
+
 @utility font-mincho {
   font-family: "游明朝", "Yu Mincho", "YuMincho", "Hiragino Mincho ProN", "HG明朝E", serif;
+}
+
+/* ============================================================
+   VIEW MORE ボタン アニメーション
+   ============================================================ */
+
+/* エントランス：スケール0 + 回転 → バウンスで登場 */
+@keyframes viewMoreEntrance {
+  0% {
+    opacity: 0;
+    transform: scale(0) rotate(-180deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.15) rotate(8deg);
+  }
+  70% {
+    transform: scale(0.92) rotate(-4deg);
+  }
+  85% {
+    transform: scale(1.04) rotate(1deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+/* ホバー時の光リング拡散 */
+@keyframes pulseRing {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+/* ホバー時の光沢スイープ */
+@keyframes shineSweep {
+  0% {
+    transform: translateX(-100%) skewX(-15deg);
+  }
+  100% {
+    transform: translateX(350%) skewX(-15deg);
+  }
+}
+
+/* ボタン本体 */
+.view-more-btn {
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.4s ease,
+    background-color 0.3s ease;
+}
+
+/* エントランス：初期状態（非表示） */
+.view-more-wrapper {
+  opacity: 0;
+  transform: scale(0) rotate(-180deg);
+}
+
+/* エントランス：表示状態 */
+.view-more-wrapper.is-visible {
+  animation: viewMoreEntrance 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* ホバー：スケール＋グロー */
+.view-more-btn:hover {
+  transform: scale(1.12);
+}
+
+.view-more-btn.variant-blue:hover {
+  box-shadow:
+    0 0 24px rgba(0, 66, 193, 0.5),
+    0 0 60px rgba(0, 66, 193, 0.25),
+    0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.view-more-btn.variant-accent:hover {
+  box-shadow:
+    0 0 24px rgba(220, 38, 38, 0.5),
+    0 0 60px rgba(220, 38, 38, 0.25),
+    0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+/* ホバー：光沢スイープ（::before） */
+.view-more-btn::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: 0;
+  width: 45%;
+  height: 200%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  pointer-events: none;
+  z-index: 1;
+  transform: translateX(-100%);
+}
+
+.view-more-btn:hover::before {
+  animation: shineSweep 0.85s ease-in-out forwards;
+}
+
+/* ホバー：パルスリング（wrapper側の::after） */
+.view-more-wrapper::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  border: 2px solid currentColor;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.view-more-wrapper:hover::after {
+  animation: pulseRing 1.2s ease-out infinite;
+}
+
+.view-more-wrapper.variant-blue::after {
+  border-color: #0042c1;
+}
+
+.view-more-wrapper.variant-accent::after {
+  border-color: #DC2626;
+}
+
+/* ============================================================
+   セクションタイトル エントランスアニメーション
+   ============================================================ */
+
+/* 左からスライド＋スキュー＋ブラー → オーバーシュート */
+@keyframes titleFromLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-160px) skewX(6deg);
+    filter: blur(6px);
+  }
+  55% {
+    opacity: 1;
+    transform: translateX(18px) skewX(-1.5deg);
+    filter: blur(0);
+  }
+  75% {
+    transform: translateX(-6px) skewX(0.5deg);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+    filter: blur(0);
+  }
+}
+
+/* 右からスライド＋スキュー＋ブラー → オーバーシュート */
+@keyframes titleFromRight {
+  0% {
+    opacity: 0;
+    transform: translateX(160px) skewX(-6deg);
+    filter: blur(6px);
+  }
+  55% {
+    opacity: 1;
+    transform: translateX(-18px) skewX(1.5deg);
+    filter: blur(0);
+  }
+  75% {
+    transform: translateX(6px) skewX(-0.5deg);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+    filter: blur(0);
+  }
+}
+
+/* 中央からスケールアップ＋ブラー → バウンス */
+@keyframes titleScaleUp {
+  0% {
+    opacity: 0;
+    transform: scale(0.15) translateY(50px);
+    filter: blur(10px);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1) translateY(-8px);
+    filter: blur(0);
+  }
+  70% {
+    transform: scale(0.96) translateY(3px);
+  }
+  85% {
+    transform: scale(1.02) translateY(-1px);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+    filter: blur(0);
+  }
+}
+
+.section-title-entrance {
+  opacity: 0;
+}
+
+.section-title-entrance.is-visible.from-left {
+  animation: titleFromLeft 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.section-title-entrance.is-visible.from-right {
+  animation: titleFromRight 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.section-title-entrance.is-visible.from-scale {
+  animation: titleScaleUp 1.1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ============================================================
+   Business ナビボタン アニメーション
+   ============================================================ */
+
+/* ホバー：赤が左からスライドイン */
+.biz-nav-btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--color-accent);
+  transform: translateX(-100%);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 0;
+}
+
+.biz-nav-btn:hover::after {
+  transform: translateX(0);
+}
+
+/* エントランス */
+@keyframes bizBtnEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(40px) scale(0.9);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(-6px) scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.biz-nav-entrance {
+  opacity: 0;
+}
+
+.biz-nav-entrance.is-visible {
+  animation: bizBtnEntrance 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* 制作事例カード エントランス */
+@keyframes worksCardEntrance {
+  0% {
+    opacity: 0;
+    transform: scale(0.85) translateY(20px);
+    filter: blur(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+    filter: blur(0);
+  }
+}
+
+.works-card-entrance {
+  opacity: 0;
+}
+
+.works-card-entrance.is-visible {
+  animation: worksCardEntrance 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ============================================================
+   Lightbox アニメーション
+   ============================================================ */
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.92); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* ============================================================
+   インタビュー写真 ホバーズーム
+   ============================================================ */
+
+.interview-photo-zoom {
+  transition: transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.interview-photo-wrap:hover .interview-photo-zoom {
+  transform: scale(var(--hover-scale)) !important;
 }

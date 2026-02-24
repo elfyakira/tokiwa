@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { site, company, contact, locations } from "@/lib/site";
-import { FadeInUp } from "@/components/animations";
+import { FadeInUp, SectionTitleEntrance } from "@/components/animations";
 
 // ============================================================
 // 📝 コンテンツデータ（必要に応じて編集してください）
@@ -26,12 +26,12 @@ export default function PrivacyPage() {
       {/* Page Header */}
       <section className="h-[150px] lg:h-[200px] flex items-center justify-center bg-navy">
         <div className="text-center">
-          <FadeInUp>
+          <SectionTitleEntrance direction="scale">
             <p className="text-sm text-white/80 tracking-[0.1em] mb-3">Privacy Policy</p>
             <h1 className="text-[28px] lg:text-[40px] font-bold text-white">
               プライバシーポリシー
             </h1>
-          </FadeInUp>
+          </SectionTitleEntrance>
         </div>
       </section>
 

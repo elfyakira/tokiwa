@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { site } from "@/lib/site";
-import { FadeInUp, StaggerContainer } from "@/components/animations";
+import { FadeInUp, StaggerContainer, SectionTitleEntrance } from "@/components/animations";
 
 // ============================================================
 // 📝 コンテンツデータ（構成案に基づいて編集してください）
@@ -70,12 +70,12 @@ function PageHeader() {
   return (
     <section className="h-[150px] lg:h-[200px] flex items-center justify-center bg-navy">
       <div className="text-center">
-        <FadeInUp>
+        <SectionTitleEntrance direction="scale">
           <p className="text-sm text-white/80 tracking-[0.1em] mb-3">News</p>
           <h1 className="text-[28px] lg:text-[40px] font-bold text-white">
             お知らせ
           </h1>
-        </FadeInUp>
+        </SectionTitleEntrance>
       </div>
     </section>
   );

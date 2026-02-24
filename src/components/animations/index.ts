@@ -4,3 +4,5 @@ export { default as StaggerContainer } from './StaggerContainer';
 export { default as AnimatedLink } from './AnimatedLink';
 export { default as HeroBackground } from './HeroBackground';
 export { default as TypingText } from './TypingText';
+export { default as SectionTitleEntrance } from './SectionTitleEntrance';
+export { default as Parallax } from './Parallax';

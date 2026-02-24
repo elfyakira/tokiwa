@@ -1,12 +1,60 @@
 "use client";
 
-import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { FadeInUp, FadeInImage, TypingText } from "@/components/animations";
+import { FadeInUp, FadeInImage, TypingText, SectionTitleEntrance, Parallax } from "@/components/animations";
 
 // ============================================================
 // TOPページ - トキワ工業
 // ============================================================
+
+// VIEW MORE 円形ボタン（エントランス＋ホバーアニメーション付き）
+function ViewMoreButton({
+  href,
+  variant = "blue",
+}: {
+  href: string;
+  variant?: "blue" | "accent";
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(el);
+        }
+      },
+      { threshold: 0.3, rootMargin: "0px 0px -30px 0px" }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  const bgClass =
+    variant === "accent"
+      ? "bg-accent variant-accent"
+      : "bg-[#0042c1] variant-blue";
+
+  return (
+    <div
+      ref={ref}
+      className={`view-more-wrapper variant-${variant} relative inline-flex ${isVisible ? "is-visible" : ""}`}
+    >
+      <Link
+        href={href}
+        className={`view-more-btn ${bgClass} w-32 h-32 lg:w-40 lg:h-40 rounded-full flex items-center justify-center text-white text-[28px] font-oswald font-light tracking-wider shadow-lg`}
+      >
+        VIEW MORE
+      </Link>
+    </div>
+  );
+}
 
 // ヒーローセクション（動画背景）
 function HeroSection() {
@@ -39,11 +87,11 @@ function AboutSection() {
   return (
     <section className="py-20 lg:py-32 bg-navy">
       <div className="max-w-container mx-auto px-6 lg:px-12">
-        <FadeInUp className="text-center mb-[100px]">
+        <SectionTitleEntrance direction="scale" className="text-center mb-[100px]">
           <h2 className="text-4xl lg:text-6xl font-anton font-bold text-white tracking-[0.1em]">
             ABOUT US
           </h2>
-        </FadeInUp>
+        </SectionTitleEntrance>
 
         <FadeInUp delay={0.1}>
           <div className="max-w-[600px] mx-auto text-center">
@@ -57,12 +105,7 @@ function AboutSection() {
               私たちは、単なる部品の供給先ではなく、お客様の製品価値を高めるための「欠かせない存在」でありたいと考えています。品質と納期に責任を持ち、最後の一手まで妥協しない。その積み重ねこそが、信頼につながると信じています。
             </p>
             <div className="mt-[100px] flex justify-center">
-              <Link
-                href="/company"
-                className="w-32 h-32 lg:w-40 lg:h-40 bg-accent rounded-full flex items-center justify-center text-white text-[24px] font-sans font-bold tracking-wider hover:bg-accent-dark transition-colors shadow-lg"
-              >
-                VIEW MORE
-              </Link>
+              <ViewMoreButton href="/company" variant="accent" />
             </div>
           </div>
         </FadeInUp>
@@ -93,16 +136,18 @@ function BusinessSection() {
         {/* コンテンツ */}
         <div className="absolute inset-0 z-10 flex flex-col">
           {/* タイトルバー（左いっぱい） */}
-          <div className="pt-12 lg:pt-16 -ml-6 lg:-ml-12">
-            <div className="bg-[#f5f8f6] inline-block">
-              <div className="pl-6 lg:pl-12 pr-8 lg:pr-12 py-4 lg:py-6">
-                <div className="flex items-center gap-4">
-                  <h2 className="text-3xl lg:text-6xl font-anton font-bold text-navy tracking-wider lg:tracking-[0.12em]">BUSINESS</h2>
-                  <span className="text-sm lg:text-base text-navy">事業紹介</span>
+          <SectionTitleEntrance direction="left">
+            <div className="pt-12 lg:pt-16 -ml-6 lg:-ml-12">
+              <div className="bg-[#f5f8f6] inline-block">
+                <div className="pl-6 lg:pl-12 pr-8 lg:pr-12 py-4 lg:py-6">
+                  <div className="flex items-center gap-4">
+                    <h2 className="text-3xl lg:text-6xl font-anton font-bold text-navy tracking-wider lg:tracking-[0.12em]">BUSINESS</h2>
+                    <span className="text-sm lg:text-base text-navy">事業紹介</span>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          </SectionTitleEntrance>
 
           {/* 説明文（画像の上に配置） */}
           <div className="pl-8 lg:pl-12 py-8 lg:py-12">
@@ -122,12 +167,7 @@ function BusinessSection() {
           {/* 下部余白とボタン */}
           <div className="flex-1" />
           <div className="flex justify-end pr-[15%] lg:pr-[20%] pb-12 lg:pb-16">
-            <Link
-              href="/business"
-              className="w-32 h-32 lg:w-40 lg:h-40 bg-[#FFFFFF] rounded-full flex items-center justify-center text-[#0042c1] text-[24px] font-sans font-bold tracking-wider hover:bg-gray-100 transition-colors shadow-lg"
-            >
-              VIEW MORE
-            </Link>
+            <ViewMoreButton href="/business" />
           </div>
         </div>
       </div>
@@ -164,7 +204,7 @@ function StrengthsSection() {
       {/* ヘッダー */}
       <div className="bg-[#DFE5EA] pt-12 lg:pt-16 pb-6 lg:pb-8">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <FadeInUp>
+          <SectionTitleEntrance direction="left">
             <div className="bg-[#f5f8f6] inline-block -ml-6 lg:-ml-12">
               <div className="pl-6 lg:pl-12 pr-8 lg:pr-12 py-4 lg:py-6">
                 <div className="flex items-center gap-4">
@@ -173,7 +213,7 @@ function StrengthsSection() {
                 </div>
               </div>
             </div>
-          </FadeInUp>
+          </SectionTitleEntrance>
         </div>
       </div>
 
@@ -197,25 +237,26 @@ function StrengthsSection() {
               />
               <div className="absolute inset-0 bg-black/40 z-0" />
 
-              {/* コンテンツ */}
+              {/* コンテンツ（パララックス付き） */}
               <div className="absolute inset-0 z-10 flex items-end justify-end">
-                <div className="px-6 lg:px-12 pb-10 lg:pb-14">
-                  <FadeInUp>
-                    <div className="max-w-xl">
+                <Parallax speed={0.25} clamp={70}>
+                  <div className="px-6 lg:px-12 pb-10 lg:pb-14">
+                    <FadeInUp>
+                      <div className="max-w-xl">
                         <p className="text-xl lg:text-3xl text-white font-anton font-bold tracking-widest mb-3">
                           OUR STRENGTHS　{item.number}
                         </p>
-                        {/* 区切り線 */}
                         <div className="w-48 lg:w-72 h-px bg-white/60 mb-6" />
                         <h3 className="text-2xl lg:text-4xl font-bold text-white mb-6">
                           {item.title}
                         </h3>
-                        <p className="text-sm lg:text-base text-white/90 leading-[2]">
+                        <p className="text-base text-white/90 leading-[2]">
                           {item.description}
                         </p>
                       </div>
-                  </FadeInUp>
-                </div>
+                    </FadeInUp>
+                  </div>
+                </Parallax>
               </div>
             </div>
           </div>
@@ -247,16 +288,18 @@ function TechnologySection() {
           {/* コンテンツ */}
           <div className="absolute inset-0 z-10 flex flex-col">
             {/* タイトルバー（右いっぱい） */}
-            <div className="pt-12 lg:pt-16 flex justify-end -mr-6 lg:-mr-12">
-              <div className="bg-[#f5f8f6] inline-block">
-                <div className="pl-8 lg:pl-12 pr-6 lg:pr-12 py-4 lg:py-6">
-                  <div className="flex items-center gap-4">
-                    <h2 className="text-3xl lg:text-6xl font-anton font-bold text-navy tracking-wider lg:tracking-[0.12em]">TECHNOLOGY</h2>
-                    <span className="text-sm lg:text-base text-navy">技術・設備</span>
+            <SectionTitleEntrance direction="right">
+              <div className="pt-12 lg:pt-16 flex justify-end -mr-6 lg:-mr-12">
+                <div className="bg-[#f5f8f6] inline-block">
+                  <div className="pl-8 lg:pl-12 pr-6 lg:pr-12 py-4 lg:py-6">
+                    <div className="flex items-center gap-4">
+                      <h2 className="text-3xl lg:text-6xl font-anton font-bold text-navy tracking-wider lg:tracking-[0.12em]">TECHNOLOGY</h2>
+                      <span className="text-sm lg:text-base text-navy">技術・設備</span>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            </SectionTitleEntrance>
 
             {/* 説明文（右寄せ） */}
             <div className="flex justify-end pr-8 lg:pr-12 py-8 lg:py-12">
@@ -276,12 +319,7 @@ function TechnologySection() {
             {/* 下部余白とボタン（左寄せ） */}
             <div className="flex-1" />
             <div className="flex justify-start pl-8 lg:pl-12 pb-12 lg:pb-16">
-              <Link
-                href="/technology"
-                className="w-32 h-32 lg:w-40 lg:h-40 bg-[#FFFFFF] rounded-full flex items-center justify-center text-[#0042c1] text-[24px] font-sans font-bold tracking-wider hover:bg-gray-100 transition-colors shadow-lg"
-              >
-                VIEW MORE
-              </Link>
+              <ViewMoreButton href="/technology" />
             </div>
           </div>
         </div>
@@ -310,16 +348,18 @@ function RecruitSection() {
           {/* コンテンツ */}
           <div className="absolute inset-0 z-10 flex flex-col">
             {/* タイトルバー（左いっぱい） */}
-            <div className="pt-12 lg:pt-16 -ml-6 lg:-ml-12">
-              <div className="bg-[#f5f8f6] inline-block">
-                <div className="pl-6 lg:pl-12 pr-8 lg:pr-12 py-4 lg:py-6">
-                  <div className="flex items-center gap-4">
-                    <h2 className="text-3xl lg:text-6xl font-anton font-bold text-navy tracking-wider lg:tracking-[0.12em]">RECRUIT</h2>
-                    <span className="text-sm lg:text-base text-navy">採用情報</span>
+            <SectionTitleEntrance direction="left">
+              <div className="pt-12 lg:pt-16 -ml-6 lg:-ml-12">
+                <div className="bg-[#f5f8f6] inline-block">
+                  <div className="pl-6 lg:pl-12 pr-8 lg:pr-12 py-4 lg:py-6">
+                    <div className="flex items-center gap-4">
+                      <h2 className="text-3xl lg:text-6xl font-anton font-bold text-navy tracking-wider lg:tracking-[0.12em]">RECRUIT</h2>
+                      <span className="text-sm lg:text-base text-navy">採用情報</span>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            </SectionTitleEntrance>
 
             {/* 説明文 */}
             <div className="pl-8 lg:pl-12 py-8 lg:py-12">
@@ -339,12 +379,7 @@ function RecruitSection() {
             {/* 下部余白とボタン */}
             <div className="flex-1" />
             <div className="flex justify-end px-6 lg:px-12 pb-12 lg:pb-16">
-              <Link
-                href="/recruit"
-                className="w-32 h-32 lg:w-40 lg:h-40 bg-[#FFFFFF] rounded-full flex items-center justify-center text-[#0042c1] text-[24px] font-sans font-bold tracking-wider hover:bg-gray-100 transition-colors shadow-lg"
-              >
-                VIEW MORE
-              </Link>
+              <ViewMoreButton href="/recruit" />
             </div>
           </div>
         </div>
@@ -376,9 +411,11 @@ function ContactSection() {
         <div className="bg-white w-[85%] sm:w-[70%] lg:w-[50%] -mt-8 lg:-mt-12">
           <div className="py-6 lg:py-12 px-6 lg:px-12 flex flex-col items-end">
             <div className="mr-4 sm:mr-8 lg:mr-24">
-              <h2 className="text-4xl sm:text-5xl lg:text-7xl font-anton font-bold tracking-wider lg:tracking-[0.12em] mb-4 lg:mb-6 text-navy">
-                CONTACT
-              </h2>
+              <SectionTitleEntrance direction="left">
+                <h2 className="text-4xl sm:text-5xl lg:text-7xl font-anton font-bold tracking-wider lg:tracking-[0.12em] mb-4 lg:mb-6 text-navy">
+                  CONTACT
+                </h2>
+              </SectionTitleEntrance>
               <p className="text-base sm:text-lg lg:text-xl text-navy leading-relaxed text-center">
                 どんなことでも、<br />お気軽にお問い合わせください。
               </p>
@@ -388,12 +425,7 @@ function ContactSection() {
 
         {/* 右カラム: ボタン */}
         <div className="mt-6 self-center lg:self-auto lg:mt-0 lg:ml-12 lg:self-end lg:-mb-24">
-          <Link
-            href="/contact"
-            className="w-32 h-32 lg:w-40 lg:h-40 bg-accent rounded-full flex items-center justify-center text-white text-[24px] font-sans font-bold tracking-wider hover:bg-accent-dark transition-colors shadow-lg"
-          >
-            VIEW MORE
-          </Link>
+          <ViewMoreButton href="/contact" variant="accent" />
         </div>
       </div>
     </section>

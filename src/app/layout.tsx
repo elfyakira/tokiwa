@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Anton } from "next/font/google";
+import { Anton, Oswald } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -10,6 +10,13 @@ const anton = Anton({
   weight: "400",
   subsets: ["latin"],
   variable: "--font-anton",
+});
+
+// Oswaldフォント（ボタン用 - Antonに近い雰囲気で細いウェイト対応）
+const oswald = Oswald({
+  weight: ["300", "400"],
+  subsets: ["latin"],
+  variable: "--font-oswald",
 });
 
 // JSON-LD構造化データ
@@ -107,7 +114,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ja" className={anton.variable}>
+    <html lang="ja" className={`${anton.variable} ${oswald.variable}`}>
       <head>
         <script
           type="application/ld+json"
