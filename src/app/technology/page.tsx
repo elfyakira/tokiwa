@@ -69,7 +69,7 @@ function PageHero() {
       {/* ヒーロー画像（フルワイド） */}
       <div className="relative">
         <FadeInImage
-          src="/images/technology-hero.jpg"
+          src="/images/technology-bg.jpg"
           alt="Technology"
           fill
           direction="up"

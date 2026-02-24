@@ -28,9 +28,9 @@ export default function Footer() {
             <Image
               src={images.logo || "/images/logo.png"}
               alt={company.name || "トキワ工業"}
-              width={120}
-              height={30}
-              className=""
+              width={720}
+              height={180}
+              className="h-[168px] w-auto"
             />
           </Link>
 
@@ -65,9 +65,9 @@ export default function Footer() {
             <Image
               src={images.logo || "/images/logo.png"}
               alt={company.name || "トキワ工業"}
-              width={100}
-              height={25}
-              className=""
+              width={600}
+              height={150}
+              className="h-[144px] w-auto"
             />
           </Link>
           <div className="text-xs text-navy/70 leading-relaxed mb-4">

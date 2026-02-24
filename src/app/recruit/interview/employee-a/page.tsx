@@ -7,7 +7,7 @@ import { FadeInUp, SectionTitleEntrance } from "@/components/animations";
 export default function EmployeeAInterviewPage() {
   return (
     <>
-      {/* ヒーロー */}
+      {/* タイトル */}
       <section className="relative pt-24">
         <div className="bg-white pt-8 pb-8 lg:pt-10 lg:pb-10">
           <div className="max-w-container mx-auto px-6 lg:px-12">
@@ -20,22 +20,15 @@ export default function EmployeeAInterviewPage() {
             </SectionTitleEntrance>
           </div>
         </div>
-
-        <div className="relative aspect-[16/9] lg:aspect-[2.5/1]">
-          <Image
-            src="/images/interview-employee-a.jpg"
-            alt="社員 A"
-            fill
-            className="object-cover"
-          />
-        </div>
       </section>
 
-      {/* 本文 */}
+      {/* ストーリー型インタビュー本文 */}
       <section className="py-16 lg:py-24 bg-white">
-        <div className="max-w-narrow mx-auto px-6 lg:px-12">
+        <div className="max-w-container mx-auto px-6 lg:px-12">
+
+          {/* Q1 — テキスト左・画像右（画像下げ） */}
           <FadeInUp>
-            <div className="space-y-12">
+            <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-start mb-20 lg:mb-28">
               <div>
                 <h2 className="text-xl lg:text-2xl font-bold text-navy mb-6 font-mincho">
                   Q1. 入社前のイメージと、実際に働いて感じたギャップはありますか？
@@ -49,8 +42,29 @@ export default function EmployeeAInterviewPage() {
                   </p>
                 </div>
               </div>
+              <div className="lg:mt-24 relative aspect-[4/3] rounded overflow-hidden">
+                <Image
+                  src="/images/interview-employee-a.jpg"
+                  alt="社員 A"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+            </div>
+          </FadeInUp>
 
-              <div>
+          {/* Q2 — 画像左・テキスト右（テキスト下げ） */}
+          <FadeInUp>
+            <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-start mb-20 lg:mb-28">
+              <div className="relative aspect-[4/3] rounded overflow-hidden lg:order-1">
+                <Image
+                  src="/images/interview-employee-a-2.jpg"
+                  alt="インタビュー風景"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <div className="lg:order-2 lg:mt-24">
                 <h2 className="text-xl lg:text-2xl font-bold text-navy mb-6 font-mincho">
                   Q2. 入社の決め手は何でしたか？
                 </h2>
@@ -63,7 +77,12 @@ export default function EmployeeAInterviewPage() {
                   </p>
                 </div>
               </div>
+            </div>
+          </FadeInUp>
 
+          {/* Q3 — テキスト左・画像右（画像下げ） */}
+          <FadeInUp>
+            <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-start mb-20 lg:mb-28">
               <div>
                 <h2 className="text-xl lg:text-2xl font-bold text-navy mb-6 font-mincho">
                   Q3. 現在の仕事内容と、やりがいを感じる瞬間を教えてください。
@@ -77,8 +96,29 @@ export default function EmployeeAInterviewPage() {
                   </p>
                 </div>
               </div>
+              <div className="lg:mt-24 relative aspect-[4/3] rounded overflow-hidden">
+                <Image
+                  src="/images/interview-employee-a-3.jpg"
+                  alt="インタビュー風景"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+            </div>
+          </FadeInUp>
 
-              <div>
+          {/* Q4 — 画像左・テキスト右（テキスト下げ） */}
+          <FadeInUp>
+            <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-start mb-20 lg:mb-28">
+              <div className="relative aspect-[4/3] rounded overflow-hidden lg:order-1">
+                <Image
+                  src="/images/interview-employee-a-4.jpg"
+                  alt="インタビュー風景"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <div className="lg:order-2 lg:mt-24">
                 <h2 className="text-xl lg:text-2xl font-bold text-navy mb-6 font-mincho">
                   Q4. どんな人がこの会社に向いていると思いますか？
                 </h2>
@@ -91,7 +131,12 @@ export default function EmployeeAInterviewPage() {
                   </p>
                 </div>
               </div>
+            </div>
+          </FadeInUp>
 
+          {/* Q5 — テキスト左・画像右（画像下げ） */}
+          <FadeInUp>
+            <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-start mb-20 lg:mb-28">
               <div>
                 <h2 className="text-xl lg:text-2xl font-bold text-navy mb-6 font-mincho">
                   Q5. この会社で成長できたと感じる点はどんなところですか？
@@ -105,12 +150,20 @@ export default function EmployeeAInterviewPage() {
                   </p>
                 </div>
               </div>
+              <div className="lg:mt-24 relative aspect-[4/3] rounded overflow-hidden">
+                <Image
+                  src="/images/interview-employee-a-5.jpg"
+                  alt="インタビュー風景"
+                  fill
+                  className="object-cover"
+                />
+              </div>
             </div>
           </FadeInUp>
 
           {/* 戻るリンク */}
           <FadeInUp delay={0.1}>
-            <div className="mt-16 pt-8 border-t border-border">
+            <div className="max-w-narrow mx-auto pt-8 border-t border-border">
               <Link
                 href="/recruit"
                 className="inline-flex items-center gap-3 text-navy hover:text-accent transition-colors group"
@@ -123,6 +176,7 @@ export default function EmployeeAInterviewPage() {
               </Link>
             </div>
           </FadeInUp>
+
         </div>
       </section>
     </>

@@ -30,7 +30,7 @@ function PageHero() {
       {/* ヒーロー画像（フルワイド） */}
       <div className="relative">
         <FadeInImage
-          src="/images/recruit-hero.jpg"
+          src="/images/recruit-bg.jpg"
           alt="Recruit"
           fill
           direction="up"
@@ -243,7 +243,7 @@ function InterviewSection() {
     {
       slug: "president",
       number: "#01",
-      name: "鳴澤 潤一",
+      name: "鴇澤 進一",
       role: "代表取締役",
       catchphrase: "社員の幸せが、確かなものづくりをつくる。",
       description: "安心して働ける環境が、良い仕事を生む。社員との距離感、提案する姿勢、段階的に成長できる体制――代表が語るトキワ工業の根っこにある想いとは。",

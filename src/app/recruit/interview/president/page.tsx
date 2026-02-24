@@ -16,7 +16,7 @@ export default function PresidentInterviewPage() {
               <h1 className="text-3xl lg:text-5xl font-bold text-navy leading-tight">
                 社員の幸せが、<br />確かなものづくりをつくる。
               </h1>
-              <p className="mt-4 text-base text-text-secondary">代表取締役　鳴澤 潤一</p>
+              <p className="mt-4 text-base text-text-secondary">代表取締役　鴇澤 進一</p>
             </SectionTitleEntrance>
           </div>
         </div>
@@ -26,9 +26,9 @@ export default function PresidentInterviewPage() {
       <section className="py-16 lg:py-24 bg-white">
         <div className="max-w-container mx-auto px-6 lg:px-12">
 
-          {/* Q1 — テキスト左 */}
+          {/* Q1 — テキスト左・画像右（画像下げ） */}
           <FadeInUp>
-            <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center mb-20 lg:mb-28">
+            <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-start mb-20 lg:mb-28">
               <div>
                 <h2 className="text-xl lg:text-2xl font-bold text-navy mb-6 font-mincho">
                   Q1. 社長が一番大切にしていることは何ですか？
@@ -42,10 +42,10 @@ export default function PresidentInterviewPage() {
                   </p>
                 </div>
               </div>
-              <div className="relative aspect-[4/3] rounded overflow-hidden">
+              <div className="lg:mt-24 relative aspect-[4/3] rounded overflow-hidden">
                 <Image
-                  src="/images/interview-president.jpg"
-                  alt="鳴澤 潤一"
+                  src="/images/interview-president-4.jpg"
+                  alt="鴇澤 進一"
                   fill
                   className="object-cover"
                 />
@@ -53,9 +53,9 @@ export default function PresidentInterviewPage() {
             </div>
           </FadeInUp>
 
-          {/* Q2 — テキスト右 */}
+          {/* Q2 — 画像左・テキスト右（テキスト下げ） */}
           <FadeInUp>
-            <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center mb-20 lg:mb-28">
+            <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-start mb-20 lg:mb-28">
               <div className="relative aspect-[4/3] rounded overflow-hidden lg:order-1">
                 <Image
                   src="/images/interview-president-2.jpg"
@@ -64,7 +64,7 @@ export default function PresidentInterviewPage() {
                   className="object-cover"
                 />
               </div>
-              <div className="lg:order-2">
+              <div className="lg:order-2 lg:mt-24">
                 <h2 className="text-xl lg:text-2xl font-bold text-navy mb-6 font-mincho">
                   Q2. 社長が考える「トキワ工業らしい強み」とは何でしょうか？
                 </h2>
@@ -80,9 +80,9 @@ export default function PresidentInterviewPage() {
             </div>
           </FadeInUp>
 
-          {/* Q3 — テキスト左 */}
+          {/* Q3 — テキスト左・画像右（画像下げ） */}
           <FadeInUp>
-            <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center mb-20 lg:mb-28">
+            <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-start mb-20 lg:mb-28">
               <div>
                 <h2 className="text-xl lg:text-2xl font-bold text-navy mb-6 font-mincho">
                   Q3. これから入社する方に、どんな環境で働いてほしいですか？
@@ -96,7 +96,7 @@ export default function PresidentInterviewPage() {
                   </p>
                 </div>
               </div>
-              <div className="relative aspect-[4/3] rounded overflow-hidden">
+              <div className="lg:mt-24 relative aspect-[4/3] rounded overflow-hidden">
                 <Image
                   src="/images/interview-president-3.jpg"
                   alt="インタビュー風景"
@@ -107,18 +107,18 @@ export default function PresidentInterviewPage() {
             </div>
           </FadeInUp>
 
-          {/* Q4 — テキスト右 */}
+          {/* Q4 — 画像左・テキスト右（テキスト下げ） */}
           <FadeInUp>
-            <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center mb-20 lg:mb-28">
+            <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-start mb-20 lg:mb-28">
               <div className="relative aspect-[4/3] rounded overflow-hidden lg:order-1">
                 <Image
-                  src="/images/interview-president-4.jpg"
+                  src="/images/interview-president.jpg"
                   alt="インタビュー風景"
                   fill
                   className="object-cover"
                 />
               </div>
-              <div className="lg:order-2">
+              <div className="lg:order-2 lg:mt-24">
                 <h2 className="text-xl lg:text-2xl font-bold text-navy mb-6 font-mincho">
                   Q4. 社員が長く活躍している理由を、社長はどう捉えていますか？
                 </h2>

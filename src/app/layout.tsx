@@ -3,6 +3,7 @@ import { Anton, Oswald } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import FloatingRecruitButton from "@/components/FloatingRecruitButton";
 import { seo, company, contact, locations } from "@/lib/site";
 
 // Antonフォント（タイトル用）
@@ -125,6 +126,7 @@ export default function RootLayout({
         <Header />
         <main>{children}</main>
         <Footer />
+        <FloatingRecruitButton />
       </body>
     </html>
   );

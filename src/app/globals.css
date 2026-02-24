@@ -532,6 +532,32 @@ body {
 }
 
 /* ============================================================
+   背景画像スローパン（エントランス時に1回だけ動く）
+   ============================================================ */
+
+@keyframes panLeft {
+  0% { transform: scale(1.15) translateX(3%); }
+  100% { transform: scale(1.15) translateX(-3%); }
+}
+
+@keyframes panRight {
+  0% { transform: scale(1.15) translateX(-3%); }
+  100% { transform: scale(1.15) translateX(3%); }
+}
+
+.pan-image {
+  transform: scale(1.15) translateX(3%);
+}
+
+.pan-image.is-visible.pan-left {
+  animation: panLeft 18s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+}
+
+.pan-image.is-visible.pan-right {
+  animation: panRight 18s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+}
+
+/* ============================================================
    インタビュー写真 ホバーズーム
    ============================================================ */
 
@@ -541,4 +567,28 @@ body {
 
 .interview-photo-wrap:hover .interview-photo-zoom {
   transform: scale(var(--hover-scale)) !important;
+}
+
+/* ============================================================
+   固定採用タブボタン（右端）
+   ============================================================ */
+
+/* 縦書き */
+.writing-vertical {
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+}
+
+/* ホバー時の光沢スイープ（縦方向） */
+@keyframes recruitShineSweepV {
+  0% {
+    transform: translateY(-100%) skewY(-15deg);
+  }
+  100% {
+    transform: translateY(350%) skewY(-15deg);
+  }
+}
+
+.group:hover .recruit-btn-shine {
+  animation: recruitShineSweepV 0.7s ease-in-out forwards;
 }

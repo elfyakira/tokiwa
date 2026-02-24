@@ -52,7 +52,7 @@ function PageHero() {
       {/* ヒーロー画像（フルワイド） */}
       <div className="relative">
         <FadeInImage
-          src="/images/business-hero.jpg"
+          src="/images/business-bg.jpg"
           alt="Business"
           fill
           direction="up"
@@ -285,7 +285,7 @@ function WorksCard({ index }: { index: number }) {
   return (
     <div
       ref={ref}
-      className={`works-card-entrance group relative aspect-square rounded-sm overflow-hidden cursor-pointer ${isVisible ? "is-visible" : ""}`}
+      className={`works-card-entrance group relative aspect-[4/3] rounded-sm overflow-hidden cursor-pointer ${isVisible ? "is-visible" : ""}`}
       style={{ animationDelay: isVisible ? `${(index % 6) * 80}ms` : undefined }}
       onClick={() => onImageClick(src, alt)}
     >

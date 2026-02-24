@@ -87,9 +87,9 @@ export default function Header() {
             <Image
               src={images.logo || "/images/logo.png"}
               alt={company.name || "トキワ工業"}
-              width={320}
-              height={80}
-              className="h-20 w-auto"
+              width={1500}
+              height={360}
+              className="h-[240px] w-auto"
             />
           </Link>
 
@@ -126,9 +126,9 @@ export default function Header() {
             <Image
               src={images.logo || "/images/logo.png"}
               alt={company.name || "トキワ工業"}
-              width={160}
-              height={40}
-              className="h-10 w-auto"
+              width={840}
+              height={210}
+              className="h-[144px] w-auto"
             />
           </Link>
 

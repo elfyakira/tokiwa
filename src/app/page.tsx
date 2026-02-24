@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { FadeInUp, FadeInImage, TypingText, SectionTitleEntrance, Parallax } from "@/components/animations";
 
@@ -52,6 +53,51 @@ function ViewMoreButton({
       >
         VIEW MORE
       </Link>
+    </div>
+  );
+}
+
+// 背景画像スローパン（エントランスで動き始め、止まる）
+function PanningBg({
+  src,
+  alt,
+  direction = "left",
+  minH = "min-h-[500px] lg:min-h-[600px]",
+}: {
+  src: string;
+  alt: string;
+  direction?: "left" | "right";
+  minH?: string;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(el);
+        }
+      },
+      { threshold: 0.15 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div ref={ref} className="absolute inset-0 z-0 overflow-hidden">
+      <div className={`relative w-full h-full ${minH}`}>
+        <Image
+          src={src}
+          alt={alt}
+          fill
+          className={`object-cover pan-image pan-${direction} ${isVisible ? "is-visible" : ""}`}
+        />
+      </div>
     </div>
   );
 }
@@ -123,15 +169,8 @@ function BusinessSection() {
 
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         <div className="relative min-h-[500px] lg:min-h-[600px]">
-          {/* 背景画像 - 右からスライドイン */}
-          <FadeInImage
-            src="/images/business-bg.jpg"
-            alt="Business"
-            fill
-            direction="right"
-            containerClassName="absolute inset-0 z-0"
-            className="object-cover"
-          />
+          {/* 背景画像 - スローパン */}
+          <PanningBg src="/images/business-bg.jpg" alt="Business" direction="left" />
 
         {/* コンテンツ */}
         <div className="absolute inset-0 z-10 flex flex-col">
@@ -275,15 +314,8 @@ function TechnologySection() {
 
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         <div className="relative min-h-[500px] lg:min-h-[600px]">
-          {/* 背景画像 - 左からスライドイン */}
-          <FadeInImage
-            src="/images/technology-bg.jpg"
-            alt="Technology"
-            fill
-            direction="left"
-            containerClassName="absolute inset-0 z-0"
-            className="object-cover"
-          />
+          {/* 背景画像 - スローパン（逆方向） */}
+          <PanningBg src="/images/technology-bg.jpg" alt="Technology" direction="right" />
 
           {/* コンテンツ */}
           <div className="absolute inset-0 z-10 flex flex-col">
@@ -335,15 +367,8 @@ function RecruitSection() {
       {/* 7xl相当の左右余白 */}
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         <div className="relative min-h-[550px] lg:min-h-[650px]">
-          {/* 背景画像 - フェードイン */}
-          <FadeInImage
-            src="/images/recruit-bg.jpg"
-            alt="Recruit"
-            fill
-            direction="up"
-            containerClassName="absolute inset-0 z-0"
-            className="object-cover"
-          />
+          {/* 背景画像 - スローパン */}
+          <PanningBg src="/images/recruit-bg.jpg" alt="Recruit" direction="left" minH="min-h-[550px] lg:min-h-[650px]" />
 
           {/* コンテンツ */}
           <div className="absolute inset-0 z-10 flex flex-col">
@@ -378,7 +403,7 @@ function RecruitSection() {
 
             {/* 下部余白とボタン */}
             <div className="flex-1" />
-            <div className="flex justify-end px-6 lg:px-12 pb-12 lg:pb-16">
+            <div className="flex justify-end pr-[15%] lg:pr-[20%] pb-12 lg:pb-16">
               <ViewMoreButton href="/recruit" />
             </div>
           </div>
@@ -394,38 +419,40 @@ function RecruitSection() {
 // Contactセクション（共通CTA）
 function ContactSection() {
   return (
-    <section className="relative min-h-[600px] lg:min-h-[700px] bg-white">
-      {/* 背景画像 - フェードイン */}
-      <FadeInImage
-        src="/images/building.jpg"
-        alt="トキワ工業 社屋"
-        fill
-        direction="up"
-        containerClassName="absolute inset-y-0 left-6 lg:left-[calc((100vw-80rem)/2+2.5rem)] right-0 z-0"
-        className="object-cover"
-      />
-
-      {/* コンテンツ */}
-      <div className="relative z-10 pt-24 lg:pt-32 flex flex-col lg:flex-row lg:items-center">
-        {/* 左カラム: タイトル＋説明文（白い帯） */}
-        <div className="bg-white w-[85%] sm:w-[70%] lg:w-[50%] -mt-8 lg:-mt-12">
-          <div className="py-6 lg:py-12 px-6 lg:px-12 flex flex-col items-end">
-            <div className="mr-4 sm:mr-8 lg:mr-24">
-              <SectionTitleEntrance direction="left">
-                <h2 className="text-4xl sm:text-5xl lg:text-7xl font-anton font-bold tracking-wider lg:tracking-[0.12em] mb-4 lg:mb-6 text-navy">
-                  CONTACT
-                </h2>
-              </SectionTitleEntrance>
-              <p className="text-base sm:text-lg lg:text-xl text-navy leading-relaxed text-center">
-                どんなことでも、<br />お気軽にお問い合わせください。
-              </p>
+    <section className="bg-[#DFE5EA] py-20 lg:py-32">
+      <div className="max-w-7xl mx-auto px-6 lg:px-12">
+        {/* 右上：ライン＋テキスト＋矢印 */}
+        <div className="flex justify-end mb-16 lg:mb-24">
+          <div className="w-[60%] lg:w-[55%]">
+            <SectionTitleEntrance direction="right">
+              <div className="w-full h-px bg-[#013f93] mb-4 lg:mb-5" />
+            </SectionTitleEntrance>
+            <div className="flex items-start justify-between">
+              <FadeInUp delay={0.2}>
+                <div className="text-left">
+                  <h2 className="text-4xl sm:text-5xl lg:text-7xl font-anton text-[#013f93] tracking-wider mb-4">
+                    Contact us
+                  </h2>
+                  <p className="text-base lg:text-lg text-[#013f93]/70 leading-[2]">
+                    トキワ工業へのご相談やご質問は<br />
+                    こちらのフォームよりお気軽に<br />
+                    お問い合わせください。
+                  </p>
+                </div>
+              </FadeInUp>
+              <FadeInUp delay={0.4}>
+                <Link
+                  href="/contact"
+                  className="group shrink-0 mt-1 inline-flex"
+                >
+                  <svg className="w-10 h-10 lg:w-14 lg:h-14 text-[#013f93]/50 group-hover:text-[#013f93] group-hover:translate-x-2 transition-all duration-500" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
+                    <line x1="3" y1="12" x2="21" y2="12" />
+                    <polyline points="15,6 21,12 15,18" />
+                  </svg>
+                </Link>
+              </FadeInUp>
             </div>
           </div>
-        </div>
-
-        {/* 右カラム: ボタン */}
-        <div className="mt-6 self-center lg:self-auto lg:mt-0 lg:ml-12 lg:self-end lg:-mb-24">
-          <ViewMoreButton href="/contact" variant="accent" />
         </div>
       </div>
     </section>
