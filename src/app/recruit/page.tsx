@@ -68,80 +68,138 @@ function PageHero() {
   );
 }
 
-// 数字でわかる"働く雰囲気"セクション（現状維持）
+// カウントアップアニメーション
+function CountUp({ value, duration = 2000 }: { value: string; duration?: number }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const [displayed, setDisplayed] = useState("0");
+  const [hasStarted, setHasStarted] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setHasStarted(true);
+          observer.unobserve(el);
+        }
+      },
+      { threshold: 0, rootMargin: "0px 0px -50px 0px" }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!hasStarted) return;
+    const target = parseInt(value, 10);
+    if (isNaN(target)) { setDisplayed(value); return; }
+
+    const startTime = performance.now();
+    const animate = (now: number) => {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      // easeOutExpo
+      const eased = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+      const current = Math.round(eased * target);
+      setDisplayed(current.toLocaleString());
+      if (progress < 1) requestAnimationFrame(animate);
+    };
+    requestAnimationFrame(animate);
+  }, [hasStarted, value, duration]);
+
+  return <span ref={ref}>{displayed}</span>;
+}
+
+// 数字で見るトキワ工業セクション
 function NumbersSection() {
+  const numbers = [
+    {
+      label: "平均残業時間",
+      value: "15",
+      unit: "時間以内",
+      suffix: "/月",
+      icon: (
+        <svg className="w-12 h-12 lg:w-14 lg:h-14 text-accent" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="10" />
+          <polyline points="12,6 12,12 16,14" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      ),
+    },
+    {
+      label: "平均勤続年数",
+      value: "12",
+      unit: "年",
+      suffix: "",
+      icon: (
+        <svg className="w-12 h-12 lg:w-14 lg:h-14 text-accent" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5s-3 1.34-3 3 1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z" />
+        </svg>
+      ),
+    },
+    {
+      label: "創業",
+      value: "1982",
+      unit: "年",
+      suffix: "",
+      icon: (
+        <svg className="w-12 h-12 lg:w-14 lg:h-14 text-accent" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z" />
+        </svg>
+      ),
+    },
+    {
+      label: "年間休日",
+      value: "115",
+      unit: "日",
+      suffix: "",
+      icon: (
+        <svg className="w-12 h-12 lg:w-14 lg:h-14 text-accent" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM9 10H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2z" />
+        </svg>
+      ),
+    },
+  ];
+
   return (
     <section className="py-16 lg:py-24 bg-bg-light">
-      <div className="max-w-container mx-auto px-6 lg:px-12">
-        <FadeInUp>
-          <h2 className="text-2xl lg:text-3xl font-bold text-text-primary mb-12 text-center">
-            数字でわかる"働く雰囲気"
+      <div className="max-w-[1400px] mx-auto px-4 lg:px-6">
+        <SectionTitleEntrance direction="scale" className="text-center mb-14 lg:mb-20">
+          <p className="text-xs lg:text-sm text-accent font-bold tracking-[0.25em] mb-2">DATA</p>
+          <h2 className="text-3xl lg:text-4xl font-anton font-bold text-navy tracking-wider">
+            数字で見るトキワ工業
           </h2>
-        </FadeInUp>
+          <div className="mt-4 mx-auto w-16 h-[2px] bg-accent" />
+        </SectionTitleEntrance>
 
-        <div className="grid md:grid-cols-3 gap-8 lg:gap-12">
-          {/* 従業員定着率 */}
-          <FadeInUp delay={0.1}>
-            <div className="text-center overflow-hidden">
-              <div className="w-40 h-40 mx-auto mb-6 flex items-center justify-center">
-                <Image
-                  src="/images/recruit-icon1.png"
-                  alt="78%"
-                  width={160}
-                  height={160}
-                  className="object-contain"
-                />
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
+          {numbers.map((item, i) => (
+            <FadeInUp key={item.label} delay={i * 0.12}>
+              <div className="bg-white rounded shadow-card aspect-square flex flex-col items-center justify-center text-center p-6 lg:p-10">
+                <div className="mb-5 lg:mb-8 flex justify-center">
+                  <div className="w-14 h-14 lg:w-20 lg:h-20 [&>svg]:w-full [&>svg]:h-full">
+                    {item.icon}
+                  </div>
+                </div>
+                <p className="text-sm lg:text-base font-bold text-text-secondary tracking-wider mb-4 lg:mb-6">
+                  {item.label}
+                </p>
+                <div className="flex items-baseline justify-center gap-1">
+                  <span className="text-6xl lg:text-8xl font-bold text-accent leading-none tracking-[0.08em]" style={{ fontFamily: "'Anton', sans-serif", fontFeatureSettings: '"tnum"' }}>
+                    <CountUp value={item.value} />
+                  </span>
+                  <span className="text-base lg:text-xl font-bold text-navy">
+                    {item.unit}
+                  </span>
+                </div>
+                {item.suffix && (
+                  <p className="text-sm text-text-secondary mt-2">
+                    {item.suffix}
+                  </p>
+                )}
               </div>
-              <h3 className="text-lg font-bold text-text-primary mb-2">
-                従業員<br />定着率
-              </h3>
-              <p className="text-base text-text-secondary leading-[1.8] break-all">
-                aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-              </p>
-            </div>
-          </FadeInUp>
-
-          {/* 生産性の向上 */}
-          <FadeInUp delay={0.2}>
-            <div className="text-center overflow-hidden">
-              <div className="w-40 h-40 mx-auto mb-6 flex items-center justify-center">
-                <Image
-                  src="/images/recruit-icon2.png"
-                  alt="67%"
-                  width={160}
-                  height={160}
-                  className="object-contain"
-                />
-              </div>
-              <h3 className="text-lg font-bold text-text-primary mb-2">
-                生産性<br />の向上
-              </h3>
-              <p className="text-base text-text-secondary leading-[1.8] break-all">
-                aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-              </p>
-            </div>
-          </FadeInUp>
-
-          {/* 多様なジェンダーの増加 */}
-          <FadeInUp delay={0.3}>
-            <div className="text-center overflow-hidden">
-              <div className="w-40 h-40 mx-auto mb-6 flex items-center justify-center">
-                <Image
-                  src="/images/recruit-icon3.png"
-                  alt="多様なジェンダー"
-                  width={160}
-                  height={160}
-                  className="object-contain"
-                />
-              </div>
-              <h3 className="text-lg font-bold text-text-primary mb-2">
-                多様なジェンダー<br />の増加
-              </h3>
-              <p className="text-base text-text-secondary leading-[1.8] break-all">
-                aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-              </p>
-            </div>
-          </FadeInUp>
+            </FadeInUp>
+          ))}
         </div>
       </div>
     </section>
@@ -253,7 +311,7 @@ function InterviewSection() {
     {
       slug: "employee-a",
       number: "#02",
-      name: "社員 A",
+      name: "T.K",
       role: "製造部",
       catchphrase: "思い描いた通りに仕上がる、その瞬間が一番の達成感。",
       description: "溶接を担当する社員が語る、細部へのこだわりとコツコツ積み重ねるものづくりの魅力。技術だけでなく人としても成長できる環境とは。",
@@ -264,7 +322,7 @@ function InterviewSection() {
     {
       slug: "employee-b",
       number: "#03",
-      name: "社員 B",
+      name: "S.M",
       role: "製造部",
       catchphrase: "できなかったことが、できるようになる喜び。",
       description: "北海道から愛知へ。派遣から正社員へ。縁と愛情に導かれ、挑戦する勇気を手にした社員が語る、トキワ工業での成長ストーリー。",

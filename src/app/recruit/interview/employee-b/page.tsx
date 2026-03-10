@@ -16,7 +16,7 @@ export default function EmployeeBInterviewPage() {
               <h1 className="text-3xl lg:text-5xl font-bold text-navy leading-tight">
                 できなかったことが、<br />できるようになる喜び。
               </h1>
-              <p className="mt-4 text-base text-text-secondary">製造部　社員 B</p>
+              <p className="mt-4 text-base text-text-secondary">製造部　S.M</p>
             </SectionTitleEntrance>
           </div>
         </div>
@@ -45,7 +45,7 @@ export default function EmployeeBInterviewPage() {
               <div className="lg:mt-24 relative aspect-[4/3] rounded overflow-hidden">
                 <Image
                   src="/images/interview-employee-b.jpg"
-                  alt="社員 B"
+                  alt="S.M"
                   fill
                   className="object-cover"
                 />

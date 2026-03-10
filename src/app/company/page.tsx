@@ -119,6 +119,142 @@ function GreetingSection() {
   );
 }
 
+// 理念セクション
+function PhilosophySection() {
+  return (
+    <section className="py-16 lg:py-24 bg-bg-light">
+      <div className="max-w-container mx-auto px-6 lg:px-12">
+        {/* セクションタイトル */}
+        <SectionTitleEntrance direction="scale" className="text-center mb-14 lg:mb-20">
+          <p className="text-xs lg:text-sm text-accent font-bold tracking-[0.25em] mb-2">PHILOSOPHY</p>
+          <h2 className="text-3xl lg:text-4xl font-anton font-bold text-navy tracking-wider">
+            理念
+          </h2>
+          <div className="mt-4 mx-auto w-16 h-[2px] bg-accent" />
+        </SectionTitleEntrance>
+
+        <FadeInUp>
+          <div className="max-w-3xl mx-auto text-center">
+            <h3 className="text-2xl lg:text-3xl font-bold text-navy font-mincho leading-relaxed mb-8">
+              顧客満足は次の顧客満足を生む
+            </h3>
+            <p className="text-base lg:text-lg text-text-primary leading-[2] mb-10">
+              納期・品質・コストを重視し、質の高いサービスを提供する
+            </p>
+            <div className="w-16 h-px bg-border mx-auto mb-10" />
+            <p className="text-sm lg:text-base text-text-secondary leading-[2.2] text-left">
+              私たちは、一つひとつの仕事に妥協なく向き合い、細かな仕事を確かな技術で積み重ねることが、お客さまの信頼につながると信じています。お客さまにとって「頼んで良かった」と思っていただける品質・納期・コストを実現し、その満足が次の仕事へとつながっていく。この循環こそが、私たちのものづくりの原点です。現場では、経験豊富な職人と若手がそれぞれの個性を活かしながら支え合い、一貫した体制で設計から完成までを担います。社員一人ひとりが安心して働ける環境をつくることが、良いものづくりの土台になる。人を大切にし、技術を磨き続けることで、お客さまの製品価値を高める「欠かせない存在」であり続けます。
+            </p>
+          </div>
+        </FadeInUp>
+      </div>
+    </section>
+  );
+}
+
+// ビジョンセクション
+function VisionSection() {
+  const visions = [
+    {
+      number: "01",
+      title: "信頼で選ばれ続ける存在へ",
+      description:
+        "納期・品質・コストに妥協しないものづくりを貫き、お客さまにとって「なくてはならないパートナー」として選ばれ続ける会社を目指します。",
+    },
+    {
+      number: "02",
+      title: "人が育ち、技術が進化する現場へ",
+      description:
+        "経験豊富な職人の技を次の世代へ受け継ぎながら、新しい設備や発想を取り入れ、変化に強いものづくりの現場をつくり続けます。",
+    },
+    {
+      number: "03",
+      title: "働く人が誇れる会社へ",
+      description:
+        "社員一人ひとりが安心して長く働ける環境を整え、仕事を通じて成長を実感できる。そんな会社であることが、確かなものづくりの原動力になると考えています。",
+    },
+  ];
+
+  return (
+    <section className="py-16 lg:py-24 bg-white">
+      <div className="max-w-container mx-auto px-6 lg:px-12">
+        {/* セクションタイトル */}
+        <SectionTitleEntrance direction="scale" className="text-center mb-14 lg:mb-20">
+          <p className="text-xs lg:text-sm text-accent font-bold tracking-[0.25em] mb-2">VISION</p>
+          <h2 className="text-3xl lg:text-4xl font-anton font-bold text-navy tracking-wider">
+            ビジョン
+          </h2>
+          <div className="mt-4 mx-auto w-16 h-[2px] bg-accent" />
+        </SectionTitleEntrance>
+
+        <div className="grid md:grid-cols-3 gap-8 lg:gap-12">
+          {visions.map((item) => (
+            <FadeInUp key={item.number} delay={Number(item.number) * 0.1}>
+              <div className="bg-bg-light rounded shadow-card p-8 lg:p-10 h-full flex flex-col">
+                <span className="text-4xl font-anton font-bold text-accent/30 tracking-wider">
+                  {item.number}
+                </span>
+                <h3 className="text-lg lg:text-xl font-bold text-navy mt-3 mb-4">
+                  {item.title}
+                </h3>
+                <div className="w-10 h-[2px] bg-accent mb-6" />
+                <p className="text-base text-text-primary leading-[2] flex-1">
+                  {item.description}
+                </p>
+              </div>
+            </FadeInUp>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// 沿革セクション
+function HistorySection() {
+  const histories = [
+    { year: "1982年", event: "初代 鴇澤弓男が名古屋市中川区において板金業を創業" },
+    { year: "1988年", event: "有限会社トキワ工業を設立" },
+    { year: "1992年", event: "名古屋市中川区から津島市神守町に工場移転" },
+    { year: "2005年", event: "津島市神守町から津島市白浜町に工場移転" },
+    { year: "2013年", event: "代表取締役会長に鴇澤弓男が就任\n代表取締役社長に鴇澤進一が就任" },
+  ];
+
+  return (
+    <section className="py-16 lg:py-24 bg-bg-light">
+      <div className="max-w-container mx-auto px-6 lg:px-12">
+        {/* セクションタイトル */}
+        <SectionTitleEntrance direction="scale" className="text-center mb-14 lg:mb-20">
+          <p className="text-xs lg:text-sm text-accent font-bold tracking-[0.25em] mb-2">HISTORY</p>
+          <h2 className="text-3xl lg:text-4xl font-anton font-bold text-navy tracking-wider">
+            沿革
+          </h2>
+          <div className="mt-4 mx-auto w-16 h-[2px] bg-accent" />
+        </SectionTitleEntrance>
+
+        <FadeInUp>
+          <div className="max-w-3xl mx-auto bg-white shadow-card rounded overflow-hidden">
+            <table className="w-full">
+              <tbody>
+                {histories.map((item, index) => (
+                  <tr key={index} className="border-b border-border last:border-b-0">
+                    <th className="py-5 px-6 lg:px-8 text-left font-bold text-navy w-32 lg:w-44 align-top bg-bg-light/50 text-sm lg:text-base">
+                      {item.year}
+                    </th>
+                    <td className="py-5 px-6 lg:px-8 text-text-primary whitespace-pre-line text-sm lg:text-base">
+                      {item.event}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </FadeInUp>
+      </div>
+    </section>
+  );
+}
+
 // 会社概要セクション
 function CompanyInfoSection() {
   const hq = locations.headquarters;
@@ -281,6 +417,9 @@ export default function CompanyPage() {
     <>
       <PageHero />
       <GreetingSection />
+      <PhilosophySection />
+      <VisionSection />
+      <HistorySection />
       <CompanyInfoSection />
       <AccessSection />
       <RecruitBannerSection />
