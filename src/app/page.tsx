@@ -104,18 +104,28 @@ function PanningBg({
 
 // ヒーローセクション（動画背景）
 function HeroSection() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
   return (
     <section className="sticky top-0 z-0 h-screen min-h-[600px] flex items-center justify-center">
       {/* 背景動画 */}
       <div className="absolute inset-0 z-0">
         <video
+          key={isMobile ? "mobile" : "desktop"}
           autoPlay
           loop
           muted
           playsInline
           className="absolute inset-0 w-full h-full object-cover"
         >
-          <source src="/videos/hero-bg.mp4" type="video/mp4" />
+          <source src={isMobile ? "/videos/hero-bg-mobile.mp4" : "/videos/hero-bg.mp4"} type="video/mp4" />
         </video>
       </div>
 

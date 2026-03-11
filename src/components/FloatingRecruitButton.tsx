@@ -1,12 +1,24 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
 
 export default function FloatingRecruitButton() {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setVisible(window.scrollY > window.innerHeight);
+    };
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <Link
       href="/recruit"
-      className="fixed right-0 top-1/2 -translate-y-1/2 z-[1100] group"
+      className={`fixed right-0 top-1/2 -translate-y-1/2 z-[1100] group transition-all duration-500 ${visible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-full pointer-events-none"}`}
       aria-label="採用情報を見る"
     >
       {/* はみ出す英語テキスト */}
