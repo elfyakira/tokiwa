@@ -202,6 +202,80 @@ function EquipmentSection({ onImageClick }: { onImageClick: (src: string, alt: s
           <p className="mt-3 text-base text-text-primary font-mincho pl-5 lg:pl-6 leading-[2]">最新の加工機器と検査設備を揃え、高い精度と安定した再現性を確保しています。人の技術と組み合わせることで、多品種・小ロットから量産まで幅広いニーズに対応できる生産体制を実現しています。</p>
         </SectionTitleEntrance>
 
+        {/* 設備能力テーブル */}
+        <div className="mb-12 lg:mb-16 space-y-10">
+          <div>
+            <h3 className="text-lg lg:text-xl font-bold text-navy mb-4">
+              設備能力
+            </h3>
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm lg:text-base border-collapse">
+                <thead>
+                  <tr className="bg-navy text-white">
+                    <th className="px-4 py-3 text-left font-bold">機械種類</th>
+                    <th className="px-4 py-3 text-left font-bold">メーカー名</th>
+                    <th className="px-4 py-3 text-center font-bold">台数</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-200">
+                  {[
+                    ["レーザー複合機 2012C1VF", "アマダ", "1台"],
+                    ["自動棚 AS2512C1", "アマダ", "1台"],
+                    ["アマスペース 1048", "アマダ", "1台"],
+                    ["NCプレスブレーキ（油圧式）2500W", "アマダ", "1台"],
+                    ["NCプレスブレーキ（油圧式）1250W", "アマダ", "1台"],
+                    ["スケヤーシャーリングマシーン", "相澤", "1台"],
+                    ["コーナーシャー", "", "1台"],
+                    ["CO2自動溶接機（半自動含む）", "松下", "6台"],
+                    ["アルゴン溶接機", "松下", "6台"],
+                    ["ファイバー溶接機", "", "1台"],
+                    ["スポット溶接機35KVA", "木村", "1台"],
+                    ["３本ロール（ベンディングロール）", "", "1台"],
+                    ["ユニットワーカー", "タケダ", "1台"],
+                    ["メタルソー", "村橋", "1台"],
+                    ["天井クレーン", "", "2基"],
+                  ].map(([name, maker, count], i) => (
+                    <tr key={i} className={i % 2 === 0 ? "bg-white" : "bg-gray-50"}>
+                      <td className="px-4 py-3 text-text-primary">{name}</td>
+                      <td className="px-4 py-3 text-text-secondary">{maker}</td>
+                      <td className="px-4 py-3 text-center text-text-primary">{count}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div>
+            <h3 className="text-lg lg:text-xl font-bold text-navy mb-4">
+              CADソフト
+            </h3>
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm lg:text-base border-collapse">
+                <thead>
+                  <tr className="bg-navy text-white">
+                    <th className="px-4 py-3 text-left font-bold">ソフト名</th>
+                    <th className="px-4 py-3 text-left font-bold">メーカー名</th>
+                    <th className="px-4 py-3 text-center font-bold">台数</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-200">
+                  {[
+                    ["AP－100", "アマダ", "2台"],
+                    ["3D CAD シートワークス", "アマダ", "1台"],
+                  ].map(([name, maker, count], i) => (
+                    <tr key={i} className={i % 2 === 0 ? "bg-white" : "bg-gray-50"}>
+                      <td className="px-4 py-3 text-text-primary">{name}</td>
+                      <td className="px-4 py-3 text-text-secondary">{maker}</td>
+                      <td className="px-4 py-3 text-center text-text-primary">{count}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
         <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-5">
           {equipmentImages.map((img, i) => (
             <TechImageCard key={i} src={img} alt={`設備 ${i + 1}`} index={i} aspect="aspect-[3/4]" onImageClick={onImageClick} />

@@ -311,7 +311,7 @@ function InterviewSection() {
     {
       slug: "employee-a",
       number: "#02",
-      name: "T.K",
+      name: "Y.K",
       role: "製造部",
       catchphrase: "思い描いた通りに仕上がる、その瞬間が一番の達成感。",
       description: "溶接を担当する社員が語る、細部へのこだわりとコツコツ積み重ねるものづくりの魅力。技術だけでなく人としても成長できる環境とは。",
@@ -322,7 +322,7 @@ function InterviewSection() {
     {
       slug: "employee-b",
       number: "#03",
-      name: "S.M",
+      name: "Y.O",
       role: "製造部",
       catchphrase: "できなかったことが、できるようになる喜び。",
       description: "北海道から愛知へ。派遣から正社員へ。縁と愛情に導かれ、挑戦する勇気を手にした社員が語る、トキワ工業での成長ストーリー。",
