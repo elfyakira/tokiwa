@@ -184,6 +184,7 @@ function EquipmentSection({ onImageClick }: { onImageClick: (src: string, alt: s
     "/images/equipment-6.jpg",
     "/images/equipment-7.jpg",
     "/images/equipment-8.jpg",
+    "/images/equipment-9.jpg",
   ];
 
   return (
