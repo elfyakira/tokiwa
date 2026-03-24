@@ -325,7 +325,7 @@ function AccessSection() {
             {/* 地図 */}
             <div className="relative aspect-[16/9] rounded overflow-hidden mb-8">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3261.5!2d136.72!3d35.18!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2z44CSNDk2LTAwMTYg5oSb55-l55yM5rSl5bO25biC55m95rWc55S65YWr5LiB55uu59Kq!5e0!3m2!1sja!2sjp!4v1"
+                src="https://www.google.com/maps?q=有限会社トキワ工業+愛知県津島市白浜町八丁目59-1&output=embed&z=16"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
