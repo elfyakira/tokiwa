@@ -426,42 +426,101 @@ function RecruitSection() {
   );
 }
 
-// Contactセクション（共通CTA）
+// Contact & SNSセクション
 function ContactSection() {
   return (
     <section className="bg-[#DFE5EA] py-20 lg:py-32">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
-        {/* 右上：ライン＋テキスト＋矢印 */}
-        <div className="flex justify-end mb-16 lg:mb-24">
-          <div className="w-[60%] lg:w-[55%]">
-            <SectionTitleEntrance direction="right">
-              <div className="w-full h-px bg-[#013f93] mb-4 lg:mb-5" />
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1px_1fr] gap-10 lg:gap-0">
+          {/* 左側：Follow us / SNS */}
+          <div className="lg:pr-14">
+            <SectionTitleEntrance direction="left">
+              <h2 className="text-4xl sm:text-5xl lg:text-7xl font-anton text-[#013f93] tracking-wider mb-10 lg:mb-14">
+                Follow us
+              </h2>
             </SectionTitleEntrance>
-            <div className="flex items-start justify-between">
-              <FadeInUp delay={0.2}>
-                <div className="text-left">
-                  <h2 className="text-4xl sm:text-5xl lg:text-7xl font-anton text-[#013f93] tracking-wider mb-4">
-                    Contact us
-                  </h2>
-                  <p className="text-base lg:text-lg text-[#013f93]/70 leading-[2]">
-                    トキワ工業へのご相談やご質問は<br />
-                    こちらのフォームよりお気軽に<br />
-                    お問い合わせください。
-                  </p>
-                </div>
-              </FadeInUp>
-              <FadeInUp delay={0.4}>
-                <Link
-                  href="/contact"
-                  className="group shrink-0 mt-1 inline-flex"
+            <div className="flex flex-col gap-6">
+              {/* TikTok */}
+              <FadeInUp delay={0.1}>
+                <a
+                  href="https://www.tiktok.com/@tokiwa.ind?_r=1&_t=ZS-952AcKZ6VIv"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center gap-5 p-5 lg:p-6 bg-white/60 hover:bg-white rounded-lg transition-all duration-300 hover:shadow-md"
                 >
-                  <svg className="w-10 h-10 lg:w-14 lg:h-14 text-[#013f93]/50 group-hover:text-[#013f93] group-hover:translate-x-2 transition-all duration-500" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
-                    <line x1="3" y1="12" x2="21" y2="12" />
-                    <polyline points="15,6 21,12 15,18" />
+                  <span className="w-14 h-14 lg:w-16 lg:h-16 rounded-full bg-[#013f93] flex items-center justify-center text-white group-hover:scale-110 transition-transform duration-300">
+                    <svg className="w-7 h-7 lg:w-8 lg:h-8" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 0 0-.79-.05A6.34 6.34 0 0 0 3.15 15a6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V8.71a8.21 8.21 0 0 0 4.76 1.52v-3.4a4.85 4.85 0 0 1-1-.14z" />
+                    </svg>
+                  </span>
+                  <div>
+                    <span className="text-2xl lg:text-3xl font-oswald font-bold text-[#013f93] tracking-wider">
+                      TikTok
+                    </span>
+                    <p className="text-sm text-[#013f93]/50 mt-1">@tokiwa.ind</p>
+                  </div>
+                  <svg className="w-6 h-6 lg:w-7 lg:h-7 ml-auto text-[#013f93]/30 group-hover:text-[#013f93] group-hover:translate-x-1 transition-all duration-300" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                    <polyline points="9,6 15,12 9,18" />
                   </svg>
-                </Link>
+                </a>
+              </FadeInUp>
+
+              {/* Instagram */}
+              <FadeInUp delay={0.2}>
+                <a
+                  href="https://www.instagram.com/tkw_k_g/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center gap-5 p-5 lg:p-6 bg-white/60 hover:bg-white rounded-lg transition-all duration-300 hover:shadow-md"
+                >
+                  <span className="w-14 h-14 lg:w-16 lg:h-16 rounded-full bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] flex items-center justify-center text-white group-hover:scale-110 transition-transform duration-300">
+                    <svg className="w-7 h-7 lg:w-8 lg:h-8" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z" />
+                    </svg>
+                  </span>
+                  <div>
+                    <span className="text-2xl lg:text-3xl font-oswald font-bold text-[#013f93] tracking-wider">
+                      Instagram
+                    </span>
+                    <p className="text-sm text-[#013f93]/50 mt-1">専務のシャッター日和</p>
+                  </div>
+                  <svg className="w-6 h-6 lg:w-7 lg:h-7 ml-auto text-[#013f93]/30 group-hover:text-[#013f93] group-hover:translate-x-1 transition-all duration-300" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                    <polyline points="9,6 15,12 9,18" />
+                  </svg>
+                </a>
               </FadeInUp>
             </div>
+          </div>
+
+          {/* 中央の縦線 */}
+          <div className="hidden lg:block bg-[#013f93]/20 self-stretch" />
+
+          {/* 右側：Contact us */}
+          <div className="lg:pl-14">
+            <SectionTitleEntrance direction="right">
+              <h2 className="text-4xl sm:text-5xl lg:text-7xl font-anton text-[#013f93] tracking-wider mb-10 lg:mb-14">
+                Contact us
+              </h2>
+            </SectionTitleEntrance>
+            <FadeInUp delay={0.2}>
+              <p className="text-base lg:text-lg text-[#013f93]/70 leading-[2] mb-10">
+                トキワ工業へのご相談やご質問は<br />
+                こちらのフォームよりお気軽に<br />
+                お問い合わせください。
+              </p>
+            </FadeInUp>
+            <FadeInUp delay={0.4}>
+              <Link
+                href="/contact"
+                className="group inline-flex items-center gap-3 text-[#013f93] hover:gap-5 transition-all duration-500"
+              >
+                <span className="text-lg lg:text-xl font-oswald tracking-wider">VIEW MORE</span>
+                <svg className="w-10 h-10 lg:w-14 lg:h-14 text-[#013f93]/50 group-hover:text-[#013f93] transition-all duration-500" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
+                  <line x1="3" y1="12" x2="21" y2="12" />
+                  <polyline points="15,6 21,12 15,18" />
+                </svg>
+              </Link>
+            </FadeInUp>
           </div>
         </div>
       </div>

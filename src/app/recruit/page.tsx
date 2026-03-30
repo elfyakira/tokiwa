@@ -150,7 +150,7 @@ function NumbersSection() {
     },
     {
       label: "年間休日",
-      value: "115",
+      value: "110",
       unit: "日",
       suffix: "",
       icon: (
