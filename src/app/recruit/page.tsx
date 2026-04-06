@@ -212,7 +212,7 @@ function InterviewCard({
   index,
   reverse,
 }: {
-  interview: { slug: string; number: string; name: string; role: string; catchphrase: string; description: string; image: string; objectPosition?: string; scale?: number };
+  interview: { slug: string; number: string; name: string; role: string; catchphrase: string; description: string; image: string; objectPosition?: string; scale?: number; preparing?: boolean };
   index: number;
   reverse: boolean;
 }) {
@@ -245,17 +245,30 @@ function InterviewCard({
     >
       {/* 画像 */}
       <div className={`relative aspect-[4/3] lg:aspect-auto overflow-hidden interview-photo-wrap ${reverse ? "lg:order-2" : ""}`}>
-        <Image
-          src={interview.image}
-          alt={interview.name}
-          fill
-          className="object-cover interview-photo-zoom"
-          style={{
-            ...(interview.objectPosition ? { objectPosition: interview.objectPosition } : {}),
-            ...(interview.scale ? { transform: `scale(${interview.scale})` } : {}),
-            ["--hover-scale" as string]: ((interview.scale || 1) * 1.08).toFixed(3),
-          }}
-        />
+        {interview.preparing ? (
+          <div className="absolute inset-0 bg-gray-100 flex items-center justify-center">
+            <div className="text-center text-gray-400">
+              <svg className="w-16 h-16 mx-auto mb-3" fill="none" stroke="currentColor" strokeWidth={1} viewBox="0 0 24 24">
+                <rect x="3" y="3" width="18" height="18" rx="2" />
+                <circle cx="8.5" cy="8.5" r="1.5" />
+                <path d="M21 15l-5-5L5 21" />
+              </svg>
+              <p className="text-sm font-bold tracking-wider">PHOTO COMING SOON</p>
+            </div>
+          </div>
+        ) : (
+          <Image
+            src={interview.image}
+            alt={interview.name}
+            fill
+            className="object-cover interview-photo-zoom"
+            style={{
+              ...(interview.objectPosition ? { objectPosition: interview.objectPosition } : {}),
+              ...(interview.scale ? { transform: `scale(${interview.scale})` } : {}),
+              ["--hover-scale" as string]: ((interview.scale || 1) * 1.08).toFixed(3),
+            }}
+          />
+        )}
         {/* ナンバーオーバーレイ */}
         <div className={`absolute bottom-0 ${reverse ? "right-0 lg:left-0 lg:right-auto" : "left-0"} p-4 lg:p-6`}>
           <span className="text-6xl lg:text-8xl font-anton font-bold text-white/20 leading-none">
@@ -309,8 +322,18 @@ function InterviewSection() {
       objectPosition: "55% center",
     },
     {
-      slug: "employee-a",
+      slug: "vice-president",
       number: "#02",
+      name: "T.S",
+      role: "専務取締役",
+      catchphrase: "現場と経営をつなぎ、より良い職場をつくる。",
+      description: "経営と現場の橋渡し役として、技術指導から相談役まで幅広く担う専務が語る、品質へのこだわりと人材への想い。",
+      image: "",
+      preparing: true,
+    },
+    {
+      slug: "employee-a",
+      number: "#03",
       name: "Y.K",
       role: "製造部",
       catchphrase: "思い描いた通りに仕上がる、その瞬間が一番の達成感。",
@@ -321,7 +344,7 @@ function InterviewSection() {
     },
     {
       slug: "employee-b",
-      number: "#03",
+      number: "#04",
       name: "Y.O",
       role: "製造部",
       catchphrase: "できなかったことが、できるようになる喜び。",

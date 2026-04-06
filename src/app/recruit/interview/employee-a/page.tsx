@@ -12,7 +12,7 @@ export default function EmployeeAInterviewPage() {
         <div className="bg-white pt-8 pb-8 lg:pt-10 lg:pb-10">
           <div className="max-w-container mx-auto px-6 lg:px-12">
             <SectionTitleEntrance direction="left">
-              <p className="text-xs text-accent font-bold tracking-[0.25em] mb-2">INTERVIEW #02</p>
+              <p className="text-xs text-accent font-bold tracking-[0.25em] mb-2">INTERVIEW #03</p>
               <h1 className="text-3xl lg:text-5xl font-bold text-navy leading-tight">
                 思い描いた通りに仕上がる、<br />その瞬間が一番の達成感。
               </h1>
