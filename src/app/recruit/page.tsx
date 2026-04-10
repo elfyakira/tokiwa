@@ -328,8 +328,7 @@ function InterviewSection() {
       role: "専務取締役",
       catchphrase: "現場と経営をつなぎ、より良い職場をつくる。",
       description: "経営と現場の橋渡し役として、技術指導から相談役まで幅広く担う専務が語る、品質へのこだわりと人材への想い。",
-      image: "",
-      preparing: true,
+      image: "/images/interview-vice-president.jpg",
     },
     {
       slug: "employee-a",

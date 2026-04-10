@@ -39,15 +39,13 @@ export default function VicePresidentInterviewPage() {
                   </p>
                 </div>
               </div>
-              <div className="lg:mt-24 relative aspect-[4/3] rounded overflow-hidden bg-gray-100 flex items-center justify-center">
-                <div className="text-center text-gray-400">
-                  <svg className="w-16 h-16 mx-auto mb-3" fill="none" stroke="currentColor" strokeWidth={1} viewBox="0 0 24 24">
-                    <rect x="3" y="3" width="18" height="18" rx="2" />
-                    <circle cx="8.5" cy="8.5" r="1.5" />
-                    <path d="M21 15l-5-5L5 21" />
-                  </svg>
-                  <p className="text-sm font-bold tracking-wider">PHOTO COMING SOON</p>
-                </div>
+              <div className="lg:mt-24 relative aspect-[4/3] rounded overflow-hidden">
+                <Image
+                  src="/images/interview-vice-president-2.jpg"
+                  alt="専務取締役 T.S インタビュー写真"
+                  fill
+                  className="object-cover"
+                />
               </div>
             </div>
           </FadeInUp>
@@ -55,15 +53,13 @@ export default function VicePresidentInterviewPage() {
           {/* Q2 — 画像左・テキスト右（テキスト下げ） */}
           <FadeInUp>
             <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-start mb-20 lg:mb-28">
-              <div className="relative aspect-[4/3] rounded overflow-hidden lg:order-1 bg-gray-100 flex items-center justify-center">
-                <div className="text-center text-gray-400">
-                  <svg className="w-16 h-16 mx-auto mb-3" fill="none" stroke="currentColor" strokeWidth={1} viewBox="0 0 24 24">
-                    <rect x="3" y="3" width="18" height="18" rx="2" />
-                    <circle cx="8.5" cy="8.5" r="1.5" />
-                    <path d="M21 15l-5-5L5 21" />
-                  </svg>
-                  <p className="text-sm font-bold tracking-wider">PHOTO COMING SOON</p>
-                </div>
+              <div className="relative aspect-[4/3] rounded overflow-hidden lg:order-1">
+                <Image
+                  src="/images/interview-vice-president-3.jpg"
+                  alt="専務取締役 T.S インタビュー写真"
+                  fill
+                  className="object-cover"
+                />
               </div>
               <div className="lg:order-2 lg:mt-24">
                 <h2 className="text-xl lg:text-2xl font-bold text-navy mb-6 font-mincho">
@@ -97,15 +93,13 @@ export default function VicePresidentInterviewPage() {
                   </p>
                 </div>
               </div>
-              <div className="lg:mt-24 relative aspect-[4/3] rounded overflow-hidden bg-gray-100 flex items-center justify-center">
-                <div className="text-center text-gray-400">
-                  <svg className="w-16 h-16 mx-auto mb-3" fill="none" stroke="currentColor" strokeWidth={1} viewBox="0 0 24 24">
-                    <rect x="3" y="3" width="18" height="18" rx="2" />
-                    <circle cx="8.5" cy="8.5" r="1.5" />
-                    <path d="M21 15l-5-5L5 21" />
-                  </svg>
-                  <p className="text-sm font-bold tracking-wider">PHOTO COMING SOON</p>
-                </div>
+              <div className="lg:mt-24 relative aspect-[4/3] rounded overflow-hidden">
+                <Image
+                  src="/images/interview-vice-president-4.jpg"
+                  alt="専務取締役 T.S インタビュー写真"
+                  fill
+                  className="object-cover"
+                />
               </div>
             </div>
           </FadeInUp>
@@ -113,15 +107,13 @@ export default function VicePresidentInterviewPage() {
           {/* Q4 — 画像左・テキスト右（テキスト下げ） */}
           <FadeInUp>
             <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-start mb-20 lg:mb-28">
-              <div className="relative aspect-[4/3] rounded overflow-hidden lg:order-1 bg-gray-100 flex items-center justify-center">
-                <div className="text-center text-gray-400">
-                  <svg className="w-16 h-16 mx-auto mb-3" fill="none" stroke="currentColor" strokeWidth={1} viewBox="0 0 24 24">
-                    <rect x="3" y="3" width="18" height="18" rx="2" />
-                    <circle cx="8.5" cy="8.5" r="1.5" />
-                    <path d="M21 15l-5-5L5 21" />
-                  </svg>
-                  <p className="text-sm font-bold tracking-wider">PHOTO COMING SOON</p>
-                </div>
+              <div className="relative aspect-[4/3] rounded overflow-hidden lg:order-1">
+                <Image
+                  src="/images/interview-vice-president-5.jpg"
+                  alt="専務取締役 T.S インタビュー写真"
+                  fill
+                  className="object-cover"
+                />
               </div>
               <div className="lg:order-2 lg:mt-24">
                 <h2 className="text-xl lg:text-2xl font-bold text-navy mb-6 font-mincho">
@@ -155,15 +147,13 @@ export default function VicePresidentInterviewPage() {
                   </p>
                 </div>
               </div>
-              <div className="lg:mt-24 relative aspect-[4/3] rounded overflow-hidden bg-gray-100 flex items-center justify-center">
-                <div className="text-center text-gray-400">
-                  <svg className="w-16 h-16 mx-auto mb-3" fill="none" stroke="currentColor" strokeWidth={1} viewBox="0 0 24 24">
-                    <rect x="3" y="3" width="18" height="18" rx="2" />
-                    <circle cx="8.5" cy="8.5" r="1.5" />
-                    <path d="M21 15l-5-5L5 21" />
-                  </svg>
-                  <p className="text-sm font-bold tracking-wider">PHOTO COMING SOON</p>
-                </div>
+              <div className="lg:mt-24 relative aspect-[4/3] rounded overflow-hidden">
+                <Image
+                  src="/images/interview-vice-president-6.jpg"
+                  alt="専務取締役 T.S インタビュー写真"
+                  fill
+                  className="object-cover"
+                />
               </div>
             </div>
           </FadeInUp>
