@@ -177,7 +177,7 @@ function BanSection() {
           </FadeInUp>
           <FadeInUp delay={0.2}>
             <div className="space-y-4">
-              <ClickableImage src="/images/business-ban-1.jpg" alt="盤制作1" />
+              <ClickableImage src="/images/business-ban-1.png" alt="盤制作1" />
               <ClickableImage src="/images/business-ban-2.jpg" alt="盤制作2" />
             </div>
           </FadeInUp>
@@ -263,7 +263,8 @@ function WorksCard({ index }: { index: number }) {
   const ref = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
   const onImageClick = useContext(LightboxContext);
-  const src = `/images/works-${index + 1}.jpg`;
+  const ext = index < 6 ? "png" : "jpg";
+  const src = `/images/works-${index + 1}.${ext}`;
   const alt = `制作事例${index + 1}`;
 
   useEffect(() => {

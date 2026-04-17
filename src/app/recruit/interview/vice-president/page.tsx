@@ -16,7 +16,7 @@ export default function VicePresidentInterviewPage() {
               <h1 className="text-3xl lg:text-5xl font-bold text-navy leading-tight">
                 現場と経営をつなぎ、<br />より良い職場をつくる。
               </h1>
-              <p className="mt-4 text-base text-text-secondary">専務取締役　T.S</p>
+              <p className="mt-4 text-base text-text-secondary">専務取締役　吉田和博</p>
             </SectionTitleEntrance>
           </div>
         </div>
@@ -42,7 +42,7 @@ export default function VicePresidentInterviewPage() {
               <div className="lg:mt-24 relative aspect-[4/3] rounded overflow-hidden">
                 <Image
                   src="/images/interview-vice-president-2.jpg"
-                  alt="専務取締役 T.S インタビュー写真"
+                  alt="専務取締役 吉田和博 インタビュー写真"
                   fill
                   className="object-cover"
                 />
@@ -56,7 +56,7 @@ export default function VicePresidentInterviewPage() {
               <div className="relative aspect-[4/3] rounded overflow-hidden lg:order-1">
                 <Image
                   src="/images/interview-vice-president-3.jpg"
-                  alt="専務取締役 T.S インタビュー写真"
+                  alt="専務取締役 吉田和博 インタビュー写真"
                   fill
                   className="object-cover"
                 />
@@ -96,7 +96,7 @@ export default function VicePresidentInterviewPage() {
               <div className="lg:mt-24 relative aspect-[4/3] rounded overflow-hidden">
                 <Image
                   src="/images/interview-vice-president-4.jpg"
-                  alt="専務取締役 T.S インタビュー写真"
+                  alt="専務取締役 吉田和博 インタビュー写真"
                   fill
                   className="object-cover"
                 />
@@ -110,7 +110,7 @@ export default function VicePresidentInterviewPage() {
               <div className="relative aspect-[4/3] rounded overflow-hidden lg:order-1">
                 <Image
                   src="/images/interview-vice-president-5.jpg"
-                  alt="専務取締役 T.S インタビュー写真"
+                  alt="専務取締役 吉田和博 インタビュー写真"
                   fill
                   className="object-cover"
                 />
@@ -150,7 +150,7 @@ export default function VicePresidentInterviewPage() {
               <div className="lg:mt-24 relative aspect-[4/3] rounded overflow-hidden">
                 <Image
                   src="/images/interview-vice-president-6.jpg"
-                  alt="専務取締役 T.S インタビュー写真"
+                  alt="専務取締役 吉田和博 インタビュー写真"
                   fill
                   className="object-cover"
                 />

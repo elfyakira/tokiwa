@@ -325,7 +325,7 @@ function AccessSection() {
             {/* 地図 */}
             <div className="relative aspect-[16/9] rounded overflow-hidden mb-8">
               <iframe
-                src="https://www.google.com/maps?q=有限会社トキワ工業+愛知県津島市白浜町八丁目59-1&output=embed&z=16"
+                src="https://www.google.com/maps?q=有限会社トキワ工業+愛知県津島市白浜町八升川田59-1&output=embed&z=16"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
@@ -342,7 +342,7 @@ function AccessSection() {
                 <h3 className="text-lg font-bold text-navy mb-3">{hq.name || "本社"}</h3>
                 <p className="text-base text-text-primary leading-[2]">
                   〒{hq.zipCode || "496-0016"}<br />
-                  {hq.address || "愛知県津島市白浜町八丁目59-1"}
+                  {hq.address || "愛知県津島市白浜町八升川田59-1"}
                 </p>
               </div>
               <div>
