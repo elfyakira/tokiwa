@@ -78,5 +78,18 @@
     "title": "代表取締役",
     "image": "",
     "message": []
+  },
+  "googleForm": {
+    "formUrl": "https://docs.google.com/forms/d/e/1FAIpQLSdd2bk49xxE9HfglvyWo_uF0ThdVTrDxyTRURAPUAQr8a03fw/formResponse",
+    "entries": {
+      "name": "entry.1109821572",
+      "company": "entry.1103560916",
+      "phone": "entry.1090056288",
+      "email": "entry.1031298076",
+      "message": "entry.1101437289",
+      "selfPr": "entry.1468153911",
+      "consent": "entry.15051647"
+    },
+    "consentValue": "同意"
   }
 }

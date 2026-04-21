@@ -43,48 +43,89 @@ function ContactForm() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
 
-  const validateForm = (formData: FormData) => {
+  const validateClient = (data: {
+    name: string;
+    company: string;
+    phone: string;
+    email: string;
+    message: string;
+    agree: boolean;
+  }) => {
     const newErrors: Record<string, string> = {};
-
-    const name = formData.get("name") as string;
-    const phone = formData.get("phone") as string;
-    const email = formData.get("email") as string;
-    const message = formData.get("message") as string;
-    const agree = formData.get("agree");
-
-    if (!name?.trim()) newErrors.name = "お名前を入力してください";
-    if (!phone?.trim()) newErrors.phone = "電話番号を入力してください";
-    if (!email?.trim()) {
+    if (!data.name?.trim()) newErrors.name = "お名前を入力してください";
+    if (!data.phone?.trim()) newErrors.phone = "電話番号を入力してください";
+    if (!data.email?.trim()) {
       newErrors.email = "メールアドレスを入力してください";
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
       newErrors.email = "メールアドレスの形式が正しくありません";
     }
     if (selectedType !== "recruit") {
-      if (!message?.trim()) {
+      if (!data.message?.trim()) {
         newErrors.message = "お問い合わせ内容を入力してください";
-      } else if (message.length < 10) {
+      } else if (data.message.length < 10) {
         newErrors.message = "10文字以上でご入力ください";
       }
     }
-    if (!agree) newErrors.agree = "プライバシーポリシーへの同意が必要です";
-
+    if (!data.agree) newErrors.agree = "プライバシーポリシーへの同意が必要です";
     return newErrors;
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    const newErrors = validateForm(formData);
+    const payload = {
+      name: (formData.get("name") as string) ?? "",
+      company: (formData.get("company") as string) ?? "",
+      phone: (formData.get("phone") as string) ?? "",
+      email: (formData.get("email") as string) ?? "",
+      message: (formData.get("message") as string) ?? "",
+      agree: !!formData.get("agree"),
+    };
 
-    if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors);
+    const clientErrors = validateClient(payload);
+    if (Object.keys(clientErrors).length > 0) {
+      setErrors(clientErrors);
       return;
     }
 
+    setErrors({});
     setIsSubmitting(true);
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    setIsSubmitting(false);
-    setIsSubmitted(true);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          type: selectedType,
+          name: payload.name,
+          company: payload.company,
+          phone: payload.phone,
+          email: payload.email,
+          message: payload.message,
+          consent: payload.agree,
+        }),
+      });
+      const data = await res.json();
+      if (!data.success) {
+        const serverErrors: Record<string, string> = {};
+        for (const err of data.errors ?? []) {
+          // consent → agree にマッピングしてUIに反映
+          const field = err.field === "consent" ? "agree" : err.field;
+          serverErrors[field] = err.message;
+        }
+        if (Object.keys(serverErrors).length === 0) {
+          serverErrors.general = "送信中にエラーが発生しました。";
+        }
+        setErrors(serverErrors);
+        return;
+      }
+      setIsSubmitted(true);
+    } catch {
+      setErrors({
+        general: "送信中にエラーが発生しました。しばらく経ってから再度お試しください。",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   if (isSubmitted) {
@@ -139,10 +180,16 @@ function ContactForm() {
         <FadeInUp delay={0.2}>
           <div className="bg-bg-light p-6 lg:p-10 rounded">
             <form onSubmit={handleSubmit} className="space-y-6">
+              {errors.general && (
+                <div className="bg-red-50 border border-accent/30 text-accent px-4 py-3 rounded text-sm">
+                  {errors.general}
+                </div>
+              )}
+
               <div>
                 <label className="flex items-center gap-2 mb-2">
                   <span className="text-sm font-semibold text-text-primary">
-                    {selectedType === "recruit" ? "お名前" : "お名前 / 会社名"}
+                    お名前
                   </span>
                   <span className="text-xs text-white bg-accent px-1.5 py-0.5 rounded">
                     必須
@@ -151,17 +198,35 @@ function ContactForm() {
                 <input
                   type="text"
                   name="name"
-                  placeholder={
-                    selectedType === "recruit"
-                      ? "例）山田 太郎"
-                      : "例）株式会社サンプル 山田太郎"
-                  }
+                  placeholder="例）山田 太郎"
                   className={`w-full h-12 px-4 border rounded text-base bg-white ${
                     errors.name ? "border-accent" : "border-gray-200"
                   } focus:border-navy focus:outline-none transition-colors`}
                 />
                 {errors.name && (
                   <p className="mt-1 text-sm text-accent">{errors.name}</p>
+                )}
+              </div>
+
+              <div>
+                <label className="flex items-center gap-2 mb-2">
+                  <span className="text-sm font-semibold text-text-primary">
+                    会社名
+                  </span>
+                  <span className="text-xs text-text-secondary bg-gray-200 px-1.5 py-0.5 rounded">
+                    任意
+                  </span>
+                </label>
+                <input
+                  type="text"
+                  name="company"
+                  placeholder="例）株式会社サンプル"
+                  className={`w-full h-12 px-4 border rounded text-base bg-white ${
+                    errors.company ? "border-accent" : "border-gray-200"
+                  } focus:border-navy focus:outline-none transition-colors`}
+                />
+                {errors.company && (
+                  <p className="mt-1 text-sm text-accent">{errors.company}</p>
                 )}
               </div>
 
