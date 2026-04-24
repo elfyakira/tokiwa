@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { FadeInUp, FadeInImage, SectionTitleEntrance, Parallax } from "@/components/animations";
+import { ContactForm } from "@/components/ContactForm";
 
 // ============================================================
 // Recruitページ - トキワ工業
@@ -385,12 +386,41 @@ function InterviewSection() {
   );
 }
 
+// 応募フォームセクション（問い合わせフォームを採用種別固定で設置）
+function EntryFormSection() {
+  return (
+    <section className="py-16 lg:py-24 bg-white">
+      <SectionTitleEntrance direction="scale" className="text-center mb-12 lg:mb-16">
+        <p className="text-xs lg:text-sm text-accent font-bold tracking-[0.25em] mb-2">ENTRY</p>
+        <h2 className="text-3xl lg:text-4xl font-anton font-bold text-navy tracking-wider">
+          応募フォーム
+        </h2>
+        <div className="mt-4 mx-auto w-16 h-[2px] bg-accent" />
+      </SectionTitleEntrance>
+      <ContactForm
+        defaultType="recruit"
+        showTypeSelector={false}
+        leadText="トキワ工業へのご応募は、こちらのフォームよりお願いいたします。内容を確認のうえ、担当者よりご連絡いたします。"
+        submitLabel="応募する"
+        successTitle="ご応募ありがとうございます"
+        successBody={
+          <>
+            <p>ご応募を受け付けました。</p>
+            <p>担当者より折り返しご連絡いたします。</p>
+          </>
+        }
+      />
+    </section>
+  );
+}
+
 export default function RecruitPage() {
   return (
     <>
       <PageHero />
       <NumbersSection />
       <InterviewSection />
+      <EntryFormSection />
     </>
   );
 }
