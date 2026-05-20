@@ -18,6 +18,40 @@ interface ContactFormData {
   email: string;
   message: string;
   consent: boolean;
+  website?: string;
+  formStartTime?: number;
+}
+
+// 平仮名・カタカナ・CJK統合漢字・拡張A・半角カタカナのいずれかが1文字でも含まれるか
+const CJK_REGEX = /[぀-ゟ゠-ヿ一-鿿㐀-䶿ｦ-ﾟ]/;
+
+// フォーム描画から送信までの最短許容時間 (ms)。これより短ければ bot 判定。
+const MIN_SUBMIT_INTERVAL_MS = 3000;
+
+function isLikelyBot(data: ContactFormData): { bot: boolean; reason?: string } {
+  // 1. Honeypot: 隠しフィールドが埋まっていれば確実に bot
+  if (data.website && data.website.trim().length > 0) {
+    return { bot: true, reason: 'honeypot filled' };
+  }
+
+  // 2. 送信タイミング: フォーム描画から極端に短時間で送信されたら bot
+  if (typeof data.formStartTime === 'number') {
+    const elapsed = Date.now() - data.formStartTime;
+    if (elapsed >= 0 && elapsed < MIN_SUBMIT_INTERVAL_MS) {
+      return { bot: true, reason: `submitted too fast (${elapsed}ms)` };
+    }
+  } else {
+    // formStartTime が欠落 = フォーム経由ではない直叩きの可能性
+    return { bot: true, reason: 'missing formStartTime' };
+  }
+
+  // 3. 日本語必須: name / company / message のいずれにも CJK 文字が無ければ bot
+  const combined = `${data.name ?? ''}${data.company ?? ''}${data.message ?? ''}`;
+  if (!CJK_REGEX.test(combined)) {
+    return { bot: true, reason: 'no CJK characters' };
+  }
+
+  return { bot: false };
 }
 
 interface ValidationError {
@@ -85,6 +119,17 @@ function validateFormData(data: ContactFormData): ValidationError[] {
 export async function POST(request: NextRequest) {
   try {
     const body: ContactFormData = await request.json();
+
+    // Bot 判定: サイレント拒否 (200 OK を返すが Google Form には投げない)
+    // bot にエラーを返すと送信パターンを変えてくるため、成功したように見せかける
+    const botCheck = isLikelyBot(body);
+    if (botCheck.bot) {
+      console.warn('Contact form: rejected as bot', botCheck.reason);
+      return NextResponse.json({
+        success: true,
+        message: 'お問い合わせを受け付けました',
+      });
+    }
 
     const errors = validateFormData(body);
     if (errors.length > 0) {

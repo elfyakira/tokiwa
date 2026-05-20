@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Link from "next/link";
 import { FadeInUp } from "@/components/animations";
 
@@ -41,6 +41,7 @@ export function ContactForm({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const formStartTimeRef = useRef<number>(Date.now());
 
   const validateClient = (data: {
     name: string;
@@ -79,6 +80,7 @@ export function ContactForm({
       email: (formData.get("email") as string) ?? "",
       message: (formData.get("message") as string) ?? "",
       agree: !!formData.get("agree"),
+      website: (formData.get("website") as string) ?? "",
     };
 
     const clientErrors = validateClient(payload);
@@ -101,6 +103,8 @@ export function ContactForm({
           email: payload.email,
           message: payload.message,
           consent: payload.agree,
+          website: payload.website,
+          formStartTime: formStartTimeRef.current,
         }),
       });
       const data = await res.json();
@@ -177,6 +181,29 @@ export function ContactForm({
       <FadeInUp delay={0.2}>
         <div className="bg-bg-light p-6 lg:p-10 rounded">
           <form onSubmit={handleSubmit} className="space-y-6">
+            {/* Honeypot field: 人間には見えない罠フィールド。bot が埋めたらサーバー側でサイレント拒否 */}
+            <div
+              aria-hidden="true"
+              style={{
+                position: "absolute",
+                left: "-9999px",
+                width: "1px",
+                height: "1px",
+                overflow: "hidden",
+              }}
+            >
+              <label>
+                Website (do not fill)
+                <input
+                  type="text"
+                  name="website"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  defaultValue=""
+                />
+              </label>
+            </div>
+
             {errors.general && (
               <div className="bg-red-50 border border-accent/30 text-accent px-4 py-3 rounded text-sm">
                 {errors.general}
