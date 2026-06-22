@@ -50,8 +50,15 @@ function PageHero() {
               <FadeInUp delay={0.1}>
                 <div className="bg-white p-8 lg:p-12 w-full shadow-lg overflow-hidden">
                   <Parallax speed={0.08} clamp={15}>
-                    <h2 className="text-[40px] font-bold text-[#013f93] font-mincho leading-tight whitespace-nowrap">
-                      確かな技術と信頼を、積み重ねて。
+                    <h2 className="text-[26px] lg:text-[40px] font-bold text-[#013f93] font-mincho leading-tight lg:whitespace-nowrap">
+                      <span className="lg:hidden">
+                        確かな技術と信頼を、
+                        <br />
+                        積み重ねて。
+                      </span>
+                      <span className="hidden lg:inline">
+                        確かな技術と信頼を、積み重ねて。
+                      </span>
                     </h2>
                     <div className="w-48 lg:w-72 h-px bg-[#013f93] mt-8 mb-8" />
                     <p className="text-base text-[#013f93] leading-[2]">
@@ -71,7 +78,7 @@ function PageHero() {
 // 代表あいさつセクション
 function GreetingSection() {
   return (
-    <section className="py-16 lg:py-24 bg-white">
+    <section className="pt-52 pb-16 lg:py-24 bg-white">
       <div className="max-w-container mx-auto px-6 lg:px-12">
         {/* セクションタイトル */}
         <SectionTitleEntrance direction="scale" className="text-center mb-14 lg:mb-20">
@@ -139,7 +146,9 @@ function PhilosophySection() {
               顧客満足は次の顧客満足を生む
             </h3>
             <p className="text-base lg:text-lg text-text-primary leading-[2] mb-10">
-              納期・品質を重視し、質の高いサービスを提供する
+              納期・品質を重視し、
+              <br className="lg:hidden" />
+              質の高いサービスを提供する
             </p>
             <div className="w-16 h-px bg-border mx-auto mb-10" />
             <p className="text-sm lg:text-base text-text-secondary leading-[2.2] text-left">

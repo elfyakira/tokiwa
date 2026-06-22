@@ -89,8 +89,15 @@ function PageHero() {
               <FadeInUp delay={0.1}>
                 <div className="bg-white p-8 lg:p-12 w-full shadow-lg overflow-hidden">
                   <Parallax speed={0.08} clamp={15}>
-                    <h2 className="text-[40px] font-bold text-[#013f93] font-mincho leading-tight whitespace-nowrap">
-                      細かな仕事を、確かな技術で。
+                    <h2 className="text-[26px] lg:text-[40px] font-bold text-[#013f93] font-mincho leading-tight lg:whitespace-nowrap">
+                      <span className="lg:hidden">
+                        細かな仕事を、
+                        <br />
+                        確かな技術で。
+                      </span>
+                      <span className="hidden lg:inline">
+                        細かな仕事を、確かな技術で。
+                      </span>
                     </h2>
                     <div className="w-48 lg:w-72 h-px bg-[#013f93] mt-8 mb-8" />
                     <p className="text-base text-[#013f93] leading-[2]">

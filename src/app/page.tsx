@@ -123,7 +123,7 @@ function HeroSection() {
           loop
           muted
           playsInline
-          className="absolute inset-0 w-full h-full object-cover"
+          className="absolute inset-0 w-full h-full object-cover object-top lg:object-center"
         >
           <source src={isMobile ? "/videos/hero-bg-mobile.mp4" : "/videos/hero-bg.mp4"} type="video/mp4" />
         </video>

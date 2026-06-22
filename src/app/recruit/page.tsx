@@ -51,8 +51,15 @@ function PageHero() {
               <FadeInUp delay={0.1}>
                 <div className="bg-white p-8 lg:p-12 w-full shadow-lg overflow-hidden">
                   <Parallax speed={0.08} clamp={15}>
-                    <h2 className="text-[40px] font-bold text-[#013f93] font-mincho leading-tight whitespace-nowrap">
-                      あなたの個性が、ものづくりを支える。
+                    <h2 className="text-[26px] lg:text-[40px] font-bold text-[#013f93] font-mincho leading-tight lg:whitespace-nowrap">
+                      <span className="lg:hidden">
+                        あなたの個性が、
+                        <br />
+                        ものづくりを支える。
+                      </span>
+                      <span className="hidden lg:inline">
+                        あなたの個性が、ものづくりを支える。
+                      </span>
                     </h2>
                     <div className="w-48 lg:w-72 h-px bg-[#013f93] mt-8 mb-8" />
                     <p className="text-base text-[#013f93] leading-[2]">
@@ -163,7 +170,7 @@ function NumbersSection() {
   ];
 
   return (
-    <section className="py-16 lg:py-24 bg-bg-light">
+    <section className="pt-52 pb-16 lg:py-24 bg-bg-light">
       <div className="max-w-[1400px] mx-auto px-4 lg:px-6">
         <SectionTitleEntrance direction="scale" className="text-center mb-14 lg:mb-20">
           <p className="text-xs lg:text-sm text-accent font-bold tracking-[0.25em] mb-2">DATA</p>
@@ -182,20 +189,24 @@ function NumbersSection() {
                     {item.icon}
                   </div>
                 </div>
-                <p className="text-sm lg:text-base font-bold text-text-secondary tracking-wider mb-4 lg:mb-6">
+                <p className="text-sm lg:text-base font-bold text-text-secondary tracking-wider mb-4 lg:mb-6 min-h-[3.2em] lg:min-h-0 flex items-center">
                   {item.label}
                 </p>
                 <div className="flex items-baseline justify-center gap-1">
-                  <span className="text-6xl lg:text-8xl font-bold text-accent leading-none tracking-[0.08em]" style={{ fontFamily: "'Anton', sans-serif", fontFeatureSettings: '"tnum"' }}>
+                  <span className="text-5xl lg:text-8xl font-bold text-accent leading-none tracking-[0.08em]" style={{ fontFamily: "'Anton', sans-serif", fontFeatureSettings: '"tnum"' }}>
                     <CountUp value={item.value} />
                   </span>
                   <span className="text-base lg:text-xl font-bold text-navy">
                     {item.unit}
                   </span>
                 </div>
-                {item.suffix && (
+                {item.suffix ? (
                   <p className="text-sm text-text-secondary mt-2">
                     {item.suffix}
+                  </p>
+                ) : (
+                  <p className="text-sm mt-2 lg:hidden" aria-hidden="true">
+                    &nbsp;
                   </p>
                 )}
               </div>
@@ -286,7 +297,17 @@ function InterviewCard({
           <h3 className="text-xl lg:text-2xl font-bold text-white mb-6">{interview.name}</h3>
           <div className="w-12 h-px bg-accent mb-6" />
           <p className="text-xl lg:text-2xl font-mincho text-white leading-relaxed mb-6">
-            「{interview.catchphrase}」
+            「{(() => {
+              const idx = interview.catchphrase.indexOf("、");
+              if (idx === -1) return interview.catchphrase;
+              return (
+                <>
+                  {interview.catchphrase.slice(0, idx + 1)}
+                  <br className="lg:hidden" />
+                  {interview.catchphrase.slice(idx + 1)}
+                </>
+              );
+            })()}」
           </p>
           <p className="text-base text-white/80 leading-[2] mb-8">
             {interview.description}

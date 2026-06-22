@@ -72,8 +72,15 @@ function PageHero() {
               <FadeInUp delay={0.1}>
                 <div className="bg-white p-8 lg:p-12 w-full shadow-lg overflow-hidden">
                   <Parallax speed={0.08} clamp={15}>
-                    <h2 className="text-[40px] font-bold text-[#013f93] font-mincho leading-tight whitespace-nowrap">
-                      多品種・小ロットに応える、細かなモノづくり。
+                    <h2 className="text-[26px] lg:text-[40px] font-bold text-[#013f93] font-mincho leading-tight lg:whitespace-nowrap">
+                      <span className="lg:hidden">
+                        多品種・小ロットに応え
+                        <br />
+                        る、細かなモノづくり。
+                      </span>
+                      <span className="hidden lg:inline">
+                        多品種・小ロットに応える、細かなモノづくり。
+                      </span>
                     </h2>
                     <div className="w-48 lg:w-72 h-px bg-[#013f93] mt-8 mb-8" />
                     <p className="text-base text-[#013f93] leading-[2]">
@@ -139,7 +146,7 @@ function BusinessOverview() {
   ];
 
   return (
-    <section className="py-12 lg:py-16 bg-[#f5f8f6]">
+    <section className="pt-32 pb-12 lg:py-16 bg-[#f5f8f6]">
       <div className="max-w-container mx-auto px-6 lg:px-12">
         <div className="grid grid-cols-2 gap-4">
           {navItems.map((item, i) => (
@@ -176,7 +183,7 @@ function BanSection() {
             </div>
           </FadeInUp>
           <FadeInUp delay={0.2}>
-            <div className="space-y-4">
+            <div className="grid grid-cols-2 gap-4 lg:grid-cols-1">
               <ClickableImage src="/images/business-ban-1.png" alt="盤制作1" />
               <ClickableImage src="/images/business-ban-2.jpg" alt="盤制作2" />
             </div>
@@ -247,7 +254,7 @@ function SeikanSection() {
             </div>
           </FadeInUp>
           <FadeInUp delay={0.2}>
-            <div className="space-y-4">
+            <div className="grid grid-cols-2 gap-4 lg:grid-cols-1">
               <ClickableImage src="/images/business-seikan-1.jpg" alt="製缶制作1" />
               <ClickableImage src="/images/business-seikan-2.jpg" alt="製缶制作2" />
             </div>

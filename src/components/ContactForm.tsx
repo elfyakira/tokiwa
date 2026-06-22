@@ -171,7 +171,15 @@ export function ContactForm({
                     : "bg-white text-text-primary border-gray-200 hover:border-navy"
                 }`}
               >
-                {type.label}
+                {type.label.endsWith("お問い合わせ") ? (
+                  <>
+                    {type.label.slice(0, -"お問い合わせ".length)}
+                    <br className="lg:hidden" />
+                    お問い合わせ
+                  </>
+                ) : (
+                  type.label
+                )}
               </button>
             ))}
           </div>
