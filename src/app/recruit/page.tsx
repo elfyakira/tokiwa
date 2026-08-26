@@ -421,6 +421,7 @@ function EntryFormSection() {
       <ContactForm
         defaultType="recruit"
         showTypeSelector={false}
+        formName="tokiwa_hp_recruit"
         leadText="トキワ工業へのご応募は、こちらのフォームよりお願いいたします。内容を確認のうえ、担当者よりご連絡いたします。"
         submitLabel="応募する"
         successTitle="ご応募ありがとうございます"

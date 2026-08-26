@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import Link from "next/link";
 import { FadeInUp } from "@/components/animations";
+import { events } from "@/lib/analytics";
 
 // お問い合わせ種別
 export const CONTACT_TYPES = [
@@ -27,6 +28,8 @@ interface ContactFormProps {
   successBody?: React.ReactNode;
   /** 送信ボタンのラベル */
   submitLabel?: string;
+  /** GA4 の form_submit イベントに送る form_name */
+  formName?: string;
 }
 
 export function ContactForm({
@@ -36,6 +39,7 @@ export function ContactForm({
   successTitle = "お問い合わせありがとうございます",
   successBody,
   submitLabel,
+  formName = "tokiwa_hp_contact",
 }: ContactFormProps) {
   const [selectedType, setSelectedType] = useState<ContactType>(defaultType);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -120,6 +124,7 @@ export function ContactForm({
         setErrors(serverErrors);
         return;
       }
+      events.formSubmit(formName, { contact_type: selectedType });
       setIsSubmitted(true);
     } catch {
       setErrors({
