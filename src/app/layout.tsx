@@ -79,6 +79,11 @@ export const metadata: Metadata = {
     },
   },
 
+  // Google Search Console サイト所有権確認
+  verification: {
+    google: "5TrO8aerZMdTuxsqhhwQuH5uYK6q3vRQmdme4KEewKc",
+  },
+
   // OGP
   openGraph: {
     title: seo.defaultTitle || company.name,
