@@ -1,10 +1,14 @@
 import type { Metadata, Viewport } from "next";
+import Script from "next/script";
 import { Anton, Oswald } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingRecruitButton from "@/components/FloatingRecruitButton";
 import { seo, company, contact, locations } from "@/lib/site";
+
+// Google Analytics 測定ID
+const GA_MEASUREMENT_ID = "G-JPKJSEWJLQ";
 
 // Antonフォント（タイトル用）
 const anton = Anton({
@@ -123,6 +127,20 @@ export default function RootLayout({
         />
       </head>
       <body>
+        {/* Google tag (gtag.js) */}
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', '${GA_MEASUREMENT_ID}');
+          `}
+        </Script>
         <Header />
         <main>{children}</main>
         <Footer />
