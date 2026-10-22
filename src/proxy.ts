@@ -3,7 +3,7 @@ import { company, contact } from "@/lib/site";
 
 // メンテナンスモード（一時非公開）
 // true: 全ページをメンテナンス中ページに差し替え / false: 通常公開
-const MAINTENANCE_MODE = true;
+const MAINTENANCE_MODE = false;
 
 // メンテナンス中ページのHTML
 const maintenanceHtml = `<!doctype html>
